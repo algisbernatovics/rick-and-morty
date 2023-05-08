@@ -10,7 +10,7 @@ class Pages
         $this->pages = $pages;
     }
 
-    public function getPages()
+    public function getPages(): int
     {
         return $this->pages;
     }

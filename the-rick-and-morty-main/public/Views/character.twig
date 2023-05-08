@@ -17,8 +17,11 @@
                         - {{ card.species }}</p>
                     <p> Last known location: </p>
                     <li>{{ card.location.name }}</li>
-                    <p> First Seen in: </p>
+                    <p> Created: </p>
+                    <li>{{ card.created }}</li>
+                    <p> Seen in: </p>
                     <li>{{ card.episodeName }}</li>
+
                 </div>
 
             {% endfor %}

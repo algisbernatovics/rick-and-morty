@@ -17,9 +17,16 @@
                         <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">{{ card.status }}
                             - {{ card.species }}</p>
                         <p> Last known location: </p>
-                        <li>{{ card.location.name }}</li>
+
+                        <li><a href="{{ card.location.url }}"
+                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ card.location.name }}</a>
+                        </li>
+
                         <p> First Seen in: </p>
-                        <li>{{ card.episodeName }}</li>
+
+                        <li><a href="{{ card.episode[0] }}"
+                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ card.episodeName }}</a>
+                        </li>
                     </div>
 
                 {% endfor %}
