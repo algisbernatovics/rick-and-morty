@@ -5,7 +5,7 @@ class Pages
 {
     protected int $pages;
 
-    public function __construct($pages)
+    public function __construct(int $pages)
     {
         $this->pages = $pages;
     }

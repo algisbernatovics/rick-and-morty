@@ -20,13 +20,13 @@
                         <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
                             Created:{{ card.created }} </p>
 
-{#                                        <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">Residents:</p>#}
+                        {#                                        <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">Residents:</p> #}
 
-{#                                        {% for resident in card.residents %}#}
-{#                                            <a href="{{ resident }}"#}
-{#                                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ resident }}</a>#}
+                        {#                                        {% for resident in card.residents %} #}
+                        {#                                            <a href="{{ resident }}" #}
+                        {#                                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ resident }}</a> #}
 
-{#                                        {% endfor %}#}
+                        {#                                        {% endfor %} #}
 
 
                     </div>
@@ -35,7 +35,7 @@
         </div>
 
     {% endif %}
-    {% for i in 0..pages %}
+    {% for i in 1..pages %}
 
         <nav aria-label="Page navigation example">
             <ul class="place-items-center inline-flex -space-x-px">

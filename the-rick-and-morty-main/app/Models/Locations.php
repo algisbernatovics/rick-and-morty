@@ -13,7 +13,10 @@ class Locations
     protected string $created;
     protected string $url;
 
-    public function __construct($id, $name, $dimension, $type, $residents, $url, $created)
+    public function __construct
+    (
+        int $id, string $name, string $dimension, string $type, array $residents, string $url, string $created
+    )
     {
         $this->id = $id;
         $this->name = $name;

@@ -20,8 +20,8 @@ class Characters
     protected string $url;
 
     public function __construct(
-        $id, $name, $status, $species, $type, $gender, $origin, $location, $image,
-        $episode, $episodeName, $url, $created)
+        int    $id, string $name, string $status, string $species, string $type, string $gender, object $origin,
+        object $location, string $image, array $episode, string $episodeName, string $url, string $created)
     {
         $this->id = $id;
         $this->name = $name;
@@ -37,7 +37,7 @@ class Characters
         $this->url = $url;
         $this->created = $created;
     }
-    
+
     public function getLocation(): object
     {
         return $this->location;

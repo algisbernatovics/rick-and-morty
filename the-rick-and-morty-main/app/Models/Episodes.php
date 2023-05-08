@@ -12,7 +12,10 @@ class Episodes
     protected string $created;
     protected string $url;
 
-    public function __construct($id, $name, $airDate, $episode, $characters, $url, $created)
+    public function __construct
+    (
+        int $id, string $name, string $airDate, string $episode, array $characters, string $url, string $created
+    )
     {
         $this->id = $id;
         $this->name = $name;

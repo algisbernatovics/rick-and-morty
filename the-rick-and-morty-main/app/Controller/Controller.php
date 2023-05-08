@@ -11,27 +11,27 @@ class Controller
     {
         $locations = (new ClientRequest("location/?page=$page"))->getLocations();
         $pages = (new ClientRequest("location/?page=$page"))->getCountOfPages();
-        return (new Renderer($locations, $pages))->render('locations.twig');
+        return (new Renderer())->renderPage('locations.twig', $locations, $pages);
     }
 
     public function episodes(int $page = 1): string
     {
         $episodes = (new ClientRequest("episode/?page=$page"))->getEpisodes();
         $pages = (new ClientRequest("episode/?page=$page"))->getCountOfPages();
-        return (new Renderer($episodes, $pages))->render('episodes.twig');
+        return (new Renderer())->renderPage('episodes.twig', $episodes, $pages);
     }
 
     public function characters(int $page = 1): string
     {
         $characters = (new ClientRequest("character/?page=$page"))->getCharacters();
         $pages = (new ClientRequest("character/?page=$page"))->getCountOfPages();
-        return (new Renderer($characters, $pages))->render('characters.twig');
+        return (new Renderer())->renderPage('characters.twig', $characters, $pages);
     }
 
     public function character(int $id = 1): string
     {
         $character = (new ClientRequest("character/$id"))->getCharacter();
-        return (new Renderer($character, $pages = 1))->render('character.twig');
+        return (new Renderer())->renderSinglePage('character.twig', $character[0], $character[1]);
     }
 
 }

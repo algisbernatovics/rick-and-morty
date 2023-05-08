@@ -10,20 +10,23 @@ class Renderer
     protected string $template;
     protected Environment $twig;
 
-    protected array $content;
-
-    protected int $pages;
-
-    public function __construct($content, $pages)
+    public function __construct()
     {
-        $this->pages = $pages;
-        $this->content = $content;
         $loader = new FilesystemLoader('../public/Views');
         $this->twig = new Environment($loader);
     }
 
-    public function render($template): string
+    public function renderPage(string $template, array $content, int $pages): string
     {
-        return $this->twig->render($template, ['cards' => $this->content, 'pages' => $this->pages]);
+        return $this->twig->render(
+            $template,
+            ['cards' => $content, 'pages' => $pages]);
+    }
+
+    public function renderSinglePage(string $template, array $content, array $seenInLocations): string
+    {
+        return $this->twig->render(
+            $template,
+            ['cards' => $content, 'seenIn' => $seenInLocations]);
     }
 }

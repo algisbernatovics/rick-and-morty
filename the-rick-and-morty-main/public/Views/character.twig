@@ -5,10 +5,10 @@
         <h1>Not found!</h1>
 
     {% else %}
-
         <div class="grid place-items-up place-items-center">
-
-            {% for card in cards %}
+            <div
+                    class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xxl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                {% for card in cards %}
 
                 <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img><img src="{{ card.image }}"></a></img>
@@ -19,13 +19,28 @@
                     <li>{{ card.location.name }}</li>
                     <p> Created: </p>
                     <li>{{ card.created }}</li>
-                    <p> Seen in: </p>
-                    <li>{{ card.episodeName }}</li>
+                    <!-- Pin to top right corner -->
+                    {% endfor %}
 
                 </div>
+                <div class="flex flex-col justify-between p-4 leading-normal">
 
-            {% endfor %}
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
 
+                    <div class="place-items-center "></div>
+                    <div class="h-128 grid grid-cols-3 gap-1 content-normal ">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Seen in: </h5>
+
+                        {% for episode in seenIn %}
+
+                            <li class=""> {{ episode.episodeName }}</li>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
         </div>
 
     {% endif %}

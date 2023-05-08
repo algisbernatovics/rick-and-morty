@@ -7,7 +7,7 @@ use Carbon;
 
 class Cache
 {
-    public static function remember(string $key, string $data, int $ttl = 10): void
+    public static function remember(string $key, string $data, int $ttl = 120): void
     {
         $expire_at = Carbon\CarbonImmutable::now()->addSeconds($ttl);
         $cacheFile = '../cache/' . $key;
