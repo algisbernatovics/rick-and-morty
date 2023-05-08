@@ -18,11 +18,10 @@ class Characters
     protected string $episodeName;
     protected string $created;
     protected string $url;
-    protected ?int $pages;
 
     public function __construct(
         $id, $name, $status, $species, $type, $gender, $origin, $location, $image,
-        $episode, $episodeName, $url, $created, $pages)
+        $episode, $episodeName, $url, $created)
     {
         $this->id = $id;
         $this->name = $name;
@@ -37,14 +36,8 @@ class Characters
         $this->episodeName = $episodeName;
         $this->url = $url;
         $this->created = $created;
-        $this->pages = $pages;
     }
-
-    public function getCountOfPages(): int
-    {
-        return $this->pages;
-    }
-
+    
     public function getLocation(): object
     {
         return $this->location;

@@ -7,28 +7,31 @@ use App\Core\Renderer;
 
 class Controller
 {
-    public function locations($page = 1): string
+    public function locations(int $page = 1): string
     {
         $locations = (new ClientRequest("location/?page=$page"))->getLocations();
-        return (new Renderer($locations))->render('locations.twig');
+        $pages = (new ClientRequest("location/?page=$page"))->getCountOfPages();
+        return (new Renderer($locations, $pages))->render('locations.twig');
     }
 
-    public function episodes($page = 1): string
+    public function episodes(int $page = 1): string
     {
         $episodes = (new ClientRequest("episode/?page=$page"))->getEpisodes();
-        return (new Renderer($episodes))->render('episodes.twig');
+        $pages = (new ClientRequest("episode/?page=$page"))->getCountOfPages();
+        return (new Renderer($episodes, $pages))->render('episodes.twig');
     }
 
-    public function characters($page = 1): string
+    public function characters(int $page = 1): string
     {
         $characters = (new ClientRequest("character/?page=$page"))->getCharacters();
-        return (new Renderer($characters))->render('characters.twig');
+        $pages = (new ClientRequest("character/?page=$page"))->getCountOfPages();
+        return (new Renderer($characters, $pages))->render('characters.twig');
     }
 
-    public function character($id = 1): string
+    public function character(int $id = 1): string
     {
         $character = (new ClientRequest("character/$id"))->getCharacter();
-        return (new Renderer($character))->render('character.twig');
+        return (new Renderer($character, $pages = 1))->render('character.twig');
     }
 
 }

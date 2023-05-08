@@ -11,9 +11,8 @@ class Episodes
     protected array $characters;
     protected string $created;
     protected string $url;
-    protected int $pages;
 
-    public function __construct($id, $name, $airDate, $episode, $characters, $url, $created, $pages)
+    public function __construct($id, $name, $airDate, $episode, $characters, $url, $created)
     {
         $this->id = $id;
         $this->name = $name;
@@ -22,12 +21,6 @@ class Episodes
         $this->characters = $characters;
         $this->url = $url;
         $this->created = $created;
-        $this->pages = $pages;
-    }
-
-    public function getCountOfPages(): int
-    {
-        return $this->pages;
     }
 
     public function getId(): string

@@ -13,20 +13,22 @@ class ClientRequest
 {
     private const BASE_URI = 'https://rickandmortyapi.com/api/';
     private object $client;
-    private string $apiResponse;
+    private string $apiPageResponse;
+    private string $apiDetailResponse;
     private string $uri;
-    private ?string $episodeResponse;
+    private string $pageCacheFileName;
 
     public function __construct($uri)
     {
         $this->uri = $uri;
+        $this->pageCacheFileName = Functions::replaceSlash($this->uri);
         $this->client = new Client(['base_uri' => self::BASE_URI]);
     }
 
     public function getEpisodes(): array
     {
-        $this->cachePage(Functions::replaceSlash($this->uri));
-        $responseDecoded = json_decode($this->apiResponse)->results;
+        $this->requestPages();
+        $responseDecoded = json_decode($this->apiPageResponse)->results;
         $content = [];
         foreach ($responseDecoded as $response) {
 
@@ -38,37 +40,37 @@ class ClientRequest
                 $response->characters,
                 $response->url,
                 $response->created,
-                $this->getCountOfPages(),
             );
         }
         return $content;
     }
 
-    public function cachePage($pageCacheFileName)
+    public function requestPages()
     {
-        if (!Cache::has($pageCacheFileName)) {
-            $this->apiResponse = $this->client->request('GET', $this->uri)->getBody()->getContents();
-            echo 'New Direct Request Cache Page ';
+        if (!Cache::has($this->pageCacheFileName)) {
+            $this->apiPageResponse = $this->client->request('GET', $this->uri)->getBody()->getContents();
+            echo 'Direct ';
         } else {
-            $this->apiResponse = Cache::get($pageCacheFileName);
-            echo 'Cache Request ';
+            $this->apiPageResponse = Cache::get($this->pageCacheFileName);
+            echo 'Cache ';
         }
-        Cache::remember($pageCacheFileName, $this->apiResponse);
+        Cache::remember($this->pageCacheFileName, $this->apiPageResponse);
     }
 
     public function getCountOfPages()
     {
-        $count = $this->client->request('GET', $this->uri);
-        return (json_decode($count->getBody()->getContents())->info->pages);
+        $this->requestPages();
+        return (json_decode($this->apiPageResponse)->info->pages);
+
     }
 
     public function getLocations(): array
     {
-        $this->cachePage(Functions::replaceSlash($this->uri));
-        $responseDecoded = json_decode($this->apiResponse)->results;
+        $this->requestPages();
+        $responseDecoded = json_decode($this->apiPageResponse)->results;
         $content = [];
         foreach ($responseDecoded as $response) {
-            $content [] = new Locations(
+            $content[] = new Locations(
                 $response->id,
                 $response->name,
                 $response->dimension,
@@ -76,7 +78,6 @@ class ClientRequest
                 $response->residents,
                 $response->url,
                 $response->created,
-                $this->getCountOfPages(),
             );
         }
         return $content;
@@ -84,13 +85,12 @@ class ClientRequest
 
     public function getCharacters(): array
     {
-        $this->cachePage(Functions::replaceSlash($this->uri));
-        return $this->saveCharacters(json_decode($this->apiResponse)->results);
+        $this->requestPages();
+        return $this->saveCharacters(json_decode($this->apiPageResponse)->results);
     }
 
     public function saveCharacters($responseDecoded): array
     {
-//        if (array_key_exists('results', $responseDecoded)) {
         foreach ($responseDecoded as $response) {
             $episodeName = $this->getFirstEpisodeName($response->episode[0]);
             $content [] = new Characters(
@@ -107,7 +107,6 @@ class ClientRequest
                 $episodeName,
                 $response->url,
                 $response->created,
-                $this->getCountOfPages()
             );
         }
         return $content;
@@ -116,24 +115,20 @@ class ClientRequest
     public function getFirstEpisodeName($episodeUri): string
     {
         $episodeUri = Functions::cutEpisodeUri($episodeUri);
-        $this->cacheEpisode($episodeUri, Functions::replaceSlash($episodeUri));
-        return json_decode($this->episodeResponse)->name;
+        $this->requestDetails($episodeUri);
+        return json_decode($this->apiDetailResponse)->name;
     }
 
-    public function cacheEpisode($episodeUri, $episodeCacheFileName)
+    public function requestDetails($uri)
     {
-        if (!Cache::has($episodeCacheFileName)) {
-            $this->episodeResponse = $this->client->request('GET', $episodeUri)->getBody()->getContents();
+        $detailCacheFileName = Functions::replaceSlash($uri);
+        if (!Cache::has($detailCacheFileName)) {
+            $this->apiDetailResponse = $this->client->request('GET', $uri)->getBody()->getContents();
+            echo 'Direct ';
         } else {
-            $this->episodeResponse = Cache::get($episodeCacheFileName);
+            $this->apiDetailResponse = Cache::get($detailCacheFileName);
+            echo 'Cache ';
         }
-        Cache::remember($episodeCacheFileName, $this->episodeResponse);
-    }
-
-    public function getCharacter(): array
-    {
-        $this->cachePage(Functions::replaceSlash($this->uri));
-
-        return $this->saveCharacters(json_decode($this->apiResponse));
+        Cache::remember($detailCacheFileName, $this->apiDetailResponse);
     }
 }

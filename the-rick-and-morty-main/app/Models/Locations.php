@@ -12,9 +12,8 @@ class Locations
     protected array $residents;
     protected string $created;
     protected string $url;
-    protected int $pages;
 
-    public function __construct($id, $name, $dimension, $type, $residents, $url, $created, $pages)
+    public function __construct($id, $name, $dimension, $type, $residents, $url, $created)
     {
         $this->id = $id;
         $this->name = $name;
@@ -23,12 +22,6 @@ class Locations
         $this->residents = $residents;
         $this->url = $url;
         $this->created = $created;
-        $this->pages = $pages;
-    }
-
-    public function getCountOfPages(): int
-    {
-        return $this->pages;
     }
 
     public function getId(): string

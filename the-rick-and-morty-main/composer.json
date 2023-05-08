@@ -1,9 +1,16 @@
 {
+  "name": "algis/rick-morty-api",
   "autoload": {
     "psr-4": {
       "App\\": "app/"
     }
   },
+  "authors": [
+    {
+      "name": "Algis Bernatovics",
+      "email": "algis.bernatovics@gmail.com"
+    }
+  ],
   "require": {
     "guzzlehttp/guzzle": "^7.5",
     "nikic/fast-route": "^1.3",

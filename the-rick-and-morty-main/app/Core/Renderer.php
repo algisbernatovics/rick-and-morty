@@ -8,13 +8,15 @@ use Twig\Loader\FilesystemLoader;
 class Renderer
 {
     protected string $template;
-
     protected Environment $twig;
 
     protected array $content;
 
-    public function __construct($content)
+    protected int $pages;
+
+    public function __construct($content, $pages)
     {
+        $this->pages = $pages;
         $this->content = $content;
         $loader = new FilesystemLoader('../public/Views');
         $this->twig = new Environment($loader);
@@ -22,6 +24,6 @@ class Renderer
 
     public function render($template): string
     {
-        return $this->twig->render($template, ['cards' => $this->content, 'pages' => $this->content[0]->getCountOfPages()]);
+        return $this->twig->render($template, ['cards' => $this->content, 'pages' => $this->pages]);
     }
 }
