@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'algis/rick-morty-api',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'ebe7d4b3be2c10081a0a0cb817996be07d17f1e0',
+        'reference' => '734417947b4ef269039e886283fc2d86e3be2fe9',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        '__root__' => array(
+        'algis/rick-morty-api' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'ebe7d4b3be2c10081a0a0cb817996be07d17f1e0',
+            'reference' => '734417947b4ef269039e886283fc2d86e3be2fe9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
