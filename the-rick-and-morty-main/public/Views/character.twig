@@ -7,7 +7,8 @@
     {% else %}
         <div class="grid place-items-up place-items-center">
             <div
-                    class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xxl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    class="flex flex-col items-center bg-white border border-gray-200 rounded-lg  ">
+                <br>
                 {% for card in cards %}
 
                 <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -34,8 +35,9 @@
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Seen in: </h5>
 
                         {% for episode in additionalInfo %}
+                            <a href="/episode/{{ episode.id }}"
+                               class="text-white bg-slate-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">{{ episode.episodeName }}</a>
 
-                            <li class=""> {{ episode.episodeName }}</li>
 
                         {% endfor %}
 
@@ -43,6 +45,8 @@
                 </div>
             </div>
         </div>
+
+        <br><br><br><br><br>
 
     {% endif %}
 {% endblock %}

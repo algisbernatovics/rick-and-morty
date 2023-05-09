@@ -27,6 +27,12 @@ class ClientRequest
         $this->client = new Client(['base_uri' => self::BASE_URI]);
     }
 
+    public function getCountOfPages()
+    {
+        $this->requestPages();
+        return (json_decode($this->apiPageResponse)->info->pages);
+    }
+
     public function requestPages()
     {
         if (!Cache::has($this->pageCacheFileName)) {
@@ -38,106 +44,13 @@ class ClientRequest
         }
         Cache::remember($this->pageCacheFileName, $this->apiPageResponse);
     }
-    public function requestDetails(string $uri): void
-    {
-        $detailCacheFileName = Functions::replaceSlash($uri);
-        if (!Cache::has($detailCacheFileName)) {
-            $this->apiDetailResponse = $this->client->request('GET', $uri)->getBody()->getContents();
-//            echo 'Direct ';
-        } else {
-            $this->apiDetailResponse = Cache::get($detailCacheFileName);
-//            echo 'Cache ';
-        }
-        Cache::remember($detailCacheFileName, $this->apiDetailResponse);
-    }
-    public function getCountOfPages()
-    {
-        $this->requestPages();
-        return (json_decode($this->apiPageResponse)->info->pages);
-    }
+
     public function getLocations(): array
     {
         $this->requestPages();
         return $this->saveLocations(json_decode($this->apiPageResponse)->results);
     }
-    public function getEpisodes(): array
-    {
-        $this->requestPages();
-        return $this->saveEpisodes(json_decode($this->apiPageResponse)->results);
-    }
-    public function getLocation(): array
-    {
-        $this->requestPages();
-        $response = (object)array('results' => json_decode($this->apiPageResponse));
-        $charactersInEpisode = $this->saveCharactersInEpisode(json_decode($this->apiPageResponse)->residents);
-        return [$this->saveLocations($response), $charactersInEpisode];
-    }
-    public function getEpisode(): array
-    {
-        $this->requestPages();
-        $response = (object)array('results' => json_decode($this->apiPageResponse));
-        $charactersInEpisode = $this->saveCharactersInEpisode(json_decode($this->apiPageResponse)->characters);
-        return [$this->saveEpisodes($response), $charactersInEpisode];
-    }
 
-    public function getCharacters(): array
-    {
-        $this->requestPages();
-        return $this->saveCharacters(json_decode($this->apiPageResponse)->results);
-    }
-    public function getCharacter(): array
-    {
-        $this->requestPages();
-        $response = (object)array('results' => json_decode($this->apiPageResponse));
-        $seenInEpisodes = $this->saveSeenInEpisodes(json_decode($this->apiPageResponse)->episode);
-        return [$this->saveCharacters($response), $seenInEpisodes];
-    }
-    public function getFirstSeenIn(string $episodeUri): string
-    {
-        $episodeUri = Functions::cutEpisodeUri($episodeUri);
-        $this->requestDetails($episodeUri);
-        return json_decode($this->apiDetailResponse)->name;
-    }
-    public function saveCharactersInEpisode(array $charactersUri): array
-    {
-        $episodes = [];
-        foreach ($charactersUri as $characterUri) {
-            $characterUri = Functions::cutEpisodeUri($characterUri);
-            $this->requestDetails($characterUri);
-            $episodes[] = new CharactersIn(
-                json_decode($this->apiDetailResponse)->name,
-                json_decode($this->apiDetailResponse)->image,
-                json_decode($this->apiDetailResponse)->id
-            );
-        }
-        return $episodes;
-    }
-    public function saveSeenInEpisodes(array $episodesUri): array
-    {
-        $episodes = [];
-        foreach ($episodesUri as $episodeUri) {
-            $episodeUri = Functions::cutEpisodeUri($episodeUri);
-            $this->requestDetails($episodeUri);
-            $episodes[] = new SeenInEpisodes(json_decode($this->apiDetailResponse)->name);
-        }
-        return $episodes;
-    }
-    public function saveEpisodes($response): array
-    {
-        $content = [];
-        foreach ($response as $episode) {
-            $content [] = new Episodes(
-                $episode->id,
-                $episode->name,
-                $episode->air_date,
-                $episode->episode,
-                $episode->characters,
-                $episode->url,
-                $episode->created,
-            );
-        }
-        return $content;
-    }
     public function saveLocations($response): array
     {
         $content = [];
@@ -154,6 +67,80 @@ class ClientRequest
         }
         return $content;
     }
+
+    public function getEpisodes(): array
+    {
+        $this->requestPages();
+        return $this->saveEpisodes(json_decode($this->apiPageResponse)->results);
+    }
+
+    public function saveEpisodes($response): array
+    {
+        $content = [];
+        foreach ($response as $episode) {
+            $content [] = new Episodes(
+                $episode->id,
+                $episode->name,
+                $episode->air_date,
+                $episode->episode,
+                $episode->characters,
+                $episode->url,
+                $episode->created,
+            );
+        }
+        return $content;
+    }
+
+    public function getLocation(): array
+    {
+        $this->requestPages();
+        $response = (object)array('results' => json_decode($this->apiPageResponse));
+        $charactersInEpisode = $this->saveCharactersInEpisode(json_decode($this->apiPageResponse)->residents);
+        return [$this->saveLocations($response), $charactersInEpisode];
+    }
+
+    public function saveCharactersInEpisode(array $charactersUri): array
+    {
+        $episodes = [];
+        foreach ($charactersUri as $characterUri) {
+            $characterUri = Functions::cutEpisodeUri($characterUri);
+            $this->requestDetails($characterUri);
+            $episodes[] = new CharactersIn(
+                json_decode($this->apiDetailResponse)->name,
+                json_decode($this->apiDetailResponse)->image,
+                json_decode($this->apiDetailResponse)->id
+            );
+        }
+        return $episodes;
+    }
+
+    public function requestDetails(string $uri): void
+    {
+        $detailCacheFileName = Functions::replaceSlash($uri);
+        if (!Cache::has($detailCacheFileName)) {
+            $this->apiDetailResponse = $this->client->request('GET', $uri)->getBody()->getContents();
+//            echo 'Direct ';
+        } else {
+            $this->apiDetailResponse = Cache::get($detailCacheFileName);
+//            echo 'Cache ';
+        }
+        Cache::remember($detailCacheFileName, $this->apiDetailResponse);
+    }
+
+    public function getEpisode(): array
+    {
+        $this->requestPages();
+        $response = (object)array('results' => json_decode($this->apiPageResponse));
+        $charactersInEpisode = $this->saveCharactersInEpisode(json_decode($this->apiPageResponse)->characters);
+        return [$this->saveEpisodes($response), $charactersInEpisode];
+    }
+
+    public function getCharacters(): array
+    {
+        $this->requestPages();
+        return $this->saveCharacters(json_decode($this->apiPageResponse)->results);
+    }
+
     public function saveCharacters($response): array
     {
         foreach ($response as $character) {
@@ -175,5 +162,34 @@ class ClientRequest
             );
         }
         return $content;
+    }
+
+    public function getFirstSeenIn(string $episodeUri): string
+    {
+        $episodeUri = Functions::cutEpisodeUri($episodeUri);
+        $this->requestDetails($episodeUri);
+        return json_decode($this->apiDetailResponse)->name;
+    }
+
+    public function getCharacter(): array
+    {
+        $this->requestPages();
+        $response = (object)array('results' => json_decode($this->apiPageResponse));
+        $seenInEpisodes = $this->saveSeenInEpisodes(json_decode($this->apiPageResponse)->episode);
+        return [$this->saveCharacters($response), $seenInEpisodes];
+    }
+
+    public function saveSeenInEpisodes(array $episodesUri): array
+    {
+        $episodes = [];
+        foreach ($episodesUri as $episodeUri) {
+            $episodeUri = Functions::cutEpisodeUri($episodeUri);
+            $this->requestDetails($episodeUri);
+            $episodes[] = new SeenInEpisodes(
+                json_decode($this->apiDetailResponse)->name,
+                json_decode($this->apiDetailResponse)->id
+            );
+        }
+        return $episodes;
     }
 }

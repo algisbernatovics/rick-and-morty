@@ -30,15 +30,15 @@
             <br><br><br><br><br><br><br><br>
 
             <div class="grid place-items-up place-items-center">
-                <div class="h-56 grid grid-cols-3 gap-12 content-normal">
+                <div class="h-56 grid grid-cols-3 gap-12 content-normal ">
 
                     {% for character in additionalInfo %}
 
                     <a href="/character/{{ character.id }}">
-                        <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class="myBox">
                                 <img src="{{ character.imageUrl }}" alt="{{ character.name }}">
-                                <p>{{ character.name}}</p>
+                                <p>{{ character.name }}</p>
                             </div>
                         </div>
 
