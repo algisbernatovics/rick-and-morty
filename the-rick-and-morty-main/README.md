@@ -13,6 +13,7 @@ Network's nighttime programming block Adult Swim.
 
 ## Getting started
 
+- download project
 - run `composer install` to get necessary packages
 - run `php -S localhost:7777` from public folder to start server
 - click on site that appears in terminal to open it in browser
