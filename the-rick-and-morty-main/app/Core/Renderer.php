@@ -23,10 +23,10 @@ class Renderer
             ['cards' => $content, 'pages' => $pages]);
     }
 
-    public function renderSinglePage(string $template, array $content, array $seenInLocations): string
+    public function renderSinglePage(string $template, array $content, array $additionalInfo): string
     {
         return $this->twig->render(
             $template,
-            ['cards' => $content, 'seenIn' => $seenInLocations]);
+            ['cards' => $content, 'additionalInfo' => $additionalInfo]);
     }
 }

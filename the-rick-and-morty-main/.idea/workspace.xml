@@ -7,21 +7,6 @@
     <list default="true" id="67af724a-ebee-43b7-b515-e3e508ffdebe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ClientRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClientRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controller/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Core/Cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Core/Cache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Core/Functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Core/Functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Core/Renderer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Core/Renderer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Characters.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Characters.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Episodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Episodes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Locations.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Locations.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Pages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Views/character.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/character.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Views/characters.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/characters.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Views/episodes.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/episodes.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Views/layout.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/layout.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Views/locations.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/locations.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +97,7 @@
       <workItem from="1683528354880" duration="413000" />
       <workItem from="1683528786733" duration="25540000" />
       <workItem from="1683563277550" duration="15271000" />
-      <workItem from="1683582865934" duration="5711000" />
+      <workItem from="1683582865934" duration="6517000" />
     </task>
     <servers />
   </component>

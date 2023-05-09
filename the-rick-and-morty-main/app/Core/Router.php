@@ -19,6 +19,8 @@ class Router
             $r->addRoute(['GET'], '/locations[/{page}]', '\App\Controller\Controller@locations');
             $r->addRoute(['GET'], '/episodes[/{page}]', '\App\Controller\Controller@episodes');
             $r->addRoute(['GET'], '/character[/{page}]', '\App\Controller\Controller@character');
+            $r->addRoute(['GET'], '/episode[/{page}]', '\App\Controller\Controller@episode');
+            $r->addRoute(['GET'], '/location[/{page}]', '\App\Controller\Controller@location');
 
 
         });

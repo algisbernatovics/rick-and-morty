@@ -19,10 +19,11 @@
                     <li>{{ card.location.name }}</li>
                     <p> Created: </p>
                     <li>{{ card.created }}</li>
-                    <!-- Pin to top right corner -->
+
                     {% endfor %}
 
                 </div>
+
                 <div class="flex flex-col justify-between p-4 leading-normal">
 
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
@@ -32,7 +33,7 @@
 
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Seen in: </h5>
 
-                        {% for episode in seenIn %}
+                        {% for episode in additionalInfo %}
 
                             <li class=""> {{ episode.episodeName }}</li>
 

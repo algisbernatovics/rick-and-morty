@@ -11,26 +11,27 @@
 
                 {% for card in cards %}
 
-                    <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ card.name }}</h5>
-                        <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white"> ID:{{ card.id }} </p>
-                        <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white"> Type:{{ card.type }} </p>
-                        <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
-                            Dimension:{{ card.dimension }} </p>
-                        <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
-                            Created:{{ card.created }} </p>
+                    <a href="/location/{{ card.id }}">
+                        <div>
 
-                        {#                                        <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">Residents:</p> #}
+                            <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-                        {#                                        {% for resident in card.residents %} #}
-                        {#                                            <a href="{{ resident }}" #}
-                        {#                                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{ resident }}</a> #}
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ card.name }}</h5>
+                                <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
+                                    ID:{{ card.id }} </p>
+                                <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
+                                    Type:{{ card.type }} </p>
+                                <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
+                                    Dimension:{{ card.dimension }} </p>
+                                <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
+                                    Created:{{ card.created }} </p>
 
-                        {#                                        {% endfor %} #}
+                            </div>
+                        </div>
+                    </a>
 
-
-                    </div>
                 {% endfor %}
+
             </div>
         </div>
 
