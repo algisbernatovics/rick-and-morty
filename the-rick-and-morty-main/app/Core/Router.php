@@ -21,7 +21,8 @@ class Router
             $r->addRoute(['GET'], '/character[/{page}]', '\App\Controller\Controller@character');
             $r->addRoute(['GET'], '/episode[/{page}]', '\App\Controller\Controller@episode');
             $r->addRoute(['GET'], '/location[/{page}]', '\App\Controller\Controller@location');
-
+            $r->addRoute(['GET'], '/searchPage[/{page}]', '\App\Controller\Controller@searchPage');
+            $r->addRoute(['POST'], '/searchResults[/{page}]', '\App\Controller\Controller@searchResults');
 
         });
         // Fetch method and URI from somewhere

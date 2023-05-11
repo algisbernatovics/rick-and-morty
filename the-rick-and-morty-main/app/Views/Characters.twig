@@ -1,4 +1,4 @@
-{% extends "layout.twig" %}
+{% extends "Layout.twig" %}
 {% block content %}
     {% if cards == null %}
 
@@ -6,12 +6,11 @@
 
     {% else %}
 
-        <div class="grid place-items-up place-items-center">
+        <div class="dark:bg-black grid place-items-up place-items-center">
             <div class="h-56 grid grid-cols-3 gap-12 content-normal">
 
                 {% for card in cards %}
                     <a href="/character/{{ card.id }}">
-
 
                         <div class="hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 max-w-sm
                         shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow
@@ -36,10 +35,9 @@
 
             </div>
 
-
         </div>
         {% for i in 1..pages %}
-            <nav aria-label=" Page navigation example">
+            <nav aria-label="">
                 <ul class="place-items-center inline-flex -space-x-px">
                     <li>
                         <a href="/characters/{{ i }}"{{ i }}
@@ -49,12 +47,9 @@
                     </li>
                 </ul>
             </nav>
+
         {% endfor %}
     {% endif %}
-
-
-
-
 {% endblock %}
 
 

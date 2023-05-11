@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+//Characters in locations and episodes.
+
 class CharactersIn
 {
     protected string $name;
     protected string $imageUrl;
     protected int $id;
 
-    public function __construct(string $name, string $imageUrl,int $id)
+    public function __construct(string $name, string $imageUrl, int $id)
     {
         $this->name = $name;
         $this->imageUrl = $imageUrl;

@@ -1,4 +1,4 @@
-{% extends "layout.twig" %}
+{% extends "Layout.twig" %}
 {% block content %}
     {% if cards == null %}
 
@@ -7,28 +7,27 @@
     {% else %}
 
         <div class="grid place-items-up place-items-center">
-            <div class="h-56 grid grid-cols-3 gap-12 content-normal ">
+            <div class="h-56 grid grid-cols-3 gap-12 content-normal">
 
                 {% for card in cards %}
 
-                    <a href="/episode/{{ card.id }}">
-
+                    <a href="/location/{{ card.id }}">
                         <div>
+
                             <div class="flex flex-col items-left bg-white border border-gray-200 rounded-lg  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ card.name }}</h5>
                                 <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
                                     ID:{{ card.id }} </p>
-                                <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white"> Air
-                                    Date:{{ card.airDate }} </p>
                                 <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
-                                    Episode:{{ card.episode }} </p>
+                                    Type:{{ card.type }} </p>
+                                <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
+                                    Dimension:{{ card.dimension }} </p>
                                 <p class="mb-2 text-1xl tracking-tight text-gray-900 dark:text-white">
                                     Created:{{ card.created }} </p>
 
                             </div>
                         </div>
-
                     </a>
 
                 {% endfor %}
@@ -42,7 +41,7 @@
         <nav aria-label="Page navigation example">
             <ul class="place-items-center inline-flex -space-x-px">
                 <li>
-                    <a href="/episodes/{{ i }}"{{ i }}
+                    <a href="/locations/{{ i }}"{{ i }}
                        class="px-5 py-1 ml-1 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ i }}</a>
                 </li>
             </ul>

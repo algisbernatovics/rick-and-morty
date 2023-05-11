@@ -12,7 +12,7 @@ class Renderer
 
     public function __construct()
     {
-        $loader = new FilesystemLoader('../public/Views');
+        $loader = new FilesystemLoader('../app/Views');
         $this->twig = new Environment($loader);
     }
 
@@ -28,5 +28,10 @@ class Renderer
         return $this->twig->render(
             $template,
             ['cards' => $content, 'additionalInfo' => $additionalInfo]);
+    }
+
+    public function viewSearch(string $template): void
+    {
+        $this->twig->load($template)->display();
     }
 }

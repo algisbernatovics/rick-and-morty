@@ -11,39 +11,53 @@ class Controller
     {
         $locations = (new ClientRequest("location/?page=$page"))->getLocations();
         $pages = (new ClientRequest("location/?page=$page"))->getCountOfPages();
-        return (new Renderer())->renderPage('locations.twig', $locations, $pages);
+        return (new Renderer())->renderPage('Locations.twig', $locations, $pages);
     }
 
     public function episodes(int $page = 1): string
     {
         $episodes = (new ClientRequest("episode/?page=$page"))->getEpisodes();
         $pages = (new ClientRequest("episode/?page=$page"))->getCountOfPages();
-        return (new Renderer())->renderPage('episodes.twig', $episodes, $pages);
+        return (new Renderer())->renderPage('Episodes.twig', $episodes, $pages);
     }
 
     public function characters(int $page = 1): string
     {
         $characters = (new ClientRequest("character/?page=$page"))->getCharacters();
         $pages = (new ClientRequest("character/?page=$page"))->getCountOfPages();
-        return (new Renderer())->renderPage('characters.twig', $characters, $pages);
+        return (new Renderer())->renderPage('Characters.twig', $characters, $pages);
     }
 
     public function character(int $id = 1): string
     {
         $character = (new ClientRequest("character/$id"))->getCharacter();
-        return (new Renderer())->renderSinglePage('character.twig', $character[0], $character[1]);
+        return (new Renderer())->renderSinglePage('SingleCharacter.twig', $character[0], $character[1]);
     }
 
     public function location(int $id = 1): string
     {
         $location = (new ClientRequest("location/$id"))->getLocation();
-        return (new Renderer())->renderSinglePage('location.twig', $location[0], $location[1]);
+        return (new Renderer())->renderSinglePage('SingleLocation.twig', $location[0], $location[1]);
     }
 
     public function episode(int $id = 1): string
     {
         $episode = (new ClientRequest("episode/$id"))->getEpisode();
-        return (new Renderer())->renderSinglePage('episode.twig', $episode[0], $episode[1]);
+        return (new Renderer())->renderSinglePage('SingleEpisode.twig', $episode[0], $episode[1]);
     }
 
+    public function searchPage(): void
+    {
+        (new Renderer())->viewSearch('SearchPage.twig');
+    }
+
+    public function searchResults(int $page = 1): string
+    {
+        $searchName = $_POST['name'];
+        $searchStatus = $_POST['status'];
+        $searchGender = $_POST['gender'];
+        $uri = "character/?page=$page&name=$searchName&status=$searchStatus&gender=$searchGender";
+        $searchResults = (new ClientRequest($uri))->getSearchResults();
+        return (new Renderer())->renderPage('SearchResults.twig', $searchResults[0], $searchResults[1]);
+    }
 }

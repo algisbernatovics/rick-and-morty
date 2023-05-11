@@ -27,10 +27,10 @@ class ClientRequest
         $this->client = new Client(['base_uri' => self::BASE_URI]);
     }
 
-    public function getCountOfPages()
+    public function getLocations(): array
     {
         $this->requestPages();
-        return (json_decode($this->apiPageResponse)->info->pages);
+        return $this->saveLocations(json_decode($this->apiPageResponse)->results);
     }
 
     public function requestPages()
@@ -43,12 +43,6 @@ class ClientRequest
 //            echo 'Cache ';
         }
         Cache::remember($this->pageCacheFileName, $this->apiPageResponse);
-    }
-
-    public function getLocations(): array
-    {
-        $this->requestPages();
-        return $this->saveLocations(json_decode($this->apiPageResponse)->results);
     }
 
     public function saveLocations($response): array
@@ -127,18 +121,18 @@ class ClientRequest
         Cache::remember($detailCacheFileName, $this->apiDetailResponse);
     }
 
-    public function getEpisode(): array
+    public function getSearchResults(): array
     {
         $this->requestPages();
-        $response = (object)array('results' => json_decode($this->apiPageResponse));
-        $charactersInEpisode = $this->saveCharactersInEpisode(json_decode($this->apiPageResponse)->characters);
-        return [$this->saveEpisodes($response), $charactersInEpisode];
+        $pages = $this->getCountOfPages();
+        $searchResults = $this->saveCharacters(json_decode($this->apiPageResponse)->results);
+        return [$searchResults, $pages];
     }
 
-    public function getCharacters(): array
+    public function getCountOfPages()
     {
         $this->requestPages();
-        return $this->saveCharacters(json_decode($this->apiPageResponse)->results);
+        return (json_decode($this->apiPageResponse)->info->pages);
     }
 
     public function saveCharacters($response): array
@@ -168,7 +162,21 @@ class ClientRequest
     {
         $episodeUri = Functions::cutEpisodeUri($episodeUri);
         $this->requestDetails($episodeUri);
-        return json_decode($this->apiDetailResponse)->name;
+        return (json_decode($this->apiDetailResponse)->name);
+    }
+
+    public function getEpisode(): array
+    {
+        $this->requestPages();
+        $response = (object)array('results' => json_decode($this->apiPageResponse));
+        $charactersInEpisode = $this->saveCharactersInEpisode(json_decode($this->apiPageResponse)->characters);
+        return [$this->saveEpisodes($response), $charactersInEpisode];
+    }
+
+    public function getCharacters(): array
+    {
+        $this->requestPages();
+        return $this->saveCharacters(json_decode($this->apiPageResponse)->results);
     }
 
     public function getCharacter(): array
@@ -193,3 +201,9 @@ class ClientRequest
         return $episodes;
     }
 }
+
+
+
+
+
+

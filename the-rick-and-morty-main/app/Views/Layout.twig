@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
 
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
                 class="relative flex w-full flex-wrap items-center justify-between bg-neutral-900 py-2 text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start lg:py-4"
                 data-te-navbar-ref>
             <div class="flex w-full flex-wrap items-center justify-between px-3">
-                
+
                 <!-- Collapsible navigation container -->
                 <div
                         class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
@@ -56,6 +56,14 @@
                                     href="/episodes"
                                     data-te-nav-link-ref
                             >Episodes</a>
+                            <!-- Episode link -->
+                        <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                            <a
+                                    class="p-0 text-white opacity-60 hover:opacity-80 focus:opacity-80 disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                                    href="/searchPage"
+                                    data-te-nav-link-ref
+                            >Search</a>
+
                         </li>
                     </ul>
                 </div>

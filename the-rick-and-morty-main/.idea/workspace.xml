@@ -6,9 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="67af724a-ebee-43b7-b515-e3e508ffdebe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Views/character.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/character.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Views/characters.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/characters.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ClientRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClientRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controller/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Core/Renderer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Core/Renderer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Core/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Core/Router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/CharactersIn.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/CharactersIn.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Views/character.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/SingleCharacter.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Views/characters.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/Characters.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Views/episode.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/SingleEpisode.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Views/episodes.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/Episodes.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Views/layout.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/Layout.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Views/location.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/SingleLocation.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Views/locations.twig" beforeDir="false" afterPath="$PROJECT_DIR$/public/Views/Locations.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +111,13 @@
       <workItem from="1683563277550" duration="15271000" />
       <workItem from="1683582865934" duration="6517000" />
       <workItem from="1683656779689" duration="6499000" />
+      <workItem from="1683668201881" duration="79000" />
+      <workItem from="1683668553162" duration="15000" />
+      <workItem from="1683668845074" duration="60000" />
+      <workItem from="1683729874282" duration="25497000" />
+      <workItem from="1683810006296" duration="2059000" />
+      <workItem from="1683812692606" duration="1178000" />
+      <workItem from="1683815152907" duration="9214000" />
     </task>
     <servers />
   </component>
