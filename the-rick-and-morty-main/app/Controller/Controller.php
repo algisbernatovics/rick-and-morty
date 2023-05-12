@@ -30,19 +30,19 @@ class Controller
 
     public function character(int $id = 1): string
     {
-        $character = (new ClientRequest("character/$id"))->getCharacter();
+        $character = (new ClientRequest("character/$id"))->getSingleCharacter();
         return (new Renderer())->renderSinglePage('SingleCharacter.twig', $character[0], $character[1]);
     }
 
     public function location(int $id = 1): string
     {
-        $location = (new ClientRequest("location/$id"))->getLocation();
+        $location = (new ClientRequest("location/$id"))->getSingleLocation();
         return (new Renderer())->renderSinglePage('SingleLocation.twig', $location[0], $location[1]);
     }
 
     public function episode(int $id = 1): string
     {
-        $episode = (new ClientRequest("episode/$id"))->getEpisode();
+        $episode = (new ClientRequest("episode/$id"))->getSingleEpisode();
         return (new Renderer())->renderSinglePage('SingleEpisode.twig', $episode[0], $episode[1]);
     }
 
@@ -59,5 +59,10 @@ class Controller
         $uri = "character/?page=$page&name=$searchName&status=$searchStatus&gender=$searchGender";
         $searchResults = (new ClientRequest($uri))->getSearchResults();
         return (new Renderer())->renderPage('SearchResults.twig', $searchResults[0], $searchResults[1]);
+    }
+
+    public function error(): string
+    {
+        return (new Renderer())->error('Error.twig');
     }
 }

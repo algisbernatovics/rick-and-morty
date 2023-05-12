@@ -36,11 +36,7 @@ class Cache
         $str = preg_replace('/[^0-9]/', " ", $content->expires_at, -1);
         $exp = explode(' ', $str);
         $expires_at = Carbon\CarbonImmutable::create($exp[0], $exp[1], $exp[2], $exp[3], $exp[4], $exp[5]);
-
-//        echo 'Expires At' . $expires_at = Carbon\CarbonImmutable::create($exp[0], $exp[1], $exp[2], $exp[3], $exp[4], $exp[5]);
-//        echo 'Now :' . Carbon\CarbonImmutable::Now()->subHour(3);
-//        var_dump($expires_at > Carbon\CarbonImmutable::now()->subHour(3));
-
+        
         return ($expires_at > Carbon\CarbonImmutable::now()->subHour(3));
     }
 }

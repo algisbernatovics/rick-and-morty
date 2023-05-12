@@ -34,4 +34,9 @@ class Renderer
     {
         $this->twig->load($template)->display();
     }
+
+    public function error(string $template): void
+    {
+        $this->twig->load($template)->display();
+    }
 }
