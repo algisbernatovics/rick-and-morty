@@ -18,9 +18,9 @@ class Router
             $r->addRoute(['GET'], '/characters[/{page}]', '\App\Controller\Controller@characters');
             $r->addRoute(['GET'], '/locations[/{page}]', '\App\Controller\Controller@locations');
             $r->addRoute(['GET'], '/episodes[/{page}]', '\App\Controller\Controller@episodes');
-            $r->addRoute(['GET'], '/character[/{page}]', '\App\Controller\Controller@character');
-            $r->addRoute(['GET'], '/episode[/{page}]', '\App\Controller\Controller@episode');
-            $r->addRoute(['GET'], '/location[/{page}]', '\App\Controller\Controller@location');
+            $r->addRoute(['GET'], '/character[/{page}]', '\App\Controller\Controller@SingleCharacter');
+            $r->addRoute(['GET'], '/episode[/{page}]', '\App\Controller\Controller@SingleEpisode');
+            $r->addRoute(['GET'], '/location[/{page}]', '\App\Controller\Controller@SingleLocation');
             $r->addRoute(['GET'], '/searchPage[/{page}]', '\App\Controller\Controller@searchPage');
             $r->addRoute(['POST'], '/searchResults[/{page}]', '\App\Controller\Controller@searchResults');
 

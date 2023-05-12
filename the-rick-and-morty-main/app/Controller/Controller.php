@@ -28,19 +28,19 @@ class Controller
         return (new Renderer())->renderPage('Characters.twig', $characters, $pages);
     }
 
-    public function character(int $id = 1): string
+    public function singleCharacter(int $id = 1): string
     {
         $character = (new ClientRequest("character/$id"))->getSingleCharacter();
         return (new Renderer())->renderSinglePage('SingleCharacter.twig', $character[0], $character[1]);
     }
 
-    public function location(int $id = 1): string
+    public function singleLocation(int $id = 1): string
     {
         $location = (new ClientRequest("location/$id"))->getSingleLocation();
         return (new Renderer())->renderSinglePage('SingleLocation.twig', $location[0], $location[1]);
     }
 
-    public function episode(int $id = 1): string
+    public function singleEpisode(int $id = 1): string
     {
         $episode = (new ClientRequest("episode/$id"))->getSingleEpisode();
         return (new Renderer())->renderSinglePage('SingleEpisode.twig', $episode[0], $episode[1]);
