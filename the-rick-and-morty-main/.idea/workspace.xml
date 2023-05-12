@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="67af724a-ebee-43b7-b515-e3e508ffdebe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ClientRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClientRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controller/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Core/Cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Core/Cache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Core/Renderer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Core/Renderer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev0.png" beforeDir="false" afterPath="$PROJECT_DIR$/prev0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev1.png" beforeDir="false" afterPath="$PROJECT_DIR$/prev1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prev2.png" beforeDir="false" afterPath="$PROJECT_DIR$/prev2.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +103,7 @@
       <workItem from="1683815152907" duration="9214000" />
       <workItem from="1683839520896" duration="5447000" />
       <workItem from="1683874970206" duration="602000" />
-      <workItem from="1683877180076" duration="4271000" />
+      <workItem from="1683877180076" duration="4689000" />
     </task>
     <servers />
   </component>
