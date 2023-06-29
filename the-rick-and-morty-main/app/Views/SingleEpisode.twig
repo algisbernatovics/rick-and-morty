@@ -29,13 +29,15 @@
             </div>
             <br><br><br><br><br><br><br><br>
 
-            <div class="grid place-items-up place-items-center">
-                <div class="h-56 grid grid-cols-3 gap-12 content-normal ">
+            <div class="dark:bg-black grid place-items-center container mx-auto px-4">
+                <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
 
                     {% for character in additionalInfo %}
 
                     <a href="/character/{{ character.id }}">
-                        <div class="hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="map animate-fade-in hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 max-w-sm
+                        shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow
+                        dark:bg-gray-800 dark:border-gray-700">
                             <div class="myBox">
                                 <img src="{{ character.imageUrl }}" alt="{{ character.name }}">
                                 <p>{{ character.name }}</p>
@@ -51,4 +53,46 @@
         </div>
 
     {% endif %}
+
+    <style>.pagination {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pagination-item {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 1300px) {
+            .pagination {
+                flex-wrap: nowrap;
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out;
+        }
+
+        .map {
+
+            background-color: #f1f1f1;
+            transition: transform 0.3s ease;
+        }
+
+        .map:hover {
+            transform: scale(1.1);
+        }</style
+
 {% endblock %}

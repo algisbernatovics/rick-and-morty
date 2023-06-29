@@ -1,14 +1,17 @@
 <!doctype html>
-<html class="dark" lang="en">
+<html class="" lang="en">
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>RICK&MORTY</title>
+{#    <link rel="stylesheet" href="{{ ('css/Local_styles.css') }}">#}
 
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>RICK&MORTY</title>
 
     {% block head %}
 
@@ -76,11 +79,13 @@
 </head>
 <body>
 <div id="content"
+
 {% block content %}{% endblock %}
 
 <div id="footer">
 
     {% block footer %}
+
     {% endblock %}
 
 </div>
