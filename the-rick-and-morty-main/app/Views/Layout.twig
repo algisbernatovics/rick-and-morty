@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 {#    <link rel="stylesheet" href="{{ ('css/Local_styles.css') }}">#}
 
-
     <script src="https://cdn.tailwindcss.com"></script>
 
     <title>RICK&MORTY</title>
@@ -16,62 +15,17 @@
     {% block head %}
 
         <title>{% block title %}RICK&MORTY{% endblock %}</title>
-
-        <!-- Main navigation container -->
-        <nav
-                class="relative flex w-full flex-wrap items-center justify-between bg-neutral-900 py-2 text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start lg:py-4"
-                data-te-navbar-ref>
-            <div class="flex w-full flex-wrap items-center justify-between px-3">
-
-                <!-- Collapsible navigation container -->
-                <div
-                        class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
-                        id="navbarSupportedContent4"
-                        data-te-collapse-item>
-                    <!-- Navbar title -->
-                    <a class="pr-2 text-xl font-semibold text-white" href="/">Home</a>
-                    <!-- Left navigation links -->
-                    <ul
-                            class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row"
-                            data-te-navbar-nav-ref>
-                        <!-- Character link -->
-                        <li class="my-4 lg:my-0 lg:pr-2" data-te-nav-item-ref>
-                            <a
-                                    class="text-white disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-                                    href="/characters"
-                                    data-te-nav-link-ref
-                            >Characters</a
-                            >
-                        </li>
-                        <!-- Location link -->
-                        <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                            <a
-                                    class="p-0 text-white opacity-60 hover:opacity-80 focus:opacity-80 disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-                                    href="/locations"
-                                    data-te-nav-link-ref
-                            >Locations</a
-                            >
-                        </li>
-                        <!-- Episode link -->
-                        <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                            <a
-                                    class="p-0 text-white opacity-60 hover:opacity-80 focus:opacity-80 disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-                                    href="/episodes"
-                                    data-te-nav-link-ref
-                            >Episodes</a>
-                            <!-- Episode link -->
-                        <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                            <a
-                                    class="p-0 text-white opacity-60 hover:opacity-80 focus:opacity-80 disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-                                    href="/searchPage"
-                                    data-te-nav-link-ref
-                            >Search</a>
-
-                        </li>
+        <header class="bg-black text-white py-4 px-4">
+                    <ul class="flex space-x-4">
+                        <li><a href="/" class="hover:text-gray-300 text-bold font-bold">Home</a></li>
+                        <li><a href="/characters" class="hover:text-gray-300 font-normal">Characters</a></li>
+                        <li><a href="/episodes" class="hover:text-gray-300 font-normal">Episodes</a></li>
+                        <li><a href="/locations" class="hover:text-gray-300 font-normal">Locations</a></li>
+                        <li><a href="/searchPage" class="hover:text-gray-300 font-normal">Search</a></li>
                     </ul>
-                </div>
+                </nav>
             </div>
-        </nav>
+        </header>
 
     {% endblock %}
 
