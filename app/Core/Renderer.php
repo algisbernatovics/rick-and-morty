@@ -16,11 +16,12 @@ class Renderer
         $this->twig = new Environment($loader);
     }
 
-    public function renderPage(string $template, array $content, int $pages): string
+    public function renderPage(string $template, array $content): string
     {
+        var_dump($content['info']);
         return $this->twig->render(
             $template,
-            ['cards' => $content, 'pages' => $pages]);
+            ['cards' => $content['characters'], 'info' => $content['info']]);
     }
 
     public function renderSinglePage(string $template, array $content, array $additionalInfo): string
