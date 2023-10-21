@@ -18,7 +18,6 @@ class Renderer
 
     public function renderPage(string $template, array $content): string
     {
-        var_dump($content['info']);
         return $this->twig->render(
             $template,
             ['cards' => $content['characters'], 'info' => $content['info']]);
