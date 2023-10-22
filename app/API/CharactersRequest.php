@@ -60,7 +60,7 @@ class CharactersRequest
 
     private function getEpisodeName(string $episodeUri): string
     {
-        $episodeUri = Functions::cutEpisodeUri($episodeUri);
+        $episodeUri = Functions::cutUri($episodeUri);
         $episodeResponse = $this->client->request('GET', self::API_PATH . $episodeUri);
         $episodeData = $this->decodeJsonResponse($episodeResponse);
 
@@ -69,7 +69,7 @@ class CharactersRequest
 
     public function getSingleCharacter($uri): array
     {
-        $characterResponse = $this->requestCharacterData($uri);
+        $characterResponse = $this->request($uri);
         $characterData = $this->decodeJsonResponse($characterResponse);
 
         $episodeUris = $characterData->episode;
@@ -94,18 +94,12 @@ class CharactersRequest
         return ['card' => $character, 'info' => $seenInEpisodes];
     }
 
-    private function requestCharacterData($characterUri)
-    {
-        $response = $this->client->get(self::API_PATH . $characterUri);
-        return $response;
-    }
-
     private function getSeenInEpisodes(array $episodeUris)
     {
         $episodes = [];
         foreach ($episodeUris as $episodeUri) {
             $episodeUri = Functions::cutUri($episodeUri);
-            $episodeResponse = $this->requestEpisodeData($episodeUri);
+            $episodeResponse = $this->request($episodeUri);
             $episodeData = $this->decodeJsonResponse($episodeResponse);
             $episodes[] = new SeenInEpisodes(
                 $episodeData->name,
@@ -115,7 +109,7 @@ class CharactersRequest
         return $episodes;
     }
 
-    private function requestEpisodeData($episodeUri)
+    private function request($episodeUri)
     {
         $response = $this->client->get(self::API_PATH . $episodeUri);
         return $response;
