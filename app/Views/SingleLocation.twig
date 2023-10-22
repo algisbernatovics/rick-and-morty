@@ -1,104 +1,39 @@
 {% extends "Layout.twig" %}
 {% block content %}
-    {% if cards == null %}
-
+    {% if card is null %}
         <h1>Not found!</h1>
-
     {% else %}
-
         <div class="grid place-items-up place-items-center">
             <div class="h-56 grid grid-cols-1 gap-12 content-normal">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Characters in this
-                    Location:</h5>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Characters in this Location:</h5>
 
-                {% for card in cards %}
-
-                    <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
-                        <p class="mb-2 text-1xl tracking-tight text-gray-900">
-                            ID:{{ card.id }} </p>
-                        <p class="mb-2 text-1xl tracking-tight text-gray-900">
-                            Type:{{ card.type }} </p>
-                        <p class="mb-2 text-1xl tracking-tight text-gray-900">
-                            Dimension:{{ card.dimension }} </p>
-                        <p class="mb-2 text-1xl tracking-tight text-gray-900">
-                            Created:{{ card.created }} </p>
-
-                    </div>
-
-                {% endfor %}
-
+                <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+                    <p class="mb-2 text-1xl tracking-tight text-gray-900">ID: {{ card.id }}</p>
+                    <p class="mb-2 text-1xl tracking-tight text-gray-900">Type: {{ card.type }}</p>
+                    <p class="mb-2 text-1xl tracking-tight text-gray-900">Dimension: {{ card.dimension }}</p>
+                    <p class="mb-2 text-1xl tracking-tight text-gray-900">Created: {{ card.created }}</p>
+                </div>
             </div>
 
-            <br><br><br><br><br><br><br><br>
+            <div style="height: 180px;"></div>
 
             <div class="grid place-items-center container mx-auto px-4">
                 <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
-
-                    {% for character in additionalInfo %}
-
-                    <a href="/character/{{ character.id }}">
-                        <div class="map animate-fade-in hover:bg-gray-100 max-w-sm
-                        shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
-                            <div class="myBox">
-                                <img src="{{ character.imageUrl }}" alt="{{ character.name }}">
-                                <p>{{ character.name }}</p>
+                    {% for character in info %}
+                        <a href="/character/{{ character.id }}">
+                            <div class="map animate-fade-in hover:bg-gray-100 max-w-sm
+                                shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
+                                <div class="myBox">
+                                    <img src="{{ character.imageUrl }}" alt="{{ character.name }}">
+                                    <p>{{ character.name }}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        {% endfor %}
-
-                    </a>
-
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
+        <div style="height: 120px;"></div>
     {% endif %}
-
-    <style>.pagination {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .pagination-item {
-            margin-bottom: 0.5rem;
-        }
-
-        @media (min-width: 1300px) {
-            .pagination {
-                flex-wrap: nowrap;
-            }
-        }
-
-        @keyframes fade-in {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in {
-            animation: fade-in 0.5s ease-out;
-        }
-
-        .map {
-
-            background-color: #f1f1f1;
-            transition: transform 0.3s ease;
-        }
-
-        .map:hover {
-            transform: scale(1.1);
-        }</style
-
 {% endblock %}
-
-
-
-
-
