@@ -25,7 +25,7 @@ class Controller
     {
         $characters = (new ClientRequest("character/?page=$page"))->getCharacters();
         $pages = (new ClientRequest("character/?page=$page"))->getCountOfPages();
-        return (new Renderer())->renderPage('Characters.twig', $characters, $pages);
+        return (new Renderer())->renderPage('CharactersRequest.twig', $characters, $pages);
     }
 
     public function singleCharacter(int $id = 1): string

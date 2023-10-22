@@ -47,7 +47,7 @@ class Router
                 $vars = $routeInfo[2];
                 [$controllerName, $methodName] = explode('@', $handler);
                 $controllerClass = 'App\\Controllers\\' . $controllerName;
-                $controller = new $controllerClass($request);
+                $controller = new $controllerClass();
 
                 return $controller->{$methodName}($vars);
         }

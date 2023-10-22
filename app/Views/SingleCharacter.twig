@@ -4,14 +4,11 @@
 
         <h1>Not found!</h1>
 
-
     {% else %}
         <div class="grid place-items-up place-items-center">
             <div
                     class="flex flex-col items-center bg-white border border-gray-200 rounded-lg  ">
                 <br>
-
-
 
                 <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200
                  rounded-lg shadow">
@@ -23,8 +20,6 @@
                     <li>{{ card.location.name }}</li>
                     <p> Created: </p>
                     <li>{{ card.created }}</li>
-
-
 
                 </div>
 
@@ -54,47 +49,6 @@
         <br><br><br><br><br>
 
     {% endif %}
-
-    <style>.pagination {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .pagination-item {
-            margin-bottom: 0.5rem;
-        }
-
-        @media (min-width: 1300px) {
-            .pagination {
-                flex-wrap: nowrap;
-            }
-        }
-
-        @keyframes fade-in {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in {
-            animation: fade-in 0.5s ease-out;
-        }
-
-        .map {
-
-            background-color: #f1f1f1;
-            transition: transform 0.3s ease;
-        }
-
-        .map:hover {
-            transform: scale(1.1);
-        }</style
 
 {% endblock %}
 

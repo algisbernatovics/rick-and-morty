@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-//Characters in locations and episodes.
+//CharactersRequest in locations and episodes.
 
 class CharactersIn
 {
