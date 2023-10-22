@@ -3,10 +3,8 @@
 namespace App\API;
 
 use App\Core\Functions;
-use App\Models\Characters;
-use App\Models\CharactersIn;
 use App\Models\Episodes;
-use App\Models\SeenInEpisodes;
+use App\Models\CharactersIn;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
@@ -24,48 +22,32 @@ class EpisodesRequest
     public function getEpisodes($uri): array
     {
         $response = $this->client->get(self::API_PATH . $uri);
-        $response = $this->decodeJsonResponse($response);
+        $data = $this->decodeJsonResponse($response);
 
-        $info = $response->info;
+        $info = $data->info;
 
         $episodes = [];
 
-        foreach ($response->results as $episodeData) {
-            $episodes[] = new Episodes(
-                $episodeData->id,
-                $episodeData->name,
-                $episodeData->air_date,
-                $episodeData->episode,
-                $episodeData->characters,
-                $episodeData->url,
-                $episodeData->created,
-            );
-
+        foreach ($data->results as $episodeData) {
+            $episodes[] = $this->createEpisodeFromData($episodeData);
         }
+
         return ['cards' => $episodes, 'info' => $info];
     }
 
     private function decodeJsonResponse(ResponseInterface $response)
     {
         $jsonContent = $response->getBody()->getContents();
-        return json_decode($jsonContent, false);
+        return json_decode($jsonContent);
     }
 
     public function getSingleEpisode($uri): array
     {
         $episodeResponse = $this->request($uri);
         $episodeData = $this->decodeJsonResponse($episodeResponse);
-        $charactersInEpisode = $this->getSeenInEpisodes($episodeData->characters);
+        $charactersInEpisode = $this->getCharactersInEpisode($episodeData->characters);
 
-        $episode = new Episodes(
-            $episodeData->id,
-            $episodeData->name,
-            $episodeData->air_date,
-            $episodeData->episode,
-            $episodeData->characters,
-            $episodeData->url,
-            $episodeData->created
-        );
+        $episode = $this->createEpisodeFromData($episodeData);
 
         return ['card' => $episode, 'info' => $charactersInEpisode];
     }
@@ -75,22 +57,40 @@ class EpisodesRequest
         $response = $this->client->get(self::API_PATH . $episodeUri);
         return $response;
     }
-    private function getSeenInEpisodes(array $characterUris): array
+
+    private function createEpisodeFromData($episodeData): Episodes
+    {
+        return new Episodes(
+            $episodeData->id,
+            $episodeData->name,
+            $episodeData->air_date,
+            $episodeData->episode,
+            $episodeData->characters,
+            $episodeData->url,
+            $episodeData->created
+        );
+    }
+
+    private function getCharactersInEpisode(array $characterUris): array
     {
         $charactersInEpisode = [];
 
         foreach ($characterUris as $characterUri) {
-
             $characterUri = Functions::cutUri($characterUri);
             $characterData = $this->request($characterUri);
             $character = $this->decodeJsonResponse($characterData);
-            $charactersInEpisode[] = new CharactersIn(
-                $character->id,
-                $character->name,
-                $character->image
-            );
+            $charactersInEpisode[] = $this->createCharactersInFromData($character);
         }
+
         return $charactersInEpisode;
     }
 
+    private function createCharactersInFromData($character): CharactersIn
+    {
+        return new CharactersIn(
+            $character->id,
+            $character->name,
+            $character->image
+        );
+    }
 }
