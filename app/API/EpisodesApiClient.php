@@ -21,18 +21,22 @@ class EpisodesApiClient
 
     public function getEpisodes($uri): array
     {
-        $response = $this->client->get(self::API_PATH . $uri);
-        $data = $this->decodeJsonResponse($response);
+        $cacheKey = 'episodes_' . md5($uri);
 
-        $info = $data->info;
+        return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
+            $response = $this->client->get(self::API_PATH . $uri);
+            $data = $this->decodeJsonResponse($response);
 
-        $episodes = [];
+            $info = $data->info;
 
-        foreach ($data->results as $episodeData) {
-            $episodes[] = $this->createEpisodeFromData($episodeData);
-        }
+            $episodes = [];
 
-        return ['cards' => $episodes, 'info' => $info];
+            foreach ($data->results as $episodeData) {
+                $episodes[] = $this->createEpisodeFromData($episodeData);
+            }
+
+            return ['cards' => $episodes, 'info' => $info];
+        });
     }
 
     private function decodeJsonResponse(ResponseInterface $response)
@@ -43,13 +47,17 @@ class EpisodesApiClient
 
     public function getSingleEpisode($uri): array
     {
-        $episodeResponse = $this->request($uri);
-        $episodeData = $this->decodeJsonResponse($episodeResponse);
-        $charactersInEpisode = $this->getCharactersInEpisode($episodeData->characters);
+        $cacheKey = 'single_episode_' . md5($uri);
 
-        $episode = $this->createEpisodeFromData($episodeData);
+        return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
+            $episodeResponse = $this->request($uri);
+            $episodeData = $this->decodeJsonResponse($episodeResponse);
+            $charactersInEpisode = $this->getCharactersInEpisode($episodeData->characters);
 
-        return ['card' => $episode, 'info' => $charactersInEpisode];
+            $episode = $this->createEpisodeFromData($episodeData);
+
+            return ['card' => $episode, 'info' => $charactersInEpisode];
+        });
     }
 
     private function request($episodeUri)

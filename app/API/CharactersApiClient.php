@@ -25,11 +25,9 @@ class CharactersApiClient
 
     public function getCharacters($uri): array
     {
-        // Define a unique cache key for this request
         $cacheKey = 'characters_' . md5($uri);
 
         return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
-            // Fetch the data from the cache if available, or execute the callback if not
 
             $response = $this->client->get(self::API_PATH . $uri);
             $data = $this->decodeJsonResponse($response);
@@ -63,14 +61,18 @@ class CharactersApiClient
 
     public function getSingleCharacter($uri): array
     {
-        $characterResponse = $this->request($uri);
-        $characterData = $this->decodeJsonResponse($characterResponse);
+        $cacheKey = 'single_character_' . md5($uri);
 
-        $episodeUris = $characterData->episode;
-        $seenInEpisodes = $this->getSeenInEpisodes($episodeUris);
-        $character = $this->createCharacterFromData($characterData, '');
+        return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
+            $characterResponse = $this->request($uri);
+            $characterData = $this->decodeJsonResponse($characterResponse);
 
-        return ['card' => $character, 'info' => $seenInEpisodes];
+            $episodeUris = $characterData->episode;
+            $seenInEpisodes = $this->getSeenInEpisodes($episodeUris);
+            $character = $this->createCharacterFromData($characterData, '');
+
+            return ['card' => $character, 'info' => $seenInEpisodes];
+        });
     }
 
     private function createCharacterFromData($characterData, $episodeName): Characters

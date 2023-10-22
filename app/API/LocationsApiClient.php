@@ -21,17 +21,21 @@ class LocationsApiClient
 
     public function getLocations(string $uri): array
     {
-        $response = $this->client->get(self::API_PATH . $uri);
-        $data = $this->decodeJsonResponse($response);
+        $cacheKey = 'locations_' . md5($uri);
 
-        $locations = [];
+        return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
+            $response = $this->client->get(self::API_PATH . $uri);
+            $data = $this->decodeJsonResponse($response);
 
-        foreach ($data->results as $locationData) {
-            $location = $this->createLocationFromData($locationData);
-            $locations[] = $location;
-        }
+            $locations = [];
 
-        return ['cards' => $locations, 'info' => $data->info];
+            foreach ($data->results as $locationData) {
+                $location = $this->createLocationFromData($locationData);
+                $locations[] = $location;
+            }
+
+            return ['cards' => $locations, 'info' => $data->info];
+        });
     }
 
     private function decodeJsonResponse(ResponseInterface $response): object
@@ -42,12 +46,16 @@ class LocationsApiClient
 
     public function getSingleLocation(string $uri): array
     {
-        $locationResponse = $this->request($uri);
-        $locationData = $this->decodeJsonResponse($locationResponse);
-        $residents = $locationData->residents;
-        $residents = $this->getSeenInEpisode($residents);
-        $location = $this->createLocationFromData($locationData, '');
-        return ['card' => $location, 'info' => $residents];
+        $cacheKey = 'single_location_' . md5($uri);
+
+        return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
+            $locationResponse = $this->request($uri);
+            $locationData = $this->decodeJsonResponse($locationResponse);
+            $residents = $locationData->residents;
+            $residents = $this->getSeenInEpisode($residents);
+            $location = $this->createLocationFromData($locationData, '');
+            return ['card' => $location, 'info' => $residents];
+        });
     }
 
     private function createLocationFromData(object $locationData): Locations
