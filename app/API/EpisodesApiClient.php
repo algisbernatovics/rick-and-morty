@@ -7,6 +7,7 @@ use App\Models\Episodes;
 use App\Models\CharactersInEpisode;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 class EpisodesApiClient
 {
@@ -14,9 +15,10 @@ class EpisodesApiClient
     private const API_PATH = 'api/';
     private object $client;
 
-    public function __construct()
+    public function __construct(TagAwareAdapter $tagCache)
     {
         $this->client = new Client(['base_uri' => self::BASE_URI]);
+        $this->tagCache = $tagCache;
     }
 
     public function getEpisodes($uri): array

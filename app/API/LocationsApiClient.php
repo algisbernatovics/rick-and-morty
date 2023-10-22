@@ -7,6 +7,7 @@ use App\Models\CharactersInLocation;
 use App\Models\Locations;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 class LocationsApiClient
 {
@@ -14,9 +15,10 @@ class LocationsApiClient
     private const API_PATH = 'api/';
     private Client $client;
 
-    public function __construct()
+    public function __construct(TagAwareAdapter $tagCache)
     {
         $this->client = new Client(['base_uri' => self::BASE_URI]);
+        $this->tagCache = $tagCache;
     }
 
     public function getLocations(string $uri): array
