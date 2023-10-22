@@ -15,7 +15,7 @@ class ServiceContainer
 
     public function __construct()
     {
-        $this->cache = new FilesystemAdapter($_ENV['CACHE_DIR'], 3600, $_ENV['CACHE_PATH']);
+        $this->cache = new FilesystemAdapter($_ENV['CACHE_DIR'], $_ENV['CACHE_TTL'], __DIR__ . $_ENV['CACHE_PATH']);
         $this->tagCache = new TagAwareAdapter($this->cache);
     }
 
