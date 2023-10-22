@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-//CharactersRequest in locations and episodes.
-
 class CharactersInEpisode
 {
     protected int $id;

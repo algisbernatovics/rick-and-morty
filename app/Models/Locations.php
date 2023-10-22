@@ -4,7 +4,6 @@ namespace App\Models;
 
 class Locations
 {
-
     protected string $id;
     protected string $name;
     protected string $dimension;
