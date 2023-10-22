@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+use JetBrains\PhpStorm\NoReturn;
+
 class HomeController
 {
-    public function Home()
+    #[NoReturn] public function Home(): void
     {
         $url = '/characters/1';
         header("Location: $url");

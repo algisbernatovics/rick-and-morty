@@ -1,62 +1,35 @@
 {% extends "Layout.twig" %}
+
 {% block content %}
-    {% if cards == null %}
-
+    {% if cards is empty %}
         <h1>Not found!</h1>
-
     {% else %}
-
         <div class="grid place-items-center container mx-auto px-4">
             <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
-
                 {% for card in cards %}
-
                     <a href="/episode/{{ card.id }}">
-
-                        <div>
-                            <div class="map animate-fade-in hover:bg-gray-100 max-w-sm
-                        shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
-
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
-                                <p class="mb-2 text-1xl tracking-tight text-gray-900">
-                                    ID:{{ card.id }} </p>
-                                <p class="mb-2 text-1xl tracking-tight text-gray-900"> Air
-                                    Date:{{ card.airDate }} </p>
-                                <p class="mb-2 text-1xl tracking-tight text-gray-900">
-                                    Episode:{{ card.episode }} </p>
-                                <p class="mb-2 text-1xl tracking-tight text-gray-900">
-                                    Created:{{ card.created }} </p>
-
-                            </div>
+                        <div class="map animate-fade-in hover:bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+                            <p class="mb-2 text-1xl tracking-tight text-gray-900">ID: {{ card.id }}</p>
+                            <p class="mb-2 text-1xl tracking-tight text-gray-900">Air Date: {{ card.airDate }}</p>
+                            <p class="mb-2 text-1xl tracking-tight text-gray-900">Episode: {{ card.episode }}</p>
+                            <p class="mb-2 text-1xl tracking-tight text-gray-900">Created: {{ card.created }}</p>
                         </div>
-
                     </a>
-
                 {% endfor %}
-
             </div>
         </div>
-
     {% endif %}
-
     <br><br><br>
-
     <div class="container mx-auto text-center mt-4">
         <nav class="inline-block">
             <ul class="md:inline-flex pagination">
-
                 {% for i in 1..info.pages %}
-
                     <li class="pagination-item">
-                        <a href="/episodes/{{ i }}"{{ i }}
-                           class="px-1 py-1 ml-1 leading-tight text-gray-500 bg-white border border-gray-300
-                           rounded-l-lg hover:bg-gray-100 hover:text-gray-700">{{ i }}</a>
+                        <a href="/episodes/{{ i }}" class="px-1 py-1 ml-1 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover-text-gray-700">{{ i }}</a>
                     </li>
-
                 {% endfor %}
-
             </ul>
         </nav>
     </div>
-
 {% endblock %}
