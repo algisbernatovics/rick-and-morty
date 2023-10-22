@@ -104,7 +104,7 @@ class CharactersRequest
     {
         $episodes = [];
         foreach ($episodeUris as $episodeUri) {
-            $episodeUri = Functions::cutEpisodeUri($episodeUri);
+            $episodeUri = Functions::cutUri($episodeUri);
             $episodeResponse = $this->requestEpisodeData($episodeUri);
             $episodeData = $this->decodeJsonResponse($episodeResponse);
             $episodes[] = new SeenInEpisodes(
