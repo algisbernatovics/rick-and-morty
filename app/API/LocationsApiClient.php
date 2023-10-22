@@ -11,13 +11,12 @@ use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 class LocationsApiClient
 {
-    private const BASE_URI = 'https://rickandmortyapi.com/';
-    private const API_PATH = 'api/';
+    private TagAwareAdapter $tagCache;
     private Client $client;
 
-    public function __construct(TagAwareAdapter $tagCache)
+    public function __construct(TagAwareAdapter $tagCache,Client $client)
     {
-        $this->client = new Client(['base_uri' => self::BASE_URI]);
+        $this->client = $client;
         $this->tagCache = $tagCache;
     }
 
@@ -26,7 +25,7 @@ class LocationsApiClient
         $cacheKey = 'locations_' . md5($uri);
 
         return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
-            $response = $this->client->get(self::API_PATH . $uri);
+            $response = $this->client->get($uri);
             $data = $this->decodeJsonResponse($response);
 
             $locations = [];
@@ -91,6 +90,6 @@ class LocationsApiClient
 
     private function request(string $uri): ResponseInterface
     {
-        return $this->client->get(self::API_PATH . $uri);
+        return $this->client->get($uri);
     }
 }

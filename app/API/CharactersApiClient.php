@@ -7,19 +7,15 @@ use App\Models\Characters;
 use App\Models\SeenInEpisodes;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 class CharactersApiClient
 {
-    private const BASE_URI = 'https://rickandmortyapi.com/';
-    private const API_PATH = 'api/';
-    private object $client;
     private TagAwareAdapter $tagCache;
-
-    public function __construct(TagAwareAdapter $tagCache)
+    private Client $client;
+    public function __construct(TagAwareAdapter $tagCache,Client $client)
     {
-        $this->client = new Client(['base_uri' => self::BASE_URI]);
+        $this->client = $client;
         $this->tagCache = $tagCache;
     }
 
@@ -29,7 +25,7 @@ class CharactersApiClient
 
         return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
 
-            $response = $this->client->get(self::API_PATH . $uri);
+            $response = $this->client->get($uri);
             $data = $this->decodeJsonResponse($response);
 
             $characters = [];
@@ -111,7 +107,7 @@ class CharactersApiClient
 
     private function request($uri)
     {
-        $response = $this->client->get(self::API_PATH . $uri);
+        $response = $this->client->get($uri);
         return $response;
     }
 }

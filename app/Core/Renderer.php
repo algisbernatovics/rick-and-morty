@@ -16,7 +16,6 @@ class Renderer
         $this->twig = new Environment($loader, []);
     }
 
-
     public function renderPage(string $template, array $content): string
     {
         return $this->twig->render(

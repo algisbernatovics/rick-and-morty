@@ -11,13 +11,12 @@ use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 class EpisodesApiClient
 {
-    private const BASE_URI = 'https://rickandmortyapi.com/';
-    private const API_PATH = 'api/';
-    private object $client;
+    private TagAwareAdapter $tagCache;
+    private Client $client;
 
-    public function __construct(TagAwareAdapter $tagCache)
+    public function __construct(TagAwareAdapter $tagCache,Client $client)
     {
-        $this->client = new Client(['base_uri' => self::BASE_URI]);
+        $this->client = $client;
         $this->tagCache = $tagCache;
     }
 
@@ -26,7 +25,7 @@ class EpisodesApiClient
         $cacheKey = 'episodes_' . md5($uri);
 
         return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
-            $response = $this->client->get(self::API_PATH . $uri);
+            $response = $this->client->get($uri);
             $data = $this->decodeJsonResponse($response);
 
             $info = $data->info;
@@ -64,7 +63,7 @@ class EpisodesApiClient
 
     private function request($episodeUri)
     {
-        $response = $this->client->get(self::API_PATH . $episodeUri);
+        $response = $this->client->get($episodeUri);
         return $response;
     }
 
