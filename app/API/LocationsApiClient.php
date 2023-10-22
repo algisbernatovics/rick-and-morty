@@ -8,7 +8,7 @@ use App\Models\Locations;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
-class LocationsRequest
+class LocationsApiClient
 {
     private const BASE_URI = 'https://rickandmortyapi.com/';
     private const API_PATH = 'api/';

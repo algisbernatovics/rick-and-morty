@@ -5,6 +5,10 @@ require '../vendor/autoload.php';
 use App\Core\Router;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7Server\ServerRequestCreator;
+use Symfony\Component\Dotenv\Dotenv;
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/../.env');
 
 $router = new Router();
 
@@ -22,7 +26,7 @@ $serverRequestCreator = new ServerRequestCreator(
 // Create a ServerRequest using ServerRequestCreator
 $serverRequest = $serverRequestCreator->fromGlobals();
 
-$response = $router->route($serverRequest);
+$response = $router->route();
 
 // Output HTTP response
 foreach ($response->getHeaders() as $name => $values) {

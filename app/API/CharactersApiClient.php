@@ -7,32 +7,43 @@ use App\Models\Characters;
 use App\Models\SeenInEpisodes;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
-class CharactersRequest
+class CharactersApiClient
 {
     private const BASE_URI = 'https://rickandmortyapi.com/';
     private const API_PATH = 'api/';
     private object $client;
+    private TagAwareAdapter $tagCache;
 
-    public function __construct()
+    public function __construct(TagAwareAdapter $tagCache)
     {
         $this->client = new Client(['base_uri' => self::BASE_URI]);
+        $this->tagCache = $tagCache;
     }
 
     public function getCharacters($uri): array
     {
-        $response = $this->client->get(self::API_PATH . $uri);
-        $data = $this->decodeJsonResponse($response);
+        // Define a unique cache key for this request
+        $cacheKey = 'characters_' . md5($uri);
 
-        $characters = [];
+        return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
+            // Fetch the data from the cache if available, or execute the callback if not
 
-        foreach ($data->results as $characterData) {
-            $episodeName = $this->getEpisodeName($characterData->episode[0]);
-            $character = $this->createCharacterFromData($characterData, $episodeName);
-            $characters[] = $character;
-        }
+            $response = $this->client->get(self::API_PATH . $uri);
+            $data = $this->decodeJsonResponse($response);
 
-        return ['cards' => $characters, 'info' => $data->info];
+            $characters = [];
+
+            foreach ($data->results as $characterData) {
+                $episodeName = $this->getEpisodeName($characterData->episode[0]);
+                $character = $this->createCharacterFromData($characterData, $episodeName);
+                $characters[] = $character;
+            }
+
+            return ['cards' => $characters, 'info' => $data->info];
+        });
     }
 
     private function decodeJsonResponse(ResponseInterface $response)

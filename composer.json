@@ -19,6 +19,8 @@
     "twig/twig": "^3.5",
     "ext-json": "*",
     "nesbot/carbon": "^2.66",
-    "nyholm/psr7": "^1.8"
+    "nyholm/psr7": "^1.8",
+    "symfony/cache": "^6.3",
+    "symfony/dotenv": "^6.3"
   }
 }

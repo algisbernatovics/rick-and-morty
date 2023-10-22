@@ -2,22 +2,25 @@
 
 namespace App\Controllers;
 
-use App\API\LocationsRequest;
+use App\API\LocationsApiClient;
+use App\Core\Renderer;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
-use App\Core\Renderer;
+use App\Core\ServiceContainer;
 
 class LocationsController
 {
     private Renderer $renderer;
-    private LocationsRequest $locationsRequest;
+    private LocationsApiClient $locationsApiClient;
     private Response $response;
+    private ServiceContainer $serviceContainer;
 
     public function __construct()
     {
         $this->renderer = new Renderer();
         $this->response = new Response();
-        $this->locationsRequest = new LocationsRequest();
+        $this->serviceContainer = new ServiceContainer();
+        $this->locationsApiClient = $this->serviceContainer->getLocationApiClient();
     }
 
     public function locations($vars): ResponseInterface
@@ -25,17 +28,16 @@ class LocationsController
         if (isset($vars['id'])) {
             $id = $vars['id'];
             $uri = "location/{$id}";
-            $content = $this->locationsRequest->getSingleLocation($uri);
+            $content = $this->locationsApiClient->getSingleLocation($uri);
             $html = $this->renderer->renderSinglePage('SingleLocation.twig', $content);
             $this->response->getBody()->write($html);
         } else {
             $page = $vars['page'] ?? 1;
             $uri = "location?page={$page}";
-            $content = $this->locationsRequest->getLocations($uri);
+            $content = $this->locationsApiClient->getLocations($uri);
             $html = $this->renderer->renderPage('Locations.twig', $content);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
     }
 }
-

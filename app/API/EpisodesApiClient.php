@@ -8,7 +8,7 @@ use App\Models\CharactersInEpisode;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
-class EpisodesRequest
+class EpisodesApiClient
 {
     private const BASE_URI = 'https://rickandmortyapi.com/';
     private const API_PATH = 'api/';
