@@ -9,7 +9,7 @@ class Functions
         return str_replace('/', '', $uri);
     }
 
-    public static function cutEpisodeUri(string $episodeUri)
+    public static function cutUri(string $episodeUri)
     {
         return substr($episodeUri, 32);
     }

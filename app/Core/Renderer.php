@@ -13,9 +13,7 @@ class Renderer
     public function __construct()
     {
         $loader = new FilesystemLoader('../app/Views');
-        $this->twig = new Environment($loader, [
-            'debug' => true,
-        ]);
+        $this->twig = new Environment($loader, []);
     }
 
 
@@ -23,7 +21,7 @@ class Renderer
     {
         return $this->twig->render(
             $template,
-            ['cards' => $content['characters'], 'info' => $content['info']]);
+            ['cards' => $content['cards'], 'info' => $content['info']]);
     }
 
     public function renderSinglePage(string $template, array $content): string
@@ -31,7 +29,7 @@ class Renderer
         return $this->twig->render(
             $template,
 
-            ['card' => $content['character'], 'info' => $content['info']]);
+            ['card' => $content['card'], 'info' => $content['info']]);
     }
 
     public function viewSearch(string $template): void

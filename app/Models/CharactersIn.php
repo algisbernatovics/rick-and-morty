@@ -6,11 +6,12 @@ namespace App\Models;
 
 class CharactersIn
 {
+    protected int $id;
     protected string $name;
     protected string $imageUrl;
-    protected int $id;
 
-    public function __construct(string $name, string $imageUrl, int $id)
+
+    public function __construct( int $id,string $name, string $imageUrl,)
     {
         $this->name = $name;
         $this->imageUrl = $imageUrl;

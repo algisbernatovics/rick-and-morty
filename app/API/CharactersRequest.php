@@ -49,7 +49,7 @@ class CharactersRequest
             );
 
         }
-        return ['characters' => $characters, 'info' => $info];
+        return ['cards' => $characters, 'info' => $info];
     }
 
     private function decodeJsonResponse(ResponseInterface $response)
@@ -91,7 +91,7 @@ class CharactersRequest
             $characterData->created
         );
 
-        return ['character' => $character, 'info' => $seenInEpisodes];
+        return ['card' => $character, 'info' => $seenInEpisodes];
     }
 
     private function requestCharacterData($characterUri)

@@ -1,6 +1,6 @@
 {% extends "Layout.twig" %}
 {% block content %}
-    {% if cards == null %}
+    {% if card == null %}
 
         <h1>Not found!</h1>
 
@@ -10,8 +10,6 @@
             <div class="h-56 grid grid-cols-1 gap-12 content-normal">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Characters in this
                     Episode:</h5>
-
-                {% for card in cards %}
 
                     <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
@@ -25,7 +23,6 @@
                             Created:{{ card.created }} </p>
 
                     </div>
-                {% endfor %}
 
             </div>
             <br><br><br><br><br><br><br><br>
@@ -33,7 +30,7 @@
             <div class="grid place-items-center container mx-auto px-4">
                 <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
 
-                    {% for character in additionalInfo %}
+                    {% for character in info %}
 
                     <a href="/character/{{ character.id }}">
                         <div class="map animate-fade-in hover:bg-gray-100 max-w-sm
@@ -45,7 +42,7 @@
                         </div>
 
                         {% endfor %}
-                        
+
                     </a>
 
                 </div>
@@ -53,46 +50,5 @@
         </div>
 
     {% endif %}
-
-    <style>.pagination {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .pagination-item {
-            margin-bottom: 0.5rem;
-        }
-
-        @media (min-width: 1300px) {
-            .pagination {
-                flex-wrap: nowrap;
-            }
-        }
-
-        @keyframes fade-in {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in {
-            animation: fade-in 0.5s ease-out;
-        }
-
-        .map {
-
-            background-color: #f1f1f1;
-            transition: transform 0.3s ease;
-        }
-
-        .map:hover {
-            transform: scale(1.1);
-        }</style
 
 {% endblock %}

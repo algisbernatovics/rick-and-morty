@@ -18,12 +18,14 @@ class Router
     {
         $this->dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
             $r->addRoute(['GET'], '/', 'HomeController@home');
-            $r->addRoute(['GET'], '/characters[/{page:\d+}]', 'CharacterController@characters');
+
+            $r->addRoute(['GET'], '/characters[/{page:\d+}]', 'CharactersController@characters');
+            $r->addRoute(['GET'], '/character[/{id:\d+}]', 'CharactersController@characters');
+
+            $r->addRoute(['GET'], '/episodes[/{page:\d+}]', 'EpisodesController@episodes');
+            $r->addRoute(['GET'], '/episode[/{id:\d+}]', 'EpisodesController@episodes');
 
             $r->addRoute(['GET'], '/locations[/{page:\d+}]', 'LocationsController@locations');
-            $r->addRoute(['GET'], '/episodes[/{page:\d+}]', 'EpisodesController@episodes');
-            $r->addRoute(['GET'], '/character[/{id:\d+}]', 'CharacterController@characters');
-            $r->addRoute(['GET'], '/episode[/{page:\d+}]', 'EpisodesController@singleEpisode');
             $r->addRoute(['GET'], '/location[/{page:\d+}]', 'LocationsController@singleLocation');
             $r->addRoute(['GET'], '/searchPage[/{page:\d+}]', 'SearchController@searchPage');
             $r->addRoute(['POST'], '/searchResults[/{page:\d+}]', 'SearchController@searchResults');
