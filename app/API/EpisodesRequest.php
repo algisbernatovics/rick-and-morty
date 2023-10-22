@@ -4,7 +4,7 @@ namespace App\API;
 
 use App\Core\Functions;
 use App\Models\Episodes;
-use App\Models\CharactersIn;
+use App\Models\CharactersInEpisode;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
@@ -85,9 +85,9 @@ class EpisodesRequest
         return $charactersInEpisode;
     }
 
-    private function createCharactersInFromData($character): CharactersIn
+    private function createCharactersInFromData($character): CharactersInEpisode
     {
-        return new CharactersIn(
+        return new CharactersInEpisode(
             $character->id,
             $character->name,
             $character->image

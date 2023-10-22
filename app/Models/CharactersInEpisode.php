@@ -4,7 +4,7 @@ namespace App\Models;
 
 //CharactersRequest in locations and episodes.
 
-class CharactersIn
+class CharactersInEpisode
 {
     protected int $id;
     protected string $name;

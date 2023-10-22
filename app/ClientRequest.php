@@ -6,7 +6,7 @@ use App\Controllers\Controller;
 use App\Core\Cache;
 use App\Core\Functions;
 use App\Models\Characters;
-use App\Models\CharactersIn;
+use App\Models\CharactersInEpisode;
 use App\Models\Episodes;
 use App\Models\Locations;
 use App\Models\SeenInEpisodes;
@@ -216,7 +216,7 @@ class ClientRequest
 //        foreach ($charactersUri as $characterUri) {
 //            $characterUri = Functions::cutEpisodeUri($characterUri);
 //            $this->requestDetails($characterUri);
-//            $episodes[] = new CharactersIn(
+//            $episodes[] = new CharactersInEpisode(
 //                json_decode($this->apiDetailResponse)->name,
 //                json_decode($this->apiDetailResponse)->image,
 //                json_decode($this->apiDetailResponse)->id
