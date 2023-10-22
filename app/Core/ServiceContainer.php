@@ -11,30 +11,31 @@ use App\API\LocationsApiClient;
 
 class ServiceContainer
 {
-    private const BASE_URI = 'https://rickandmortyapi.com/api/';
-
+    private string $baseUri;
     private object $client;
     private FilesystemAdapter $cache;
     private TagAwareAdapter $tagCache;
 
     public function __construct()
     {
+        $this->baseUri = $_ENV['API'];
         $this->cache = new FilesystemAdapter($_ENV['CACHE_DIR'], $_ENV['CACHE_TTL'], __DIR__ . $_ENV['CACHE_PATH']);
         $this->tagCache = new TagAwareAdapter($this->cache);
-        $this->client = new Client(['base_uri' => self::BASE_URI]);
+        $this->client = new Client(['base_uri' => $this->baseUri]);
     }
 
     public function getCharacterApiClient(): CharactersApiClient
     {
-        return new CharactersApiClient($this->tagCache,$this->client);
+        return new CharactersApiClient($this->tagCache, $this->client);
     }
 
     public function getLocationApiClient(): LocationsApiClient
     {
-        return new LocationsApiClient($this->tagCache,$this->client);
+        return new LocationsApiClient($this->tagCache, $this->client);
     }
+
     public function getEpisodesRequest(): EpisodesApiClient
     {
-        return new EpisodesApiClient($this->tagCache,$this->client);
+        return new EpisodesApiClient($this->tagCache, $this->client);
     }
 }
