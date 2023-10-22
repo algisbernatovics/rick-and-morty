@@ -13,8 +13,11 @@ class Renderer
     public function __construct()
     {
         $loader = new FilesystemLoader('../app/Views');
-        $this->twig = new Environment($loader);
+        $this->twig = new Environment($loader, [
+            'debug' => true,
+        ]);
     }
+
 
     public function renderPage(string $template, array $content): string
     {
@@ -23,11 +26,12 @@ class Renderer
             ['cards' => $content['characters'], 'info' => $content['info']]);
     }
 
-    public function renderSinglePage(string $template, array $content, array $additionalInfo): string
+    public function renderSinglePage(string $template, array $content): string
     {
         return $this->twig->render(
             $template,
-            ['cards' => $content, 'additionalInfo' => $additionalInfo]);
+
+            ['card' => $content['character'], 'info' => $content['info']]);
     }
 
     public function viewSearch(string $template): void

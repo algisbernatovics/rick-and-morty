@@ -1,15 +1,17 @@
 {% extends "Layout.twig" %}
 {% block content %}
-    {% if cards == null %}
+    {% if card == null %}
 
         <h1>Not found!</h1>
+
 
     {% else %}
         <div class="grid place-items-up place-items-center">
             <div
                     class="flex flex-col items-center bg-white border border-gray-200 rounded-lg  ">
                 <br>
-                {% for card in cards %}
+
+
 
                 <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200
                  rounded-lg shadow">
@@ -22,7 +24,7 @@
                     <p> Created: </p>
                     <li>{{ card.created }}</li>
 
-                    {% endfor %}
+
 
                 </div>
 
@@ -35,7 +37,7 @@
 
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"> Seen in: </h5>
 
-                        {% for episode in additionalInfo %}
+                        {% for episode in info %}
 
                             <a href="/episode/{{ episode.id }}"
                                class="text-white bg-slate-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium

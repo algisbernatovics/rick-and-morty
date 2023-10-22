@@ -10,6 +10,7 @@ use App\Models\CharactersIn;
 use App\Models\Episodes;
 use App\Models\Locations;
 use App\Models\SeenInEpisodes;
+use App\Models\SingleCharacter;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
@@ -21,20 +22,16 @@ class ClientRequest
     private const BASE_URI = 'https://rickandmortyapi.com/';
     private const API_PATH = 'api/';
     private object $client;
-//    private string $apiPageResponse;
-//    private string $apiDetailResponse;
-    private string $target;
 
-    public function __construct($target)
+    public function __construct()
     {
-
-        $this->target = $target;
         $this->client = new Client(['base_uri' => self::BASE_URI]);
     }
 
-    public function getCharacters()
+    public function getCharacters($uri)
     {
-        $response = $this->client->get(self::API_PATH . $this->target);
+
+        $response = $this->client->get(self::API_PATH . $uri);
         $response = $this->decodeJsonResponse($response);
 
         $info = $response->info;
@@ -79,6 +76,62 @@ class ClientRequest
         return $episodeData->name;
     }
 
+    public function getSingleCharacter($uri): array
+    {
+        $characterResponse = $this->requestCharacterData($uri);
+        $characterData = $this->decodeJsonResponse($characterResponse);
+
+        $episodeUris = $characterData->episode;
+
+        $seenInEpisodes = $this->getSeenInEpisodes($episodeUris);
+
+        $character = new Characters($characterData->id,
+            $characterData->name,
+            $characterData->status,
+            $characterData->species,
+            $characterData->type,
+            $characterData->gender,
+            $characterData->origin,
+            $characterData->location,
+            $characterData->image,
+            $characterData->episode,
+            '',
+            $characterData->url,
+            $characterData->created
+        );
+
+        return ['character' => $character, 'info' => $seenInEpisodes];
+    }
+
+    private function requestCharacterData($characterUri)
+    {
+        $response = $this->client->get(self::API_PATH . $characterUri);
+        return $response;
+    }
+
+    private function getSeenInEpisodes(array $episodeUris)
+    {
+        $episodes = [];
+        foreach ($episodeUris as $episodeUri) {
+            $episodeUri = Functions::cutEpisodeUri($episodeUri);
+            $episodeResponse = $this->requestEpisodeData($episodeUri);
+            $episodeData = $this->decodeJsonResponse($episodeResponse);
+            $episodes[] = new SeenInEpisodes(
+                $episodeData->name,
+                $episodeData->id
+            );
+        }
+        return $episodes;
+    }
+
+    private function requestEpisodeData($episodeUri)
+    {
+        $response = $this->client->get(self::API_PATH . $episodeUri);
+        return $response;
+    }
+
+// Other helper methods and class definitions can be added as needed
+
 
 //    public function getSearchResults(): array
 //    {
@@ -109,35 +162,7 @@ class ClientRequest
 //        return (json_decode($this->apiPageResponse)->info->pages);
 //    }
 //
-//    public function saveCharacters($response): array
-//    {
-//        foreach ($response as $character) {
-//            $episodeName = $this->getFirstSeenIn($character->episode[0]);
-//            $content [] = new Characters(
-//                $character->id,
-//                $character->name,
-//                $character->status,
-//                $character->species,
-//                $character->type,
-//                $character->gender,
-//                $character->origin,
-//                $character->location,
-//                $character->image,
-//                $character->episode,
-//                $episodeName,
-//                $character->url,
-//                $character->created,
-//            );
-//        }
-//        return $content;
-//    }
-//
-//    public function getFirstSeenIn(string $episodeUri): string
-//    {
-//        $episodeUri = Functions::cutEpisodeUri($episodeUri);
-//        $this->requestDetails($episodeUri);
-//        return (json_decode($this->apiDetailResponse)->name);
-//    }
+
 //
 //    public function requestDetails(string $uri): void
 //    {
@@ -231,11 +256,6 @@ class ClientRequest
 //        return [$this->saveLocations($response), $charactersInEpisode];
 //    }
 //
-//    public function getCharacters(): array
-//    {
-//        $this->requestPages();
-//        return $this->saveCharacters(json_decode($this->apiPageResponse)->results);
-//    }
 //
 //    public function getSingleCharacter(): array
 //    {

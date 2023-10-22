@@ -6,7 +6,7 @@ class HomeController
 {
     public function Home()
     {
-        $url = '/character?page=1';
+        $url = '/characters/1';
         header("Location: $url");
         exit;
     }

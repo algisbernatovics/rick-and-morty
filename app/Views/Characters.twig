@@ -11,7 +11,6 @@
 
                 {% for card in cards %}
                     <a href="/character/{{ card.id }}">
-
                         <div class="map animate-fade-in hover:bg-gray-100 max-w-sm
                         shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
                             <img src="{{ card.image }}" alt="{{ card.name }}">
@@ -39,7 +38,7 @@
 
                     {% for i in 1..info.pages %}
                         <li class="pagination-item">
-                            <a href="/character?page={{ i }}"{{ i }}
+                            <a href="/characters/{{ i }}"{{ i }}
                                class="px-1 py-1 ml-1 leading-tight text-gray-500 bg-white border border-gray-300
                            rounded-l-lg hover:bg-gray-100 hover:text-gray-700">{{ i }}</a>
                         </li>

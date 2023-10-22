@@ -18,11 +18,11 @@ class Router
     {
         $this->dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
             $r->addRoute(['GET'], '/', 'HomeController@home');
-            $r->addRoute(['GET'], '/character[/{page:\d+}]', 'CharacterController@character');
+            $r->addRoute(['GET'], '/characters[/{page:\d+}]', 'CharacterController@characters');
 
             $r->addRoute(['GET'], '/locations[/{page:\d+}]', 'LocationsController@locations');
             $r->addRoute(['GET'], '/episodes[/{page:\d+}]', 'EpisodesController@episodes');
-//            $r->addRoute(['GET'], '/character[/{page:\d+}]', 'CharacterController@singleCharacter');
+            $r->addRoute(['GET'], '/character[/{id:\d+}]', 'CharacterController@characters');
             $r->addRoute(['GET'], '/episode[/{page:\d+}]', 'EpisodesController@singleEpisode');
             $r->addRoute(['GET'], '/location[/{page:\d+}]', 'LocationsController@singleLocation');
             $r->addRoute(['GET'], '/searchPage[/{page:\d+}]', 'SearchController@searchPage');
@@ -42,12 +42,14 @@ class Router
             case Dispatcher::METHOD_NOT_ALLOWED:
                 return $responseFactory->createResponse(405);
             case Dispatcher::FOUND:
+
                 $handler = $routeInfo[1];
+                $vars = $routeInfo[2];
                 [$controllerName, $methodName] = explode('@', $handler);
                 $controllerClass = 'App\\Controllers\\' . $controllerName;
                 $controller = new $controllerClass($request);
 
-                return $controller->{$methodName}();
+                return $controller->{$methodName}($vars);
         }
     }
 }
