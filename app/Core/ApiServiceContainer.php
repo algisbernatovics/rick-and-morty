@@ -9,7 +9,7 @@ use App\API\CharactersApiClient;
 use App\API\EpisodesApiClient;
 use App\API\LocationsApiClient;
 
-class ServiceContainer
+class ApiServiceContainer
 {
     private string $baseUri;
     private object $client;
