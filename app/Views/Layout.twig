@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {#    <link rel="stylesheet" href="{{ ('css/Local_styles.css') }}"> #}
+        <link rel="stylesheet" href="{{ ('/styles/styles.css') }}">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -27,68 +27,9 @@
             </nav>
         </header>
 
-        <style>
-            .menu-list {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .menu-list li {
-                margin-bottom: 8px;
-            }
-
-            @media only screen and (min-width: 768px) {
-                .menu-list {
-                    flex-direction: row;
-                }
-
-                .menu-list li {
-                    margin-bottom: 0;
-                    margin-right: 12px;
-                }
-            }
-
-            .pagination {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .pagination-item {
-                margin-bottom: 0.5rem;
-            }
-
-            @media (min-width: 1300px) {
-                .pagination {
-                    flex-wrap: nowrap;
-                }
-            }
-
-            @keyframes fade-in {
-                0% {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .animate-fade-in {
-                animation: fade-in 0.5s ease-out;
-            }
-
-            .map {
-
-                background-color: #f1f1f1;
-                transition: transform 0.3s ease;
-            }
-
-            .map:hover {
-                transform: scale(1.1);
-            }
-        </style
+        {% if pageName is defined %}
+            {% include pageName|capitalize ~ '/Filter.twig' %}
+        {% endif %}
 
     {% endblock %}
 
