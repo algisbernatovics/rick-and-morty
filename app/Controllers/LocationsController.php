@@ -32,10 +32,12 @@ class LocationsController
             $html = $this->renderer->renderSinglePage('Locations/SingleLocation.twig', $content);
             $this->response->getBody()->write($html);
         } else {
+            $methodName = __METHOD__;
+            $pageName = substr(strrchr($methodName, '::'), 1);
             $page = $vars['page'] ?? 1;
             $uri = "location?page={$page}";
             $content = $this->locationsApiClient->getLocations($uri);
-            $html = $this->renderer->renderPage('Locations/Locations.twig', $content);
+            $html = $this->renderer->renderPage('Locations/Locations.twig', $content, $pageName);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');

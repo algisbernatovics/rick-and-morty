@@ -18,11 +18,11 @@ class Renderer
         $this->twig = new Environment($loader, []);
     }
 
-    public function renderPage(string $template, array $content): string
+    public function renderPage(string $template, array $content, $pageName): string
     {
         return $this->twig->render(
             $template,
-            ['cards' => $content['cards'], 'info' => $content['info']]);
+            ['cards' => $content['cards'], 'info' => $content['info'], 'pageName' => $pageName]);
     }
 
     public function renderSinglePage(string $template, array $content): string

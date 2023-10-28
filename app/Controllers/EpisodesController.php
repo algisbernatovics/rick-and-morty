@@ -32,10 +32,12 @@ class EpisodesController
             $html = $this->renderer->renderSinglePage('Episodes/SingleEpisode.twig', $content);
             $this->response->getBody()->write($html);
         } else {
+            $methodName = __METHOD__;
+            $pageName = substr(strrchr($methodName, '::'), 1);
             $page = $vars['page'] ?? 1;
             $uri = "episode?page={$page}";
             $content = $this->episodesApiClient->getEpisodes($uri);
-            $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content);
+            $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content, $pageName);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
