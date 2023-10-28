@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\API\EpisodesApiClient;
+use App\Core\ApiServiceContainer;
 use App\Core\ServiceContainer;
 use App\Core\Renderer;
 use Nyholm\Psr7\Response;
@@ -13,13 +14,13 @@ class EpisodesController
     private Renderer $renderer;
     private EpisodesApiClient $episodesApiClient;
     private Response $response;
-    private ServiceContainer $serviceContainer;
+    private ApiServiceContainer $serviceContainer;
 
     public function __construct()
     {
         $this->renderer = new Renderer();
         $this->response = new Response();
-        $this->serviceContainer = new ServiceContainer();
+        $this->serviceContainer = new ApiServiceContainer();
         $this->episodesApiClient = $this->serviceContainer->getEpisodesRequest();
     }
 

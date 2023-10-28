@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\API\LocationsApiClient;
+use App\Core\ApiServiceContainer;
 use App\Core\Renderer;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -13,13 +14,13 @@ class LocationsController
     private Renderer $renderer;
     private LocationsApiClient $locationsApiClient;
     private Response $response;
-    private ServiceContainer $serviceContainer;
+    private ApiServiceContainer $serviceContainer;
 
     public function __construct()
     {
         $this->renderer = new Renderer();
         $this->response = new Response();
-        $this->serviceContainer = new ServiceContainer();
+        $this->serviceContainer = new ApiServiceContainer();
         $this->locationsApiClient = $this->serviceContainer->getLocationApiClient();
     }
 

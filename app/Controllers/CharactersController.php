@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\API\CharactersApiClient;
+use App\Core\ApiServiceContainer;
 use App\Core\ServiceContainer;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -12,14 +13,14 @@ class CharactersController
 {
     private Renderer $renderer;
     private Response $response;
-    private ServiceContainer $serviceContainer;
+    private ApiServiceContainer $serviceContainer;
     private CharactersApiClient $charactersApiClient;
 
     public function __construct()
     {
         $this->renderer = new Renderer();
         $this->response = new Response();
-        $this->serviceContainer = new ServiceContainer();
+        $this->serviceContainer = new ApiServiceContainer();
         $this->charactersApiClient = $this->serviceContainer->getCharacterApiClient();
     }
 

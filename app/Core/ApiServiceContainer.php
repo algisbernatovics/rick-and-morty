@@ -5,9 +5,9 @@ namespace App\Core;
 use GuzzleHttp\Client;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use App\API\CharactersApiClient;
-use App\API\EpisodesApiClient;
-use App\API\LocationsApiClient;
+use App\Api\CharactersApiClient;
+use App\Api\EpisodesApiClient;
+use App\Api\LocationsApiClient;
 
 class ApiServiceContainer
 {
