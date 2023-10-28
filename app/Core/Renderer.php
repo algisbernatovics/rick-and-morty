@@ -48,7 +48,7 @@ class Renderer
             ['errorCode' => $errorCode]);
     }
 
-    public function exception(string $template, ConnectException $exception): void
+    public function exception(string $template,$exception): void
     {
         $this->twig->load($template)->display(['exception' => $exception]);
     }

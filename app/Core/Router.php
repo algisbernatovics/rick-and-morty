@@ -45,13 +45,14 @@ class Router
             case Dispatcher::FOUND:
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
+                $vars['page'] = $vars['page'] ?? 1;
                 [$controllerName, $methodName] = explode('@', $handler);
                 $controllerClass = 'App\\Controllers\\' . $controllerName;
 
                 if (class_exists($controllerClass)) {
-                    $controller = new $controllerClass();
+                    $controller = new $controllerClass($vars);
                     if (method_exists($controller, $methodName)) {
-                        return $controller->{$methodName}($vars);
+                        return $controller->{$methodName}();
                     }
                 }
         }
