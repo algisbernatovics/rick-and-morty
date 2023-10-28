@@ -18,16 +18,15 @@ class Router
             $r->addRoute(['GET'], '/', 'HomeController@home');
 
             $r->addRoute(['GET'], '/characters[/{page:\d+}]', 'CharactersController@characters');
+            $r->addRoute(['POST'], '/characters/filter', 'CharactersController@filter');
             $r->addRoute(['GET'], '/character[/{id:\d+}]', 'CharactersController@characters');
+
 
             $r->addRoute(['GET'], '/episodes[/{page:\d+}]', 'EpisodesController@episodes');
             $r->addRoute(['GET'], '/episode[/{id:\d+}]', 'EpisodesController@episodes');
 
             $r->addRoute(['GET'], '/locations[/{page:\d+}]', 'LocationsController@locations');
             $r->addRoute(['GET'], '/location[/{id:\d+}]', 'LocationsController@locations');
-
-            $r->addRoute(['GET'], '/search', 'SearchController@form');
-            $r->addRoute(['POST'], '/search[/{page:\d+}]', 'SearchController@search');
         });
     }
 

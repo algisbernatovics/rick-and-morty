@@ -42,5 +42,10 @@ class CharactersController
         }
         return $this->response->withHeader('Content-Type', 'text/html');
     }
+
+    public function filter()
+    {
+        var_dump($_POST);
+    }
 }
 

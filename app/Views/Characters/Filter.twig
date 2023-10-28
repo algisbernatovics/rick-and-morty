@@ -1,11 +1,48 @@
 <div class="bg-black text-white py-4 px-4">
     <nav>
-        <ul class="menu-list">
-            <li><a href="/" class="hover:text-gray-300 text-bold font-bold">Home</a></li>
-            <li><a href="/characters" class="hover:text-gray-300 font-normal">Characters</a></li>
-            <li><a href="/episodes" class="hover:text-gray-300 font-normal">Episodes</a></li>
-            <li><a href="/locations" class="hover:text-gray-300 font-normal">Locations</a></li>
-            <li><a href="/search" class="hover:text-gray-300 font-normal">Search</a></li>
+        <ul class="menu-list flex items-center">
+            <form action="/{{ pageName }}/filter" method="post" class="flex space-x-4">
+                <div class="flex items-center">
+                    <label for="name" class="text-white text-sm font-bold mr-2">Name:</label>
+                    <input type="text" id="name" name="name" class="px-2 py-1 border rounded-md bg-black text-white">
+                </div>
+
+                <div class="flex items-center">
+                    <label for="status" class="text-white text-sm font-bold mr-2">Status:</label>
+                    <select id="status" name="status" class="px-2 py-1 border rounded-md bg-black text-white">
+                        <option value="">Any</option>
+                        <option value="alive">Alive</option>
+                        <option value="dead">Dead</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center">
+                    <label for="species" class="text-white text-sm font-bold mr-2">Species:</label>
+                    <input type="text" id="species" name="species" class="px-2 py-1 border rounded-md bg-black text-white">
+                </div>
+
+                <div class="flex items-center">
+                    <label for="type" class="text-white text-sm font-bold mr-2">Type:</label>
+                    <input type="text" id="type" name="type" class="px-2 py-1 border rounded-md bg-black text-white">
+                </div>
+
+                <div class="flex items-center">
+                    <label for="gender" class="text-white text-sm font-bold mr-2">Gender:</label>
+                    <select id="gender" name="gender" class="px-2 py-1 border rounded-md bg-black text-white">
+                        <option value="">Any</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="genderless">Genderless</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 focus:outline-none">
+                    Filter
+                </button>
+
+            </form>
         </ul>
     </nav>
 </div>
