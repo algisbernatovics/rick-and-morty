@@ -8,7 +8,7 @@ class HomeController
 {
     #[NoReturn] public function Home(): void
     {
-        $url = '/characters/1';
+        $url = '/characters?page=1';
         header("Location: $url");
         exit;
     }

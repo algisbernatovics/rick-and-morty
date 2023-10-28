@@ -2,8 +2,6 @@
 
 namespace App\Core;
 
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Exception\RequestException;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
@@ -20,11 +18,11 @@ class Renderer
         $this->twig->addExtension(new DebugExtension());
     }
 
-    public function renderPage(string $template, array $content, string $pageName, int $page): string
+    public function renderPage(string $template, array $content, string $pageName, int $page,string $queryShadow): string
     {
         return $this->twig->render(
             $template,
-            ['cards' => $content['cards'], 'info' => $content['info'], 'pageName' => $pageName, 'page' => $page]);
+            ['cards' => $content['cards'], 'info' => $content['info'], 'pageName' => $pageName, 'page' => $page, 'query' => $queryShadow]);
     }
 
     public function renderSinglePage(string $template, array $content): string
@@ -48,7 +46,7 @@ class Renderer
             ['errorCode' => $errorCode]);
     }
 
-    public function exception(string $template,$exception): void
+    public function exception(string $template, $exception): void
     {
         $this->twig->load($template)->display(['exception' => $exception]);
     }

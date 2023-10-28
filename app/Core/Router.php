@@ -21,7 +21,6 @@ class Router
             $r->addRoute(['POST'], '/characters/filter', 'CharactersController@filter');
             $r->addRoute(['GET'], '/character[/{id:\d+}]', 'CharactersController@characters');
 
-
             $r->addRoute(['GET'], '/episodes[/{page:\d+}]', 'EpisodesController@episodes');
             $r->addRoute(['GET'], '/episode[/{id:\d+}]', 'EpisodesController@episodes');
 
@@ -34,6 +33,7 @@ class Router
     {
         $request = ServerRequest::fromGlobals();
         $routeInfo = $this->dispatcher->dispatch($request->getMethod(), $request->getUri()->getPath());
+        $request = ServerRequest::fromGlobals();
 
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
@@ -50,7 +50,7 @@ class Router
                 $controllerClass = 'App\\Controllers\\' . $controllerName;
 
                 if (class_exists($controllerClass)) {
-                    $controller = new $controllerClass($vars);
+                    $controller = new $controllerClass($request,$vars);
                     if (method_exists($controller, $methodName)) {
                         return $controller->{$methodName}();
                     }

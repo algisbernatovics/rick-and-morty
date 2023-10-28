@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Api\CharactersApiClient;
 use App\Core\ApiServiceContainer;
+use GuzzleHttp\Psr7\ServerRequest;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use App\Core\Renderer;
@@ -12,35 +13,55 @@ class CharactersController
 {
     private Renderer $renderer;
     private Response $response;
+    private ServerRequest $request;
     private ApiServiceContainer $serviceContainer;
     private CharactersApiClient $charactersApiClient;
     private array $vars;
 
-    public function __construct($vars)
+    public function __construct(ServerRequest $request, $vars)
     {
         $this->vars = $vars;
+        $this->request = $request;
         $this->renderer = new Renderer();
         $this->response = new Response();
         $this->serviceContainer = new ApiServiceContainer();
         $this->charactersApiClient = $this->serviceContainer->getCharacterApiClient();
     }
 
-    public function characters(string $query = ''): ResponseInterface
+    public function characters(array $filterQuery = []): ResponseInterface
     {
         if (isset($this->vars['id'])) {
+
             $this->getSingleCharacter();
         } else {
+
+            $queryParams = $this->request->getQueryParams();
+            $queryShadow = empty($filterQuery) ? $queryParams : $filterQuery;
+
+            unset($queryShadow['page']);
+
+            $filterQuery = empty($filterQuery) ? $queryParams : $filterQuery;
+
             $methodName = __METHOD__;
             $pageName = substr(strrchr($methodName, '::'), 1);
-            $uri = "character/?page={$this->vars['page']}&" . $query;
-            $content = $this->api($uri);
-            $html = $this->renderer->renderPage('Characters/Characters.twig', $content, $pageName, $this->vars['page']);
+
+            $page = $queryParams['page'] ?? 1;
+
+            $query = http_build_query($filterQuery);
+            $queryShadow = http_build_query($queryShadow);
+
+            $uri = "character/?{$query}";
+
+            $content = $this->charactersApiClient->getCharacters($uri);
+            $html = $this->renderer->renderPage('Characters/Characters.twig', $content, $pageName, $page, $queryShadow);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
     }
 
-    public function filter()
+
+
+    public function filter(): ResponseInterface
     {
         $queryParameters = [];
         foreach (['name', 'species', 'type', 'status', 'gender'] as $param) {
@@ -48,14 +69,9 @@ class CharactersController
                 $queryParameters[$param] = $_POST[$param];
             }
         }
-        $query = http_build_query($queryParameters);
-        return $this->characters($query);
+        return $this->characters($queryParameters);
     }
 
-    private function api($uri): array
-    {
-        return $this->charactersApiClient->getCharacters($uri);
-    }
 
     private function getSingleCharacter(): void
     {
