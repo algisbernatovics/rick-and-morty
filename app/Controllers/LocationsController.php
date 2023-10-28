@@ -29,13 +29,13 @@ class LocationsController
             $id = $vars['id'];
             $uri = "location/{$id}";
             $content = $this->locationsApiClient->getSingleLocation($uri);
-            $html = $this->renderer->renderSinglePage('SingleLocation.twig', $content);
+            $html = $this->renderer->renderSinglePage('Locations/SingleLocation.twig', $content);
             $this->response->getBody()->write($html);
         } else {
             $page = $vars['page'] ?? 1;
             $uri = "location?page={$page}";
             $content = $this->locationsApiClient->getLocations($uri);
-            $html = $this->renderer->renderPage('Locations.twig', $content);
+            $html = $this->renderer->renderPage('Locations/Locations.twig', $content);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');

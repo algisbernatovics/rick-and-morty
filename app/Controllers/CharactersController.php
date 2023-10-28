@@ -29,13 +29,13 @@ class CharactersController
             $id = $vars['id'];
             $uri = "character/{$id}";
             $content = $this->charactersApiClient->getSingleCharacter($uri);
-            $html = $this->renderer->renderSinglePage('SingleCharacter.twig', $content);
+            $html = $this->renderer->renderSinglePage('Characters/SingleCharacter.twig', $content);
             $this->response->getBody()->write($html);
         } else {
             $page = $vars['page'] ?? 1;
             $uri = "character?page={$page}";
             $content = $this->charactersApiClient->getCharacters($uri);
-            $html = $this->renderer->renderPage('Characters.twig', $content);
+            $html = $this->renderer->renderPage('Characters/Characters.twig', $content);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');

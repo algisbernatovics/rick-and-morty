@@ -1,83 +1,54 @@
 {% extends "Layout.twig" %}
 {% block content %}
-
-    <div class="grid place-items-up place-items-center ">
-        <form action="/searchResults" method="post" class="w-full max-w-lg">
-
-            <div class="h-56 grid grid-cols-3 gap-4 content-center">
-
+    <div class="grid place-items-center">
+        <form action="/search" method="post" class="w-full max-w-lg">
+            <div class="grid grid-cols-3 gap-4">
                 <div class="w-full px-3 mb-6 md:mb-0">
-
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Character Name
                     </label>
-
                     <input class="appearance-none block w-full bg-gray-200 text-gray-700
-                                     border border-red-500 rounded py-3 px-4 mb-3 leading-tight
-                                      focus:outline-none focus:bg-white "
-                           type="text" id="name" name="name" placeholder="Name">
+                           border border-gray-200 rounded py-3 px-4 mb-3 leading-tight
+                           focus:outline-none focus:bg-white" type="text" id="name" name="name" placeholder="Name">
                 </div>
 
                 <div class="w-full px-3 mb-6 md:mb-0">
-
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Status
                     </label>
-
                     <div class="relative">
-
-                        <select class="block appearance-none w-full
-                         bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4
-                          pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text" id="status" name="status">
+                        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" id="status" name="status">
                             <option></option>
                             <option>alive</option>
                             <option>dead</option>
                             <option>unknown</option>
                         </select>
-
                     </div>
                 </div>
 
                 <div class="w-full px-3 mb-6 md:mb-0">
-
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                         Gender
                     </label>
-
                     <div class="relative">
-
-                        <select class="block appearance-none w-full
-                         bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4
-                          pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text" id="gender" name="gender">
+                        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" id="gender" name="gender">
                             <option></option>
                             <option>male</option>
                             <option>female</option>
                             <option>genderless</option>
                             <option>unknown</option>
                         </select>
-
                     </div>
                 </div>
             </div>
 
             <div class="grid place-items-up place-items-center">
-
-                <button type="submit" formmethod="post"
-                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4
-                        focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+                <button type="submit" formmethod="post" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                     Search
                 </button>
-
             </div>
-
         </form>
-
     </div>
 
-    </form>
-
     <br><br>
-
 {% endblock %}

@@ -29,13 +29,13 @@ class EpisodesController
             $id = $vars['id'];
             $uri = "episode/{$id}";
             $content = $this->episodesApiClient->getSingleEpisode($uri);
-            $html = $this->renderer->renderSinglePage('SingleEpisode.twig', $content);
+            $html = $this->renderer->renderSinglePage('Episodes/SingleEpisode.twig', $content);
             $this->response->getBody()->write($html);
         } else {
             $page = $vars['page'] ?? 1;
             $uri = "episode?page={$page}";
             $content = $this->episodesApiClient->getEpisodes($uri);
-            $html = $this->renderer->renderPage('Episodes.twig', $content);
+            $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');

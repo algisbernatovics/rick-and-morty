@@ -29,22 +29,25 @@ class Renderer
     {
         return $this->twig->render(
             $template,
-
             ['card' => $content['card'], 'info' => $content['info']]);
     }
 
-    public function viewSearch(string $template): void
+    public function search(string $template, array $content = []): string
     {
-        $this->twig->load($template)->display();
+        return $this->twig->render(
+            $template,
+            ['content' => $content]);
     }
 
     public function error(string $template, int $errorCode): string
     {
         return $this->twig->render(
-            $template, ['errorCode' => $errorCode]);
+            $template,
+            ['errorCode' => $errorCode]);
     }
-    public function exception(string $template,ConnectException $exception): void
+
+    public function exception(string $template, ConnectException $exception): void
     {
-        $this->twig->load($template)->display(['exception'=>$exception]);
+        $this->twig->load($template)->display(['exception' => $exception]);
     }
 }

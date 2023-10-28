@@ -26,8 +26,8 @@ class Router
             $r->addRoute(['GET'], '/locations[/{page:\d+}]', 'LocationsController@locations');
             $r->addRoute(['GET'], '/location[/{id:\d+}]', 'LocationsController@locations');
 
-            $r->addRoute(['GET'], '/searchPage[/{page:\d+}]', 'SearchController@searchPage');
-            $r->addRoute(['POST'], '/searchResults[/{page:\d+}]', 'SearchController@searchResults');
+            $r->addRoute(['GET'], '/search', 'SearchController@form');
+            $r->addRoute(['POST'], '/search[/{page:\d+}]', 'SearchController@search');
         });
     }
 
