@@ -114,7 +114,7 @@ class CharactersApiClient
             $response = $this->client->get($uri);
             return $response;
         } catch (Exception $exception) {
-            $errorsController = new ErrorsController(500);
+            $errorsController = new ErrorsController();
             $errorsController->exception($exception);
             exit;
         }
