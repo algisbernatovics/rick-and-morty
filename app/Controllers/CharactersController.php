@@ -23,7 +23,7 @@ class CharactersController
         $this->charactersApiClient = $this->serviceContainer->getCharacterApiClient();
     }
 
-    public function characters($vars): ResponseInterface
+    public function characters(array $vars): ResponseInterface
     {
         if (isset($vars['id'])) {
             $id = $vars['id'];

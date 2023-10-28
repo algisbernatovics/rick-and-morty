@@ -23,7 +23,7 @@ class EpisodesController
         $this->episodesApiClient = $this->serviceContainer->getEpisodesRequest();
     }
 
-    public function episodes($vars): ResponseInterface
+    public function episodes(array $vars): ResponseInterface
     {
         if (isset($vars['id'])) {
             $id = $vars['id'];

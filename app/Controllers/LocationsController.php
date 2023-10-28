@@ -23,7 +23,7 @@ class LocationsController
         $this->locationsApiClient = $this->serviceContainer->getLocationApiClient();
     }
 
-    public function locations($vars): ResponseInterface
+    public function locations(array $vars): ResponseInterface
     {
         if (isset($vars['id'])) {
             $id = $vars['id'];
