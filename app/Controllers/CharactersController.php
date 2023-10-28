@@ -59,8 +59,6 @@ class CharactersController
         return $this->response->withHeader('Content-Type', 'text/html');
     }
 
-
-
     public function filter(): ResponseInterface
     {
         $queryParameters = [];
@@ -71,7 +69,6 @@ class CharactersController
         }
         return $this->characters($queryParameters);
     }
-
 
     private function getSingleCharacter(): void
     {
