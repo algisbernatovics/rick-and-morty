@@ -37,7 +37,7 @@ class CharactersController
             $page = $vars['page'] ?? 1;
             $uri = "character?page={$page}";
             $content = $this->charactersApiClient->getCharacters($uri);
-            $html = $this->renderer->renderPage('Characters/Characters.twig', $content, $pageName);
+            $html = $this->renderer->renderPage('Characters/Characters.twig', $content, $pageName, $page);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');

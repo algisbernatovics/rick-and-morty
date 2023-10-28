@@ -37,7 +37,7 @@ class LocationsController
             $page = $vars['page'] ?? 1;
             $uri = "location?page={$page}";
             $content = $this->locationsApiClient->getLocations($uri);
-            $html = $this->renderer->renderPage('Locations/Locations.twig', $content, $pageName);
+            $html = $this->renderer->renderPage('Locations/Locations.twig', $content, $pageName, $page);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');

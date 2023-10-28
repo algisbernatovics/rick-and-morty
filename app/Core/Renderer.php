@@ -5,6 +5,7 @@ namespace App\Core;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use Twig\Environment;
+use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 
 class Renderer
@@ -15,14 +16,15 @@ class Renderer
     public function __construct()
     {
         $loader = new FilesystemLoader('../app/Views');
-        $this->twig = new Environment($loader, []);
+        $this->twig = new Environment($loader, ['debug' => true]);
+        $this->twig->addExtension(new DebugExtension());
     }
 
-    public function renderPage(string $template, array $content, $pageName): string
+    public function renderPage(string $template, array $content, string $pageName, int $page): string
     {
         return $this->twig->render(
             $template,
-            ['cards' => $content['cards'], 'info' => $content['info'], 'pageName' => $pageName]);
+            ['cards' => $content['cards'], 'info' => $content['info'], 'pageName' => $pageName, 'page' => $page]);
     }
 
     public function renderSinglePage(string $template, array $content): string

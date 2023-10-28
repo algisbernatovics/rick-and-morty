@@ -37,7 +37,7 @@ class EpisodesController
             $page = $vars['page'] ?? 1;
             $uri = "episode?page={$page}";
             $content = $this->episodesApiClient->getEpisodes($uri);
-            $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content, $pageName);
+            $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content, $pageName, $page);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
