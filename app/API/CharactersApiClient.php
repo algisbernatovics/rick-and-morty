@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Api;
+namespace App\API;
 
-use App\Controllers\ErrorsController;
 use App\Core\Functions;
 use App\Models\Characters;
 use App\Models\SeenInEpisodes;
-use Exception;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 class CharactersApiClient
 {
+    private const BASE_URI = 'https://rickandmortyapi.com/';
+    private const API_PATH = 'api/';
+    private object $client;
     private TagAwareAdapter $tagCache;
-    private Client $client;
-    public function __construct(TagAwareAdapter $tagCache,Client $client)
+
+    public function __construct(TagAwareAdapter $tagCache)
     {
-        $this->client = $client;
+        $this->client = new Client(['base_uri' => self::BASE_URI]);
         $this->tagCache = $tagCache;
     }
 
@@ -27,7 +29,7 @@ class CharactersApiClient
 
         return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
 
-            $response = $this->request($uri);
+            $response = $this->client->get(self::API_PATH . $uri);
             $data = $this->decodeJsonResponse($response);
 
             $characters = [];
@@ -107,14 +109,9 @@ class CharactersApiClient
         return $episodes;
     }
 
-    private function request($uri): ResponseInterface
+    private function request($uri)
     {
-        try {
-            $response = $this->client->get($uri);
-            return $response;
-        } catch (Exception $e) {
-            $errorsController = new ErrorsController(500);
-            return $errorsController->error();
-        }
+        $response = $this->client->get(self::API_PATH . $uri);
+        return $response;
     }
 }

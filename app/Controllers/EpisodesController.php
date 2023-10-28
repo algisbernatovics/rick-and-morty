@@ -2,9 +2,8 @@
 
 namespace App\Controllers;
 
-use App\API\EpisodesApiClient;
+use App\Api\EpisodesApiClient;
 use App\Core\ApiServiceContainer;
-use App\Core\ServiceContainer;
 use App\Core\Renderer;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;

@@ -36,8 +36,9 @@ class Renderer
         $this->twig->load($template)->display();
     }
 
-    public function error(string $template): void
+    public function error(string $template, int $errorCode): string
     {
-        $this->twig->load($template)->display();
+        return $this->twig->render(
+            $template, ['errorCode' => $errorCode]);
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Controllers;
 
-use App\API\LocationsApiClient;
-use App\Core\ApiServiceContainer;
+use App\Api\LocationsApiClient;
 use App\Core\Renderer;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
-use App\Core\ServiceContainer;
+use App\Core\ApiServiceContainer;
 
 class LocationsController
 {

@@ -2,9 +2,8 @@
 
 namespace App\Controllers;
 
-use App\API\CharactersApiClient;
+use App\Api\CharactersApiClient;
 use App\Core\ApiServiceContainer;
-use App\Core\ServiceContainer;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use App\Core\Renderer;

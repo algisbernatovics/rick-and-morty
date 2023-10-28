@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Api;
+namespace App\API;
 
-use App\Controllers\ErrorsController;
 use App\Core\Functions;
 use App\Models\CharactersInLocation;
 use App\Models\Locations;
-use Exception;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 class LocationsApiClient
 {
-    private TagAwareAdapter $tagCache;
+    private const BASE_URI = 'https://rickandmortyapi.com/';
+    private const API_PATH = 'api/';
     private Client $client;
 
-    public function __construct(TagAwareAdapter $tagCache,Client $client)
+    public function __construct(TagAwareAdapter $tagCache)
     {
-        $this->client = $client;
+        $this->client = new Client(['base_uri' => self::BASE_URI]);
         $this->tagCache = $tagCache;
     }
 
@@ -27,7 +26,7 @@ class LocationsApiClient
         $cacheKey = 'locations_' . md5($uri);
 
         return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
-            $response = $this->request($uri);
+            $response = $this->client->get(self::API_PATH . $uri);
             $data = $this->decodeJsonResponse($response);
 
             $locations = [];
@@ -90,14 +89,8 @@ class LocationsApiClient
         return $residents;
     }
 
-    private function request($uri): ResponseInterface
+    private function request(string $uri): ResponseInterface
     {
-        try {
-            $response = $this->client->get($uri);
-            return $response;
-        } catch (Exception $e) {
-            $errorsController = new ErrorsController(500);
-            return $errorsController->error();
-        }
+        return $this->client->get(self::API_PATH . $uri);
     }
 }

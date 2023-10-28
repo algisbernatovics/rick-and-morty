@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Api;
+namespace App\API;
 
-use App\Controllers\ErrorsController;
 use App\Core\Functions;
 use App\Models\Episodes;
 use App\Models\CharactersInEpisode;
-use Exception;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 class EpisodesApiClient
 {
-    private TagAwareAdapter $tagCache;
-    private Client $client;
+    private const BASE_URI = 'https://rickandmortyapi.com/';
+    private const API_PATH = 'api/';
+    private object $client;
 
-    public function __construct(TagAwareAdapter $tagCache,Client $client)
+    public function __construct(TagAwareAdapter $tagCache)
     {
-        $this->client = $client;
+        $this->client = new Client(['base_uri' => self::BASE_URI]);
         $this->tagCache = $tagCache;
     }
 
@@ -27,7 +26,7 @@ class EpisodesApiClient
         $cacheKey = 'episodes_' . md5($uri);
 
         return $this->tagCache->get($cacheKey, function ($item) use ($uri) {
-            $response = $this->request($uri);
+            $response = $this->client->get(self::API_PATH . $uri);
             $data = $this->decodeJsonResponse($response);
 
             $info = $data->info;
@@ -63,15 +62,10 @@ class EpisodesApiClient
         });
     }
 
-    private function request($uri)
+    private function request($episodeUri)
     {
-        try {
-            $response = $this->client->get($uri);
-            return $response;
-        } catch (Exception $e) {
-            $errorsController = new ErrorsController(500);
-            return $errorsController->error();
-        }
+        $response = $this->client->get(self::API_PATH . $episodeUri);
+        return $response;
     }
 
     private function createEpisodeFromData($episodeData): Episodes
