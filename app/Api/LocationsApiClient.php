@@ -95,9 +95,10 @@ class LocationsApiClient
         try {
             $response = $this->client->get($uri);
             return $response;
-        } catch (Exception $e) {
-            $errorsController = new ErrorsController(500);
-            return $errorsController->error();
+        } catch (Exception $exception) {
+            $errorsController = new ErrorsController();
+            $errorsController->exception($exception);
+            exit;
         }
     }
 }

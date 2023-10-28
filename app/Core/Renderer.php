@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -40,5 +42,9 @@ class Renderer
     {
         return $this->twig->render(
             $template, ['errorCode' => $errorCode]);
+    }
+    public function exception(string $template,ConnectException $exception): void
+    {
+        $this->twig->load($template)->display(['exception'=>$exception]);
     }
 }

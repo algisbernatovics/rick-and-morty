@@ -8,6 +8,7 @@ use App\Models\Characters;
 use App\Models\SeenInEpisodes;
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
@@ -112,9 +113,11 @@ class CharactersApiClient
         try {
             $response = $this->client->get($uri);
             return $response;
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             $errorsController = new ErrorsController(500);
-            return $errorsController->error();
+            $errorsController->exception($exception);
+            exit;
         }
     }
+
 }
