@@ -1,48 +1,49 @@
 <div class="bg-black text-white py-4 px-4">
     <nav>
-        <ul class="menu-list flex items-center">
-            <form action="/{{ pageName }}/filter" method="post" class="flex space-x-4">
-                <div class="flex items-center">
-                    <label for="name" class="text-white text-sm font-bold mr-2">Name:</label>
-                    <input type="text" id="name" name="name" class="px-2 py-1 border rounded-md bg-black text-white">
-                </div>
+        <form action="/{{ pageName }}/filter" method="post">
+            <ul class="menu-list">
+                <li class="w-full md:w-1/2">
+                    <label for="name" class="text-white text-sm font-bold">Name:</label>
+                    <input type="text" id="name" name="name" class="w-full px-2 py-1 border rounded-md bg-black text-white">
+                </li>
 
-                <div class="flex items-center">
-                    <label for="status" class="text-white text-sm font-bold mr-2">Status:</label>
-                    <select id="status" name="status" class="px-2 py-1 border rounded-md bg-black text-white">
+                <li class="w-full md:w-1/2">
+                    <label for="species" class="text-white text-sm font-bold">Species:</label>
+                    <input type="text" id="species" name="species" class="w-full px-2 py-1 border rounded-md bg-black text-white">
+                </li>
+
+                <li class="w-full md:w-1/2">
+                    <label for="type" class="text-white text-sm font-bold">Type:</label>
+                    <input type="text" id="type" name="type" class="w-full px-2 py-1 border rounded-md bg-black text-white">
+                </li>
+
+                <li class="w-full md:w-1/2">
+                    <label for="status" class="text-white text-sm font-bold">Status:</label>
+                    <select id="status" name="status" class="w-full px-2 py-1 border rounded-md bg-black text-white">
                         <option value="">Any</option>
                         <option value="alive">Alive</option>
                         <option value="dead">Dead</option>
                         <option value="unknown">Unknown</option>
                     </select>
-                </div>
+                </li>
 
-                <div class="flex items-center">
-                    <label for="species" class="text-white text-sm font-bold mr-2">Species:</label>
-                    <input type="text" id="species" name="species" class="px-2 py-1 border rounded-md bg-black text-white">
-                </div>
-
-                <div class="flex items-center">
-                    <label for="type" class="text-white text-sm font-bold mr-2">Type:</label>
-                    <input type="text" id="type" name="type" class="px-2 py-1 border rounded-md bg-black text-white">
-                </div>
-
-                <div class="flex items-center">
-                    <label for="gender" class="text-white text-sm font-bold mr-2">Gender:</label>
-                    <select id="gender" name="gender" class="px-2 py-1 border rounded-md bg-black text-white">
-                        <option value="">Any</option>
-                        <option value="female">Female</option>
-                        <option value="male">Male</option>
-                        <option value="genderless">Genderless</option>
-                        <option value="unknown">Unknown</option>
+                <li class="w-full md:w-1/2">
+                    <label for="gender" class="text-white text-sm font-bold">Gender:</label>
+                    <select id="gender" name="gender" class="w-full px-2 py-1 border rounded-md bg-black text-white">
+                    <option value="">Any</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="genderless">Genderless</option>
+                    <option value="unknown">Unknown</option>
                     </select>
-                </div>
+                </li>
 
-                <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 focus:outline-none">
-                    Filter
-                </button>
-
-            </form>
-        </ul>
+                <li class="w-full py-5">
+                    <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 focus:outline-none">
+                        Filter
+                    </button>
+                </li>
+            </ul>
+        </form>
     </nav>
 </div>
