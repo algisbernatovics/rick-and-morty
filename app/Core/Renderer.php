@@ -32,13 +32,6 @@ class Renderer
             ['card' => $content['card'], 'info' => $content['info'],'pageName'=>$pageName]);
     }
 
-    public function search(string $template, array $content = []): string
-    {
-        return $this->twig->render(
-            $template,
-            ['content' => $content]);
-    }
-
     public function error(string $template, int $errorCode): string
     {
         return $this->twig->render(
