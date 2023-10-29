@@ -47,7 +47,7 @@ class CharactersController
             $page = $queryParams['page'] ?? 1;
 
             $query = http_build_query($filterQuery);
-            $uri = SELF::PATH . $query;
+            $uri = self::PATH . $query;
 
             $content = $this->charactersApiClient->getCharacters($uri);
             $html = $this->renderer->renderPage('Characters/Characters.twig', $content, $pageName, $page, $queryShadow);

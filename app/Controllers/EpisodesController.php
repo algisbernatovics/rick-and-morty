@@ -47,7 +47,7 @@ class EpisodesController
             $page = $queryParams['page'] ?? 1;
 
             $query = http_build_query($filterQuery);
-            $uri = SELF::PATH . $query;
+            $uri = self::PATH . $query;
 
             $content = $this->episodesApiClient->getEpisodes($uri);
             $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content, $pageName, $page, $queryShadow);
@@ -59,7 +59,7 @@ class EpisodesController
     public function filter(): ResponseInterface
     {
         $queryParameters = [];
-        foreach (['name', 'type', 'dimension'] as $param) {
+        foreach (['name', 'episode'] as $param) {
             if (!empty($_POST[$param])) {
                 $queryParameters[$param] = $_POST[$param];
             }

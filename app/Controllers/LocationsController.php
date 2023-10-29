@@ -48,7 +48,7 @@ class LocationsController
             $page = $queryParams['page'] ?? 1;
 
             $query = http_build_query($filterQuery);
-            $uri = SELF::PATH . $query;
+            $uri = self::PATH . $query;
 
             $content = $this->locationsApiClient->getLocations($uri);
             $html = $this->renderer->renderPage('Locations/Locations.twig', $content, $pageName, $page, $queryShadow);
@@ -60,7 +60,7 @@ class LocationsController
     public function filter(): ResponseInterface
     {
         $queryParameters = [];
-        foreach (['name', 'episode'] as $param) {
+        foreach (['name', 'type', 'dimension'] as $param) {
             if (!empty($_POST[$param])) {
                 $queryParameters[$param] = $_POST[$param];
             }
