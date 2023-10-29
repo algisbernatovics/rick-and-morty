@@ -1,17 +1,26 @@
 <nav class="inline-block">
     <ul class="md:inline-flex pagination">
 
+        <li class="pagination-item">
+            {% if page > 1 %}
+                <a href="/{{ pageName }}?page={{ page - 1 }}{{ query }}" class="px-1 py-1 ml-1 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">Previous</a>
+            {% endif %}
+        </li>
+
         {% for i in 1..info.pages %}
             <li class="pagination-item">
                 {% if i == page %}
-                    <a href="/{{ pageName }}?page={{ i }}&{{ query }}" class="px-1 py-1 ml-1 leading-tight text-gray-700 bg-gray-100 border border-gray-300 hover:bg-gray-100 hover:text-gray-700">{{ i }}</a>
+                    <a href="/{{ pageName }}?page={{ i }}{{ query }}" class="px-1 py-1 ml-1 leading-tight text-gray-700 bg-gray-100 border border-gray-300 hover-bg-gray-100 hover:text-gray-700">{{ i }}</a>
                 {% else %}
-                    <a href="/{{ pageName }}?page={{ i }}&{{ query }}" class="px-1 py-1 ml-1 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">{{ i }}</a>
+                    <a href="/{{ pageName }}?page={{ i }}{{ query }}" class="px-1 py-1 ml-1 leading-tight text-gray-500 bg-white border border-gray-300 hover-bg-gray-100 hover:text-gray-700">{{ i }}</a>
                 {% endif %}
             </li>
         {% endfor %}
 
+        <li class="pagination-item">
+            {% if page < info.pages %}
+                <a href="/{{ pageName }}?page={{ page + 1 }}{{ query }}" class="px-1 py-1 ml-1 leading-tight text-gray-500 bg-white border border-gray-300 hover-bg-gray-100 hover:text-gray-700">Next</a>
+            {% endif %}
+        </li>
     </ul>
 </nav>
-
-<div style="height: 120px;"></div>

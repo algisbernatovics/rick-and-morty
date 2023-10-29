@@ -11,6 +11,7 @@ use App\Core\Renderer;
 
 class CharactersController
 {
+    private const PATH = 'character/?';
     private Renderer $renderer;
     private Response $response;
     private ServerRequest $request;
@@ -31,26 +32,21 @@ class CharactersController
     public function characters(array $filterQuery = []): ResponseInterface
     {
         if (isset($this->vars['id'])) {
-
             $this->getSingleCharacter();
         } else {
-
             $queryParams = $this->request->getQueryParams();
             $queryShadow = empty($filterQuery) ? $queryParams : $filterQuery;
-
-            unset($queryShadow['page']);
-
             $filterQuery = empty($filterQuery) ? $queryParams : $filterQuery;
+            unset($queryShadow['page']);
+            $queryShadow = http_build_query($queryShadow);
+            $queryShadow = $queryShadow ? '&' . $queryShadow : '';
 
             $methodName = __METHOD__;
             $pageName = substr(strrchr($methodName, '::'), 1);
-
             $page = $queryParams['page'] ?? 1;
 
             $query = http_build_query($filterQuery);
-            $queryShadow = http_build_query($queryShadow);
-
-            $uri = "character/?{$query}";
+            $uri = SELF::PATH . $query;
 
             $content = $this->charactersApiClient->getCharacters($uri);
             $html = $this->renderer->renderPage('Characters/Characters.twig', $content, $pageName, $page, $queryShadow);
