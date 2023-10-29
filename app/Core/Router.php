@@ -26,6 +26,7 @@ class Router
             $r->addRoute(['GET'], '/episode[/{id:\d+}]', 'EpisodesController@episodes');
 
             $r->addRoute(['GET'], '/locations[/{page:\d+}]', 'LocationsController@locations');
+            $r->addRoute(['POST'], '/locations/filter', 'LocationsController@filter');
             $r->addRoute(['GET'], '/location[/{id:\d+}]', 'LocationsController@locations');
         });
     }

@@ -56,7 +56,6 @@ class EpisodesController
         return $this->response->withHeader('Content-Type', 'text/html');
     }
 
-
     public function filter(): ResponseInterface
     {
         $queryParameters = [];
