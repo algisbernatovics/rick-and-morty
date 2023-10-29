@@ -12,6 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 class LocationsController
 {
     private const PATH = 'location/?';
+    private const PAGENAME = 'locations';
 
     private Renderer $renderer;
     private LocationsApiClient $locationsApiClient;
@@ -43,15 +44,13 @@ class LocationsController
             $queryShadow = http_build_query($queryShadow);
             $queryShadow = $queryShadow ? '&' . $queryShadow : '';
 
-            $methodName = __METHOD__;
-            $pageName = substr(strrchr($methodName, '::'), 1);
             $page = $queryParams['page'] ?? 1;
 
             $query = http_build_query($filterQuery);
             $uri = self::PATH . $query;
 
             $content = $this->locationsApiClient->getLocations($uri);
-            $html = $this->renderer->renderPage('Locations/Locations.twig', $content, $pageName, $page, $queryShadow);
+            $html = $this->renderer->renderPage('Locations/Locations.twig', $content, self::PAGENAME, $page, $queryShadow);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
@@ -73,7 +72,7 @@ class LocationsController
         $id = $this->vars['id'];
         $uri = "location/{$id}";
         $content = $this->locationsApiClient->getSingleLocation($uri);
-        $html = $this->renderer->renderSinglePage('Locations/SingleLocation.twig', $content);
+        $html = $this->renderer->renderSinglePage('Locations/SingleLocation.twig', $content,self::PAGENAME);
         $this->response->getBody()->write($html);
     }
 }

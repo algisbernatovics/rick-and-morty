@@ -12,6 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 class EpisodesController
 {
     private const PATH = 'episode/?';
+    private const PAGENAME = 'episodes';
     private Renderer $renderer;
     private EpisodesApiClient $episodesApiClient;
     private ServerRequest $request;
@@ -42,15 +43,13 @@ class EpisodesController
             $queryShadow = http_build_query($queryShadow);
             $queryShadow = $queryShadow ? '&' . $queryShadow : '';
 
-            $methodName = __METHOD__;
-            $pageName = substr(strrchr($methodName, '::'), 1);
             $page = $queryParams['page'] ?? 1;
 
             $query = http_build_query($filterQuery);
             $uri = self::PATH . $query;
 
             $content = $this->episodesApiClient->getEpisodes($uri);
-            $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content, $pageName, $page, $queryShadow);
+            $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content, self::PAGENAME, $page, $queryShadow);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
@@ -72,7 +71,7 @@ class EpisodesController
         $id = $this->vars['id'];
         $uri = "episode/{$id}";
         $content = $this->episodesApiClient->getSingleEpisode($uri);
-        $html = $this->renderer->renderSinglePage('Episodes/SingleEpisode.twig', $content);
+        $html = $this->renderer->renderSinglePage('Episodes/SingleEpisode.twig', $content,self::PAGENAME);
         $this->response->getBody()->write($html);
     }
 }

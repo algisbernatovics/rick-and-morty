@@ -12,6 +12,7 @@ use App\Core\Renderer;
 class CharactersController
 {
     private const PATH = 'character/?';
+    private const PAGENAME ='characters';
     private Renderer $renderer;
     private Response $response;
     private ServerRequest $request;
@@ -42,15 +43,13 @@ class CharactersController
             $queryShadow = http_build_query($queryShadow);
             $queryShadow = $queryShadow ? '&' . $queryShadow : '';
 
-            $methodName = __METHOD__;
-            $pageName = substr(strrchr($methodName, '::'), 1);
             $page = $queryParams['page'] ?? 1;
 
             $query = http_build_query($filterQuery);
             $uri = self::PATH . $query;
 
             $content = $this->charactersApiClient->getCharacters($uri);
-            $html = $this->renderer->renderPage('Characters/Characters.twig', $content, $pageName, $page, $queryShadow);
+            $html = $this->renderer->renderPage('Characters/Characters.twig', $content, self::PAGENAME, $page, $queryShadow);
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
@@ -72,7 +71,7 @@ class CharactersController
         $id = $this->vars['id'];
         $uri = "character/{$id}";
         $content = $this->charactersApiClient->getSingleCharacter($uri);
-        $html = $this->renderer->renderSinglePage('Characters/SingleCharacter.twig', $content);
+        $html = $this->renderer->renderSinglePage('Characters/SingleCharacter.twig', $content,self::PAGENAME);
         $this->response->getBody()->write($html);
     }
 }

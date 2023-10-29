@@ -25,11 +25,11 @@ class Renderer
             ['cards' => $content['cards'], 'info' => $content['info'], 'pageName' => $pageName, 'page' => $page, 'query' => $queryShadow]);
     }
 
-    public function renderSinglePage(string $template, array $content): string
+    public function renderSinglePage(string $template, array $content,string $pageName): string
     {
         return $this->twig->render(
             $template,
-            ['card' => $content['card'], 'info' => $content['info']]);
+            ['card' => $content['card'], 'info' => $content['info'],'pageName'=>$pageName]);
     }
 
     public function search(string $template, array $content = []): string
