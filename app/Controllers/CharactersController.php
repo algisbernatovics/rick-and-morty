@@ -38,6 +38,7 @@ class CharactersController
             $queryShadow = empty($filterQuery) ? $queryParams : $filterQuery;
             $filterQuery = empty($filterQuery) ? $queryParams : $filterQuery;
             unset($queryShadow['page']);
+
             $queryShadow = http_build_query($queryShadow);
             $queryShadow = $queryShadow ? '&' . $queryShadow : '';
 
