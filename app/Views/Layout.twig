@@ -1,51 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="" lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="{{ ('/styles/styles.css') }}">
+    <link rel="stylesheet" href="/styles/styles.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
     <title>RICK&MORTY</title>
-
     {% block head %}
+    <title>{% block title %}RICK&MORTY{% endblock %}</title>
+    <header class="bg-black text-white py-4 px-4">
+        <nav>
+            <ul class="menu-list">
+                <li><a href="/" class="hover:text-gray-300 text-bold font-bold">Home</a></li>
+                <li><a href="/characters" class="hover:text-gray-300 font-normal">Characters</a></li>
+                <li><a href="/episodes" class="hover:text-gray-300 font-normal">Episodes</a></li>
+                <li><a href="/locations" class="hover:text-gray-300 font-normal">Locations</a></li>
+                <li>
 
-        <title>{% block title %}RICK&MORTY{% endblock %}</title>
-        <header class="bg-black text-white py-4 px-4">
-            <nav>
-                <ul class="menu-list">
-                    <li><a href="/" class="hover:text-gray-300 text-bold font-bold">Home</a></li>
-                    <li><a href="/characters" class="hover:text-gray-300 font-normal">Characters</a></li>
-                    <li><a href="/episodes" class="hover:text-gray-300 font-normal">Episodes</a></li>
-                    <li><a href="/locations" class="hover:text-gray-300 font-normal">Locations</a></li>
-                </ul>
-            </nav>
-        </header>
+                    <button id="search-button">
+                        <span class="inline">Filter</span>
+                    </button>
 
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div id="filter" class="filter" style="display: none;">
         {% if pageName is defined %}
             {% include pageName|capitalize ~ '/Filter.twig' %}
         {% endif %}
-
-    {% endblock %}
-
-    <br><br><br>
+        {% endblock %}
+    </div>
 </head>
 <body>
-<div id="content"
 
-{% block content %}{% endblock %}
+<div style="height: 120px;"></div>
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
 
 <div id="footer">
-
     {% block footer %}
-
+        {% include 'Includes/Footer.twig' %}
     {% endblock %}
-
 </div>
+
 </body>
 </html>
-
