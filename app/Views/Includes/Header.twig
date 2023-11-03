@@ -1,0 +1,24 @@
+<header class="bg-black text-white py-4 px-4">
+    <title>RICK&MORTY</title>
+    <nav>
+        <ul class="menu-list">
+            <li><a href="/" class="hover:text-gray-300 text-bold font-bold">Home</a></li>
+            <li><a href="/characters" class="hover:text-gray-300 font-normal">Characters</a></li>
+            <li><a href="/episodes" class="hover:text-gray-300 font-normal">Episodes</a></li>
+            <li><a href="/locations" class="hover:text-gray-300 font-normal">Locations</a></li>
+            <li>
+                <button id="search-button">
+                    <span class="inline">Filter</span>
+                </button>
+            </li>
+
+            <div id="filter" class="filter" style="display: none;">
+                {% if pageName is defined %}
+                    {% include pageName|capitalize ~ '/Filter.twig' %}
+                {% endif %}
+            </div>
+        </ul>
+    </nav>
+
+
+</header>
