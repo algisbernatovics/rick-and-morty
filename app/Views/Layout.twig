@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html class="" lang="en">
 
-    {% block head %}
-        {% include 'Includes/Head.twig' %}
-    {% endblock %}
+{% block head %}
+    {% include 'Includes/Head.twig' %}
+{% endblock %}
 
-<body>
-
-<header>
-    {% include 'Includes/Header.twig' %}
-</header>
+{% include 'Includes/Header.twig' %}
 
 <div style="height: 120px;"></div>
 
-<div id="content">
-    {% block content %}
-    {% endblock %}
-</div>
+{% block content %}
+{% endblock %}
 
-<div id="footer">
-    {% block footer %}
-        {% include 'Includes/Footer.twig' %}
-    {% endblock %}
-</div>
+{% block footer %}
+    {% include 'Includes/Footer.twig' %}
+{% endblock %}
 
-</body>
+
 </html>
