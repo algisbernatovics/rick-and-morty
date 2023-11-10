@@ -61,7 +61,7 @@ class LocationsApiClient
         });
     }
 
-    private function createLocationFromData(object $locationData): Locations
+    private function createLocationFromData(\stdClass $locationData): Locations
     {
         return new Locations(
             $locationData->id,
@@ -90,7 +90,7 @@ class LocationsApiClient
         return $residents;
     }
 
-    private function request($uri): ResponseInterface
+    private function request(string $uri): ResponseInterface
     {
         try {
             $response = $this->client->get($uri);

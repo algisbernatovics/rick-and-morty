@@ -22,7 +22,7 @@ class EpisodesApiClient
         $this->tagCache = $tagCache;
     }
 
-    public function getEpisodes($uri): array
+    public function getEpisodes(string $uri): array
     {
         $cacheKey = 'episodes_' . md5($uri);
 
@@ -48,7 +48,7 @@ class EpisodesApiClient
         return json_decode($jsonContent);
     }
 
-    public function getSingleEpisode($uri): array
+    public function getSingleEpisode(string $uri): array
     {
         $cacheKey = 'single_episode_' . md5($uri);
 
@@ -63,7 +63,7 @@ class EpisodesApiClient
         });
     }
 
-    private function request($uri): ResponseInterface
+    private function request(string $uri): ResponseInterface
     {
         try {
             $response = $this->client->get($uri);
@@ -75,7 +75,7 @@ class EpisodesApiClient
         }
     }
 
-    private function createEpisodeFromData($episodeData): Episodes
+    private function createEpisodeFromData(\stdClass $episodeData): Episodes
     {
         return new Episodes(
             $episodeData->id,
@@ -102,7 +102,7 @@ class EpisodesApiClient
         return $charactersInEpisode;
     }
 
-    private function createCharactersInFromData($character): CharactersInEpisode
+    private function createCharactersInFromData(\stdClass $character): CharactersInEpisode
     {
         return new CharactersInEpisode(
             $character->id,

@@ -22,7 +22,7 @@ class CharactersApiClient
         $this->tagCache = $tagCache;
     }
 
-    public function getCharacters($uri): array
+    public function getCharacters(string $uri): array
     {
         $cacheKey = 'characters_' . md5($uri);
 
@@ -58,7 +58,7 @@ class CharactersApiClient
         return $episodeData->name;
     }
 
-    public function getSingleCharacter($uri): array
+    public function getSingleCharacter(string $uri): array
     {
         $cacheKey = 'single_character_' . md5($uri);
 
@@ -74,7 +74,7 @@ class CharactersApiClient
         });
     }
 
-    private function createCharacterFromData($characterData, $episodeName): Characters
+    private function createCharacterFromData(\stdClass $characterData,string $episodeName): Characters
     {
         return new Characters(
             $characterData->id,
@@ -108,7 +108,7 @@ class CharactersApiClient
         return $episodes;
     }
 
-    private function request($uri): ResponseInterface
+    private function request(string $uri): ResponseInterface
     {
         try {
             $response = $this->client->get($uri);

@@ -1,5 +1,6 @@
 <header class="bg-black text-white py-4 px-4">
     <title>RICK&MORTY</title>
+
     <nav>
         <ul class="menu-list">
             <li><a href="/" class="hover:text-gray-300 text-bold font-bold">Home</a></li>
@@ -11,14 +12,13 @@
                     <span class="inline">Filter</span>
                 </button>
             </li>
-
-            <div id="filter" class="filter" style="display: none;">
-                {% if pageName is defined %}
-                    {% include pageName|capitalize ~ '/Filter.twig' %}
-                {% endif %}
-            </div>
         </ul>
     </nav>
 
+    <div id="filter" class="filter" style="display: none;">
+        {% if pageName is defined %}
+            {% include pageName|capitalize ~ '/Filter.twig' %}
+        {% endif %}
+    </div>
 
 </header>
