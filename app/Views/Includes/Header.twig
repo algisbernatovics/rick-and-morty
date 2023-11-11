@@ -1,11 +1,7 @@
 <header class="bg-black text-white py-4 px-4">
-    <nav>
+    <nav class="flex items-center justify-left">
         {% include 'Includes/Nav.twig' %}
-        {% if pageName is defined %}
-            <div id="filter">
-                {% include pageName|capitalize ~ '/Filter.twig' %}
-            </div>
-        {% endif %}
+
     </nav>
 </header>
 

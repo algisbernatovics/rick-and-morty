@@ -16,3 +16,9 @@
         </button>
     </li>
 </ul>
+
+{% if pageName is defined %}
+    <div id="filter">
+        {% include pageName|capitalize ~ '/Filter.twig' %}
+    </div>
+{% endif %}
