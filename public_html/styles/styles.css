@@ -17,6 +17,16 @@
         margin-right: 12px;
     }
 }
+.menu-list li a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.menu-list li a:hover,
+.menu-list li a.active {
+    color: #ffcc00;
+}
 
 .pagination {
     display: flex;
@@ -60,5 +70,10 @@
 }
 
 .filter {
-
+    display: none;
 }
+
+.active {
+    color: #ffcc00;
+}
+
