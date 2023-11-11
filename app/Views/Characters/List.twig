@@ -1,0 +1,29 @@
+<div id="content">
+    {% if cards is empty %}
+        <h1>Not found!</h1>
+    {% else %}
+        <div class="grid place-items-center container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
+                {% for card in cards %}
+                    <a href="/character/{{ card.id }}">
+                        <div class="map animate-fade-in hover:bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
+                            <img src="{{ card.image }}" alt="{{ card.name }}">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+                            <p class="mb-2 text-1xl tracking-tight text-gray-900">{{ card.status }} - {{ card.species }}</p>
+
+                            <p>Last known location:</p>
+                            <li>{{ card.location.name }}</li>
+
+                            <p>First Seen in:</p>
+                            <li>{{ card.episodeName }}</li>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div style="height: 120px;"></div>
+        <div class="container mx-auto text-center mt-4">
+            {% include '/Includes/Pagination.twig' %}
+        </div>
+    {% endif %}
+</div>
