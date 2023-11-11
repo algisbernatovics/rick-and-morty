@@ -1,5 +1,7 @@
 {% extends "Layout.twig" %}
 
 {% block content %}
-    {% include pageName|capitalize ~ '/List.twig' %}
+    <div id="filterContent">
+        {% include pageName|capitalize ~ '/List.twig' %}
+    </div>
 {% endblock %}

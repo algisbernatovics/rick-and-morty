@@ -1,4 +1,4 @@
-// Pārvieto mainīgo deklarāciju uz ārpus notikuma klausītāja
+
 const searchButton = document.getElementById("search-button");
 const filter = document.getElementById("filter");
 
@@ -11,7 +11,6 @@ document.getElementById('filterForm').addEventListener('input', function () {
     var form = document.getElementById('filterForm');
     var formData = new FormData(form);
 
-    // Iegūst pageName vērtību no datu atribūta
     var pageName = document.getElementById('filterForm').getAttribute('data-page-name');
 
     var xhr = new XMLHttpRequest();
@@ -21,7 +20,19 @@ document.getElementById('filterForm').addEventListener('input', function () {
             if (xhr.responseText === 'redirect') {
                 window.location.href = '/Locations';
             } else {
-                document.getElementById('content').innerHTML = xhr.responseText;
+                var contentIsNotFound = xhr.responseText.trim() === 'Not found!';
+
+                if (contentIsNotFound) {
+                } else {
+
+                    var singleContentElement = document.getElementById('singleContent');
+                    if (singleContentElement) {
+                        singleContentElement.style.display = contentIsNotFound ? 'block' : 'none';
+                    } else {
+                        console.error('Element with ID "singleContent" not found');
+                    }
+                    document.getElementById('filterContent').innerHTML = xhr.responseText;
+                }
             }
         } else {
             console.error('Request failed with status ' + xhr.status);
