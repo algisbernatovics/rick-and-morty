@@ -7,6 +7,30 @@
     margin-bottom: 8px;
 }
 
+nav {
+    display: flex;
+    align-items: center;
+    height: 20px;
+}
+
+.menu-list, .search-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.menu-list li {
+    margin: 0 10px;
+}
+
+#filter {
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+/* Responsive styles for larger screens */
 @media only screen and (min-width: 768px) {
     .menu-list {
         flex-direction: row;
@@ -17,14 +41,30 @@
         margin-right: 12px;
     }
 }
+
 .menu-list li a {
     color: inherit;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
+/* Apply hover effect for menu item links */
 .menu-list li a:hover,
 .menu-list li a.active {
+    color: #ffcc00;
+}
+
+/* Apply hover effect for the button */
+#search-button:hover {
+    cursor: pointer;
+    color: #ffcc00;
+}
+
+.filter {
+    display: none;
+}
+
+.active {
     color: #ffcc00;
 }
 
@@ -38,6 +78,7 @@
     margin-bottom: 0.5rem;
 }
 
+/* Responsive styles for very large screens */
 @media (min-width: 1300px) {
     .pagination {
         flex-wrap: nowrap;
@@ -60,7 +101,6 @@
 }
 
 .map {
-
     background-color: #f1f1f1;
     transition: transform 0.3s ease;
 }
@@ -68,12 +108,3 @@
 .map:hover {
     transform: scale(1.1);
 }
-
-.filter {
-    display: none;
-}
-
-.active {
-    color: #ffcc00;
-}
-
