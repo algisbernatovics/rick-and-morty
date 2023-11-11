@@ -1,0 +1,11 @@
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pagination-item {
+    margin-bottom: 0.5rem;
+}
+
+/*Pagination @ media*/

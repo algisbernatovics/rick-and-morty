@@ -1,0 +1,23 @@
+@media only screen and (min-width: 970px) {
+    nav {
+        height: auto;
+    }
+    .menu-list {
+        flex-direction: row;
+    }
+
+    .menu-list li {
+        margin-bottom: 0;
+        margin-right: 12px;
+    }
+
+    #filter {
+        display: block;
+    }
+}
+
+@media (min-width: 1300px) {
+    .pagination {
+        flex-wrap: nowrap;
+    }
+}
