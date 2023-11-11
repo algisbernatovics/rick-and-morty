@@ -57,12 +57,12 @@ class CharactersController
 
     public function filter(): ResponseInterface
     {
-        $postData = $this->request->getParsedBody();
+        $parsedBody = $this->request->getParsedBody();
 
         $queryParameters = [];
         foreach (['name', 'species', 'type', 'status', 'gender'] as $param) {
-            if (!empty($postData[$param])) {
-                $queryParameters[$param] = $postData[$param];
+            if (isset($parsedBody[$param]) && !empty($parsedBody[$param])) {
+                $queryParameters[$param] = $parsedBody[$param];
             }
         }
 

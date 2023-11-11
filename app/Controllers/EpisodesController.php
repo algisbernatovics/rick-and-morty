@@ -57,14 +57,19 @@ class EpisodesController
 
     public function filter(): ResponseInterface
     {
+        $parsedBody = $this->request->getParsedBody();
+
         $queryParameters = [];
         foreach (['name', 'episode'] as $param) {
-            if (!empty($_POST[$param])) {
-                $queryParameters[$param] = $_POST[$param];
+            if (isset($parsedBody[$param]) && !empty($parsedBody[$param])) {
+                $queryParameters[$param] = $parsedBody[$param];
             }
         }
+
         return $this->episodes($queryParameters);
     }
+
+
 
     private function getSingleEpisode(): void
     {

@@ -58,14 +58,18 @@ class LocationsController
 
     public function filter(): ResponseInterface
     {
+        $parsedBody = $this->request->getParsedBody();
+
         $queryParameters = [];
         foreach (['name', 'type', 'dimension'] as $param) {
-            if (!empty($_POST[$param])) {
-                $queryParameters[$param] = $_POST[$param];
+            if (isset($parsedBody[$param]) && !empty($parsedBody[$param])) {
+                $queryParameters[$param] = $parsedBody[$param];
             }
         }
+
         return $this->locations($queryParameters);
     }
+
 
     private function getSingleLocation(): void
     {
