@@ -13,7 +13,6 @@ class LocationsController
 {
     private const PATH = 'location/?';
     private const PAGENAME = 'locations';
-
     private Renderer $renderer;
     private LocationsApiClient $locationsApiClient;
     private ServerRequest $request;
@@ -31,7 +30,7 @@ class LocationsController
         $this->locationsApiClient = $this->serviceContainer->getLocationApiClient();
     }
 
-    public function locations(array $filterQuery = []): ResponseInterface
+    public function locations(array $filterQuery = [],bool $filter = false): ResponseInterface
     {
         if (isset($this->vars['id'])) {
             $this->getSingleLocation();
@@ -50,7 +49,13 @@ class LocationsController
             $uri = self::PATH . $query;
 
             $content = $this->locationsApiClient->getLocations($uri);
-            $html = $this->renderer->renderPage('Locations/Locations.twig', $content, self::PAGENAME, $page, $queryShadow);
+
+            if ($filter){
+                $html = $this->renderer->renderPage('Locations/List.twig', $content, self::PAGENAME, $page, $queryShadow);
+            }else{
+                $html = $this->renderer->renderPage('Locations/Locations.twig', $content, self::PAGENAME, $page, $queryShadow);
+            }
+
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
@@ -67,9 +72,8 @@ class LocationsController
             }
         }
 
-        return $this->locations($queryParameters);
+        return $this->locations($queryParameters,true);
     }
-
 
     private function getSingleLocation(): void
     {

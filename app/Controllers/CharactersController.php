@@ -30,7 +30,7 @@ class CharactersController
         $this->charactersApiClient = $this->serviceContainer->getCharacterApiClient();
     }
 
-    public function characters(array $filterQuery = []): ResponseInterface
+    public function characters(array $filterQuery = [],bool $filter = false): ResponseInterface
     {
         if (isset($this->vars['id'])) {
             $this->getSingleCharacter();
@@ -49,7 +49,13 @@ class CharactersController
             $uri = self::PATH . $query;
 
             $content = $this->charactersApiClient->getCharacters($uri);
-            $html = $this->renderer->renderPage('Characters/Characters.twig', $content, self::PAGENAME, $page, $queryShadow);
+
+            if ($filter){
+                $html = $this->renderer->renderPage('Characters/List.twig', $content, self::PAGENAME, $page, $queryShadow);
+            }else{
+                $html = $this->renderer->renderPage('Characters/Characters.twig', $content, self::PAGENAME, $page, $queryShadow);
+            }
+
             $this->response->getBody()->write($html);
         }
         return $this->response->withHeader('Content-Type', 'text/html');
@@ -66,7 +72,7 @@ class CharactersController
             }
         }
 
-        return $this->characters($queryParameters);
+        return $this->characters($queryParameters,true);
     }
 
 

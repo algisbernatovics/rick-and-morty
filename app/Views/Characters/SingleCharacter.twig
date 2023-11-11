@@ -10,30 +10,48 @@
 
                 <div style="height: 30px;"></div>
 
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
-                    <img src="{{ card.image }}" alt="{{ card.name }}">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
-                    <p class="mb-2 text-1xl tracking-tight text-gray-900">{{ card.status }} - {{ card.species }}</p>
-                    <p>Last known location:</p>
-                    <li>{{ card.location.name }}</li>
-                    <p>Created:</p>
-                    <li>{{ card.created }}</li>
-                </div>
-                <div class="flex flex-col justify-between p-4 leading-normal">
-                    <div style="height: 40px;"></div>
-                    <div class="flex items-center justify-center">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }} Seen in:</h5>
-                    </div>
-                    <div style="height: 70px;"></div>
-                    <div class="grid grid-cols-3 gap-1 content-normal">
+                <div class="container mx-auto px-4">
+                    <div class="map animate-fade-in hover:bg-gray-100 max-w-sm mx-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white rounded-lg shadow">
 
+                        <img src="{{ card.image }}" alt="{{ card.name }}" class="mx-auto">
+
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+
+                        <div class="border border-transparent">
+                            <table class="min-w-full">
+                                <tbody>
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Status:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.status }}</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Species:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.species }}</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Last Known Location:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.location.name }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 20px;"></div>
+
+                <div class="flex flex-col items-center">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }} Seen in:</h5>
+
+                    <div style="height: 20px;"></div>
+
+                    <div class="grid grid-cols-3 gap-1 content-normal">
                         {% for episode in info %}
                             <a href="/episode/{{ episode.id }}"
                                class="text-white bg-slate-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">
                                 {{ episode.episodeName }}
                             </a>
                         {% endfor %}
-
                     </div>
                 </div>
             </div>
