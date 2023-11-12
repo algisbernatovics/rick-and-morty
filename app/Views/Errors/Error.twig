@@ -20,7 +20,9 @@
                          data-dm-inline-fill="" style="--dm-inline-fill:currentColor;"></polygon>
             </svg>
 
-            <p class="text-3xl">Looks like our services are currently offline</p>
+            {% if errorCode is defined and errorCode != 404 %}
+                <p class="text-3xl">Looks like our services are currently offline</p>
+            {% endif %}
             <a rel="noopener noreferrer" href="/" class="px-8 py-3 font-semibold rounded">Back to homepage</a>
         </div>
     </section>

@@ -1,96 +1,93 @@
 {% extends "Layout.twig" %}
     {% block content %}
-        <div id="singleContent">
-            {% if card is null %}
-                <h1>Not found!</h1>
-            {% else %}
-                <div class="grid place-items-center">
-                    <div class="flex flex-col items-center">
-                        <br>
 
-                        <div class="container mx-auto px-4">
-                            <div class="map animate-fade-in hover:bg-gray-100 max-w-sm mx-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white rounded-lg shadow">
+<div id="singleContent">
+    <div class="grid place-items-center">
+        <div class="flex flex-col items-center">
+            <br>
 
-                                <img src="{{ card.image }}" alt="{{ card.name }}" class="mx-auto">
-                                <div style="height: 30px;"></div>
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
-                                <div style="height: 30px;"></div>
-                                <div class="border border-transparent">
-                                    <table class="min-w-full">
-                                        <tbody>
-                                        {% if card.status is not empty %}
-                                            <tr class="border-b">
-                                                <td class="pb-2 pr-2"><strong>Status:</strong></td>
-                                                <td class="pb-2 mb-2">{{ card.status }}</td>
-                                            </tr>
-                                        {% endif %}
+            <div class="container mx-auto px-4">
+                <div class="map animate-fade-in hover:bg-gray-100 max-w-sm mx-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white rounded-lg shadow">
 
-                                        {% if card.species is not empty %}
-                                            <tr class="border-b">
-                                                <td class="pb-2 pr-2"><strong>Species:</strong></td>
-                                                <td class="pb-2 mb-2">{{ card.species }}</td>
-                                            </tr>
-                                        {% endif %}
+                    <img src="{{ card.image }}" alt="{{ card.name }}" class="mx-auto">
+                    <div style="height: 30px;"></div>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+                    <div style="height: 30px;"></div>
+                    <div class="border border-transparent">
+                        <table class="min-w-full">
+                            <tbody>
+                            {% if card.status is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Status:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.status }}</td>
+                                </tr>
+                            {% endif %}
 
-                                        {% if card.location.name is not empty %}
-                                            <tr class="border-b">
-                                                <td class="pb-2 pr-2"><strong>Last Known Location:</strong></td>
-                                                <td class="pb-2 mb-2">{{ card.location.name }}</td>
-                                            </tr>
-                                        {% endif %}
+                            {% if card.species is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Species:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.species }}</td>
+                                </tr>
+                            {% endif %}
 
-                                        {% if card.type is not empty %}
-                                            <tr class="border-b">
-                                                <td class="pb-2 pr-2"><strong>Type:</strong></td>
-                                                <td class="pb-2 mb-2">{{ card.type }}</td>
-                                            </tr>
-                                        {% endif %}
+                            {% if card.location.name is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Last Known Location:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.location.name }}</td>
+                                </tr>
+                            {% endif %}
 
-                                        {% if card.gender is not empty %}
-                                            <tr class="border-b">
-                                                <td class="pb-2 pr-2"><strong>Gender:</strong></td>
-                                                <td class="pb-2 mb-2">{{ card.gender }}</td>
-                                            </tr>
-                                        {% endif %}
+                            {% if card.type is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Type:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.type }}</td>
+                                </tr>
+                            {% endif %}
 
-                                        {% if card.origin.name is not empty %}
-                                            <tr class="border-b">
-                                                <td class="pb-2 pr-2"><strong>Origin:</strong></td>
-                                                <td class="pb-2 mb-2">{{ card.origin.name }}</td>
-                                            </tr>
-                                        {% endif %}
-                                        </tbody>
-                                    </table>
+                            {% if card.gender is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Gender:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.gender }}</td>
+                                </tr>
+                            {% endif %}
 
-                                </div>
-                            </div>
-                        </div>
+                            {% if card.origin.name is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Origin:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.origin.name }}</td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
 
-                        <div style="height: 60px;"></div>
-
-                        <div class="flex flex-col items-center">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }} Seen
-                                in:</h5>
-
-                            <div style="height: 20px;"></div>
-
-                            <div class="grid grid-cols-3 gap-1 content-normal">
-                                {% for episode in info %}
-                                    <a href="/episode/{{ episode.id }}"
-                                       class="text-white bg-slate-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">
-                                        {{ episode.episodeName }}
-                                    </a>
-                                {% endfor %}
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div style="height: 120px;"></div>
-            {% endif %}
-        </div>
+            </div>
 
-        <div id="filterContent">
-            {% include pageName|capitalize ~ '/List.twig' %}
-        </div>
+            <div style="height: 60px;"></div>
 
-    {% endblock %}
+            <div class="flex flex-col items-center">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }} Seen
+                    in:</h5>
+
+                <div style="height: 20px;"></div>
+
+                <div class="grid grid-cols-3 gap-1 content-normal">
+                    {% for episode in info %}
+                        <a href="/episode/{{ episode.id }}"
+                           class="text-white bg-slate-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">
+                            {{ episode.episodeName }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 120px;"></div>
+</div>
+
+<div id="filterContent">
+    {% include pageName|capitalize ~ '/List.twig' %}
+</div>
+
+{% endblock %}
