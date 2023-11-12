@@ -30,8 +30,13 @@ class CharactersController
         $this->charactersApiClient = $this->serviceContainer->getCharacterApiClient();
     }
 
-    public function characters(array $filterQuery = [],bool $filter = false): ResponseInterface
+    public function characters(array $filterQuery = [],bool $ajax = false): ResponseInterface
     {
+        $ajax = $this->request->getHeaderLine('Content-Type') === 'application/json';
+
+
+        var_dump($ajax);
+
         if (isset($this->vars['id'])) {
             $this->getSingleCharacter();
         } else {
@@ -50,7 +55,7 @@ class CharactersController
 
             $content = $this->charactersApiClient->getCharacters($uri);
 
-            if ($filter){
+            if ($ajax){
                 $html = $this->renderer->renderPage('Characters/List.twig', $content, self::PAGENAME, $page, $queryShadow);
             }else{
                 $html = $this->renderer->renderPage('Characters/Characters.twig', $content, self::PAGENAME, $page, $queryShadow);

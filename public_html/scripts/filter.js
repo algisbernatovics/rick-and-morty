@@ -1,4 +1,3 @@
-
 const searchButton = document.getElementById("search-button");
 const filter = document.getElementById("filter");
 
@@ -17,9 +16,7 @@ document.getElementById('filterForm').addEventListener('input', function () {
     xhr.open('POST', '/' + pageName + '/filter', true);
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
-            if (xhr.responseText === 'redirect') {
-                window.location.href = '/Locations';
-            } else {
+            {
                 var contentIsNotFound = xhr.responseText.trim() === 'Not found!';
 
                 if (contentIsNotFound) {
