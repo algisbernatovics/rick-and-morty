@@ -1,12 +1,10 @@
-// pagination.js
-
-function setupPagination() {
+export function setupPagination() {
     const paginationContainer = document.querySelector('.pagination');
 
     if (paginationContainer) {
         paginationContainer.addEventListener('click', function (event) {
             event.preventDefault();
-
+            console.log('Pagination click event triggered!');
             const paginationLink = event.target.closest('a');
 
             if (paginationLink) {
@@ -23,9 +21,10 @@ function setupPagination() {
                         const contentArea = document.getElementById('filterContent');
                         if (contentArea) {
                             contentArea.innerHTML = data;
+                            setupPagination();
+                        } else {
+                            console.error('Element with ID "filterContent" not found');
                         }
-
-                        setupPagination();
                     })
                     .catch(error => {
                         console.error('Error fetching page:', error);
@@ -36,6 +35,12 @@ function setupPagination() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log('DOMContentLoaded event triggered!');
     // Initial setup
     setupPagination();
+
+    document.addEventListener('ajaxSuccess', function () {
+        console.log('ajaxSuccess event triggered!');
+        setupPagination();
+    });
 });

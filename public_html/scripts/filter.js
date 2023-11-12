@@ -1,3 +1,4 @@
+import { setupPagination } from './pagination.js';
 const searchButton = document.getElementById("search-button");
 const filter = document.getElementById("filter");
 
@@ -16,20 +17,19 @@ document.getElementById('filterForm').addEventListener('input', function () {
     xhr.open('POST', '/' + pageName + '/filter', true);
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
-            {
-                var contentIsNotFound = xhr.responseText.trim() === 'Not found!';
+            var contentIsNotFound = xhr.responseText.trim() === 'Not found!';
 
-                if (contentIsNotFound) {
+            if (contentIsNotFound) {
+            } else {
+                var singleContentElement = document.getElementById('singleContent');
+                if (singleContentElement) {
+                    singleContentElement.style.display = contentIsNotFound ? 'block' : 'none';
                 } else {
-
-                    var singleContentElement = document.getElementById('singleContent');
-                    if (singleContentElement) {
-                        singleContentElement.style.display = contentIsNotFound ? 'block' : 'none';
-                    } else {
-                        console.error('Element with ID "singleContent" not found');
-                    }
-                    document.getElementById('filterContent').innerHTML = xhr.responseText;
+                    console.log('Element with ID "singleContent" not found');
                 }
+                document.getElementById('filterContent').innerHTML = xhr.responseText;
+
+                setupPagination();
             }
         } else {
             console.error('Request failed with status ' + xhr.status);
@@ -39,4 +39,12 @@ document.getElementById('filterForm').addEventListener('input', function () {
         console.error('Network error occurred');
     };
     xhr.send(formData);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    setupPagination();
+});
+
+document.addEventListener('ajaxSuccess', function () {
+    setupPagination();
 });

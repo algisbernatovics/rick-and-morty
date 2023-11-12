@@ -30,7 +30,7 @@ class LocationsController
         $this->locationsApiClient = $this->serviceContainer->getLocationApiClient();
     }
 
-    public function locations(array $filterQuery = [],bool $filter = false): ResponseInterface
+    public function locations(array $filterQuery = [],bool $ajax = true): ResponseInterface
     {
         if (isset($this->vars['id'])) {
             $this->getSingleLocation();
@@ -50,7 +50,7 @@ class LocationsController
 
             $content = $this->locationsApiClient->getLocations($uri);
 
-            if ($filter){
+            if ($ajax){
                 $html = $this->renderer->renderPage('Locations/List.twig', $content, self::PAGENAME, $page, $queryShadow);
             }else{
                 $html = $this->renderer->renderPage('Locations/Locations.twig', $content, self::PAGENAME, $page, $queryShadow);
@@ -60,7 +60,10 @@ class LocationsController
         }
         return $this->response->withHeader('Content-Type', 'text/html');
     }
-
+    public function home()
+    {
+        return $this->locations([self::PATH],0);
+    }
     public function filter(): ResponseInterface
     {
         $parsedBody = $this->request->getParsedBody();
@@ -72,7 +75,7 @@ class LocationsController
             }
         }
 
-        return $this->locations($queryParameters,true);
+        return $this->locations($queryParameters);
     }
 
     private function getSingleLocation(): void

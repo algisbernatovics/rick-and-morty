@@ -15,16 +15,18 @@ class Router
     public function __construct()
     {
         $this->dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
-            $r->addRoute(['GET'], '/', 'HomeController@home');
-
+            $r->addRoute(['GET'], '/', 'CharactersController@home');
+            $r->addRoute(['GET'], '/characters/home', 'CharactersController@home');
             $r->addRoute(['GET'], '/characters[/{page:\d+}]', 'CharactersController@characters');
             $r->addRoute(['POST'], '/characters/filter', 'CharactersController@filter');
             $r->addRoute(['GET'], '/character[/{id:\d+}]', 'CharactersController@characters');
 
+            $r->addRoute(['GET'], '/episodes/home', 'EpisodesController@home');
             $r->addRoute(['GET'], '/episodes[/{page:\d+}]', 'EpisodesController@episodes');
             $r->addRoute(['POST'], '/episodes/filter', 'EpisodesController@filter');
             $r->addRoute(['GET'], '/episode[/{id:\d+}]', 'EpisodesController@episodes');
 
+            $r->addRoute(['GET'], '/locations/home', 'LocationsController@home');
             $r->addRoute(['GET'], '/locations[/{page:\d+}]', 'LocationsController@locations');
             $r->addRoute(['POST'], '/locations/filter', 'LocationsController@filter');
             $r->addRoute(['GET'], '/location[/{id:\d+}]', 'LocationsController@locations');

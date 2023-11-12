@@ -30,7 +30,7 @@ class EpisodesController
         $this->episodesApiClient = $this->serviceContainer->getEpisodesRequest();
     }
 
-    public function episodes(array $filterQuery = [],bool $filter = false): ResponseInterface
+    public function episodes(array $filterQuery = [],bool $ajax = true): ResponseInterface
     {
         if (isset($this->vars['id'])) {
             $this->getSingleEpisode();
@@ -50,7 +50,7 @@ class EpisodesController
 
             $content = $this->episodesApiClient->getEpisodes($uri);
 
-            if ($filter){
+            if ($ajax){
                 $html = $this->renderer->renderPage('Episodes/List.twig', $content, self::PAGENAME, $page, $queryShadow);
             }else{
                 $html = $this->renderer->renderPage('Episodes/Episodes.twig', $content, self::PAGENAME, $page, $queryShadow);
@@ -72,10 +72,12 @@ class EpisodesController
             }
         }
 
-        return $this->episodes($queryParameters,true);
+        return $this->episodes($queryParameters);
     }
-
-
+    public function home()
+    {
+        return $this->episodes([self::PATH],0);
+    }
 
     private function getSingleEpisode(): void
     {

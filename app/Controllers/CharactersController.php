@@ -12,7 +12,7 @@ use App\Core\Renderer;
 class CharactersController
 {
     private const PATH = 'character/?';
-    private const PAGENAME ='characters';
+    private const PAGENAME = 'characters';
     private Renderer $renderer;
     private Response $response;
     private ServerRequest $request;
@@ -30,13 +30,8 @@ class CharactersController
         $this->charactersApiClient = $this->serviceContainer->getCharacterApiClient();
     }
 
-    public function characters(array $filterQuery = [],bool $ajax = false): ResponseInterface
+    public function characters(array $filterQuery = [], bool $ajax = true): ResponseInterface
     {
-        $ajax = $this->request->getHeaderLine('Content-Type') === 'application/json';
-
-
-        var_dump($ajax);
-
         if (isset($this->vars['id'])) {
             $this->getSingleCharacter();
         } else {
@@ -55,9 +50,9 @@ class CharactersController
 
             $content = $this->charactersApiClient->getCharacters($uri);
 
-            if ($ajax){
+            if ($ajax) {
                 $html = $this->renderer->renderPage('Characters/List.twig', $content, self::PAGENAME, $page, $queryShadow);
-            }else{
+            } else {
                 $html = $this->renderer->renderPage('Characters/Characters.twig', $content, self::PAGENAME, $page, $queryShadow);
             }
 
@@ -77,16 +72,20 @@ class CharactersController
             }
         }
 
-        return $this->characters($queryParameters,true);
+        return $this->characters($queryParameters);
     }
 
+    public function home()
+    {
+        return $this->characters([self::PATH],0);
+    }
 
     private function getSingleCharacter(): void
     {
         $id = $this->vars['id'];
         $uri = "character/{$id}";
         $content = $this->charactersApiClient->getSingleCharacter($uri);
-        $html = $this->renderer->renderSinglePage('Characters/SingleCharacter.twig', $content,self::PAGENAME);
+        $html = $this->renderer->renderSinglePage('Characters/SingleCharacter.twig', $content, self::PAGENAME);
         $this->response->getBody()->write($html);
     }
 }
