@@ -13,9 +13,14 @@
                             <tbody>
                             {% if card.status is not empty %}
                                 <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>ID:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.id }}</td>
+                                </tr>
+                                <tr class="border-b">
                                     <td class="pb-2 pr-2"><strong>Status:</strong></td>
                                     <td class="pb-2 mb-2">{{ card.status }}</td>
                                 </tr>
+                            <tr class="border-b">
                             {% endif %}
 
                             {% if card.species is not empty %}
@@ -41,3 +46,5 @@
         {% endfor %}
     </div>
 </div>
+<div style="height: 50px;"></div>
+{% include '/Includes/Pagination.twig' %}

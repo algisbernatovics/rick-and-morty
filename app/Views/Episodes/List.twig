@@ -9,19 +9,19 @@
 
                     <table class="min-w-full">
                         <tbody>
-                        <tr>
+                        <tr class="border-b">
                             <td class="pb-2 pr-2"><strong>ID:</strong></td>
                             <td class="pb-2 mb-2">{{ card.id }}</td>
                         </tr>
-                        <tr>
+                        <tr class="border-b">
                             <td class="pb-2 pr-2"><strong>Air Date:</strong></td>
                             <td class="pb-2 mb-2">{{ card.airDate }}</td>
                         </tr>
-                        <tr>
+                        <tr class="border-b">
                             <td class="pb-2 pr-2"><strong>Episode:</strong></td>
                             <td class="pb-2 mb-2">{{ card.episode }}</td>
                         </tr>
-                        <tr>
+                        <tr class="border-b">
                             <td class="pb-2 pr-2"><strong>Created:</strong></td>
                             <td class="pb-2 mb-2">{{ card.created }}</td>
                         </tr>
@@ -32,3 +32,5 @@
         {% endfor %}
     </div>
 </div>
+<div style="height: 50px;"></div>
+{% include '/Includes/Pagination.twig' %}
