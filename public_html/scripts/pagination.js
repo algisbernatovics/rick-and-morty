@@ -20,7 +20,12 @@ export function setupPagination() {
                     .then(data => {
                         const contentArea = document.getElementById('filterContent');
                         if (contentArea) {
+                            console.log('Updating content area with fetched data:', data);
                             contentArea.innerHTML = data;
+
+                            // Scroll to the top of the page
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+
                             setupPagination();
                         } else {
                             console.error('Element with ID "filterContent" not found');

@@ -1,4 +1,5 @@
 import { setupPagination } from './pagination.js';
+
 const searchButton = document.getElementById("search-button");
 const filter = document.getElementById("filter");
 
@@ -20,6 +21,7 @@ document.getElementById('filterForm').addEventListener('input', function () {
             var contentIsNotFound = xhr.responseText.trim() === 'Not found!';
 
             if (contentIsNotFound) {
+
             } else {
                 var singleContentElement = document.getElementById('singleContent');
                 if (singleContentElement) {
@@ -28,6 +30,8 @@ document.getElementById('filterForm').addEventListener('input', function () {
                     console.log('Element with ID "singleContent" not found');
                 }
                 document.getElementById('filterContent').innerHTML = xhr.responseText;
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
 
                 setupPagination();
             }

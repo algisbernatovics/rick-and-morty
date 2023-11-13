@@ -4,6 +4,7 @@
             {% set errorCodeToDisplay = exception.code is not null ? exception.code : errorCode %}
 
             <p class="text-xl text-gray-600 mb-2 inline-block">Error Code: {{ errorCodeToDisplay }}</p>
+
             <p class="text-red-500 text-lg inline-block mx-2">{{ exception.message }}</p>
 
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-40 h-40">

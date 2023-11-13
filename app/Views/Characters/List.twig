@@ -1,51 +1,43 @@
-{% if cards is empty %}
-    <h1>Not found!</h1>
-{% else %}
-    <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-3 gap-8 content-normal sm:grid-cols-1">
-            {% for card in cards %}
-                <a href="/character/{{ card.id }}">
-                    <div class="map animate-fade-in hover:bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white rounded-lg shadow">
+<div class="container mx-auto px-4">
+    <div class="grid md:grid-cols-3 gap-8 content-normal sm:grid-cols-1">
+        {% for card in cards %}
+            <a href="/character/{{ card.id }}">
+                <div class="map animate-fade-in hover:bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white rounded-lg shadow">
 
-                        <img src="{{ card.image }}" alt="{{ card.name }}" class="mx-auto">
-                        <div style="height: 30px;"></div>
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
-                        <div style="height: 30px;"></div>
-                        <div class="border border-transparent">
-                            <table class="min-w-full">
-                                <tbody>
-                                {% if card.status is not empty %}
-                                    <tr class="border-b">
-                                        <td class="pb-2 pr-2"><strong>Status:</strong></td>
-                                        <td class="pb-2 mb-2">{{ card.status }}</td>
-                                    </tr>
-                                {% endif %}
+                    <img src="{{ card.image }}" alt="{{ card.name }}" class="mx-auto">
+                    <div style="height: 30px;"></div>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+                    <div style="height: 30px;"></div>
+                    <div class="border border-transparent">
+                        <table class="min-w-full">
+                            <tbody>
+                            {% if card.status is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Status:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.status }}</td>
+                                </tr>
+                            {% endif %}
 
-                                {% if card.species is not empty %}
-                                    <tr class="border-b">
-                                        <td class="pb-2 pr-2"><strong>Species:</strong></td>
-                                        <td class="pb-2 mb-2">{{ card.species }}</td>
-                                    </tr>
-                                {% endif %}
+                            {% if card.species is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Species:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.species }}</td>
+                                </tr>
+                            {% endif %}
 
-                                {% if card.episodeName is not empty %}
-                                    <tr class="{{ card.status is not empty or card.species is not empty ? 'border-b' : '' }}">
-                                        <td class="pb-2 pr-2"><strong>First Seen In:</strong></td>
-                                        <td class="pb-2 mb-2">{{ card.episodeName }}</td>
-                                    </tr>
-                                {% endif %}
-                                </tbody>
-                            </table>
-
-                        </div>
+                            {% if card.episodeName is not empty %}
+                                <tr class="{{ card.status is not empty or card.species is not empty ? 'border-b' : '' }}">
+                                    <td class="pb-2 pr-2"><strong>First Seen In:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.episodeName }}</td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
 
                     </div>
-                </a>
-            {% endfor %}
-        </div>
+
+                </div>
+            </a>
+        {% endfor %}
     </div>
-    <div style="height: 120px;"></div>
-
-        {% include '/Includes/Pagination.twig' %}
-
-{% endif %}
+</div>

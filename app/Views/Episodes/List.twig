@@ -1,23 +1,34 @@
-<div id="content">
-    {% if cards is empty %}
-        <h1>Not found!</h1>
-    {% else %}
-        <div class="grid place-items-center container mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
-                {% for card in cards %}
-                    <a href="/episode/{{ card.id }}">
-                        <div class="map animate-fade-in hover:bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
-                            <p class="mb-2 text-1xl tracking-tight text-gray-900">ID: {{ card.id }}</p>
-                            <p class="mb-2 text-1xl tracking-tight text-gray-900">Air Date: {{ card.airDate }}</p>
-                            <p class="mb-2 text-1xl tracking-tight text-gray-900">Episode: {{ card.episode }}</p>
-                            <p class="mb-2 text-1xl tracking-tight text-gray-900">Created: {{ card.created }}</p>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-    <div style="height: 120px;"></div>
-        {% include '/Includes/Pagination.twig' %}
+<div class="container mx-auto px-4">
+    <div class="grid md:grid-cols-3 gap-8 content-normal sm:grid-cols-1">
+        {% for card in cards %}
+            <a href="/episode/{{ card.id }}">
+                <div class="map animate-fade-in hover:bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white rounded-lg shadow">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+
+                    <div style="height: 30px;"></div>
+
+                    <table class="min-w-full">
+                        <tbody>
+                        <tr>
+                            <td class="pb-2 pr-2"><strong>ID:</strong></td>
+                            <td class="pb-2 mb-2">{{ card.id }}</td>
+                        </tr>
+                        <tr>
+                            <td class="pb-2 pr-2"><strong>Air Date:</strong></td>
+                            <td class="pb-2 mb-2">{{ card.airDate }}</td>
+                        </tr>
+                        <tr>
+                            <td class="pb-2 pr-2"><strong>Episode:</strong></td>
+                            <td class="pb-2 mb-2">{{ card.episode }}</td>
+                        </tr>
+                        <tr>
+                            <td class="pb-2 pr-2"><strong>Created:</strong></td>
+                            <td class="pb-2 mb-2">{{ card.created }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
 </div>
