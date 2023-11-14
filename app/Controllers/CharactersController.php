@@ -77,7 +77,7 @@ class CharactersController
 
     public function home()
     {
-        return $this->characters([self::PATH],0);
+        return $this->characters([],0);
     }
 
     private function getSingleCharacter(): void

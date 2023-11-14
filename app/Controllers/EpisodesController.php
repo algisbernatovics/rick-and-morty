@@ -76,7 +76,7 @@ class EpisodesController
     }
     public function home()
     {
-        return $this->episodes([self::PATH],0);
+        return $this->episodes([],0);
     }
 
     private function getSingleEpisode(): void

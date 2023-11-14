@@ -62,7 +62,7 @@ class LocationsController
     }
     public function home()
     {
-        return $this->locations([self::PATH],0);
+        return $this->locations([],0);
     }
     public function filter(): ResponseInterface
     {
