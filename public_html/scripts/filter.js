@@ -8,7 +8,10 @@ searchButton.addEventListener("click", function () {
     searchButton.classList.toggle("active");
 });
 
-document.getElementById('filterForm').addEventListener('input', function () {
+let typingTimer; // Timer identifier
+const doneTypingInterval = 1000; // 1 second
+
+function fetchData() {
     var form = document.getElementById('filterForm');
     var formData = new FormData(form);
 
@@ -16,12 +19,12 @@ document.getElementById('filterForm').addEventListener('input', function () {
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/' + pageName + '/filter', true);
-    xhr.onload = function () {
+    xhr.onload = async function () {
         if (xhr.status >= 200 && xhr.status < 300) {
             var contentIsNotFound = xhr.responseText.trim() === 'Not found!';
 
             if (contentIsNotFound) {
-
+                // Handle not found case
             } else {
                 var singleContentElement = document.getElementById('singleContent');
                 if (singleContentElement) {
@@ -29,10 +32,23 @@ document.getElementById('filterForm').addEventListener('input', function () {
                 } else {
                     console.log('Element with ID "singleContent" not found');
                 }
-                document.getElementById('filterContent').innerHTML = xhr.responseText;
 
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Update content area with fetched data
+                const contentArea = document.getElementById('filterContent');
+                contentArea.innerHTML = xhr.responseText;
 
+                // Wait for all images to load
+                const images = contentArea.querySelectorAll('img');
+                const imageLoadPromises = Array.from(images).map(img => {
+                    return new Promise((resolve, reject) => {
+                        img.onload = resolve;
+                        img.onerror = reject;
+                    });
+                });
+
+                await Promise.all(imageLoadPromises);
+
+                // Setup pagination after scrolling
                 setupPagination();
             }
         } else {
@@ -43,12 +59,16 @@ document.getElementById('filterForm').addEventListener('input', function () {
         console.error('Network error occurred');
     };
     xhr.send(formData);
+}
+
+// Event listener for filter input with debounce
+document.getElementById('filterForm').addEventListener('input', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(fetchData, doneTypingInterval);
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    setupPagination();
-});
-
-document.addEventListener('ajaxSuccess', function () {
-    setupPagination();
+document.addEventListener("DOMContentLoaded", async function () {
+    console.log('DOMContentLoaded event triggered!');
+    await window.scrollTo({top: 0, behavior: 'smooth'});
+    await setupPagination();
 });

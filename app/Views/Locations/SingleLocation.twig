@@ -1,64 +1,65 @@
 {% extends "Layout.twig" %}
     {% block content %}
+        <div id="singleContent">
+            <div class="grid place-items-up place-items-center">
+                <div class="h-56 grid grid-cols-1 gap-12 content-normal">
 
-        <div class="grid place-items-up place-items-center">
-            <div class="h-56 grid grid-cols-1 gap-12 content-normal">
+                    <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow map animate-fade-in hover:bg-gray-100 mx-auto">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
 
-                <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow map animate-fade-in hover:bg-gray-100 mx-auto">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+                        <table class="w-full mb-4">
+                            {% if card.id is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>ID:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.id }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if card.type is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Type:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.type }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if card.dimension is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Dimension:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.dimension }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if card.created is not empty %}
+                                <tr class="border-b">
+                                    <td class="pb-2 pr-2"><strong>Created:</strong></td>
+                                    <td class="pb-2 mb-2">{{ card.created }}</td>
+                                </tr>
+                            {% endif %}
+                        </table>
 
-                    <table class="w-full mb-4">
-                        {% if card.id is not empty %}
-                            <tr class="border-b">
-                                <td class="pb-2 pr-2"><strong>ID:</strong></td>
-                                <td class="pb-2 mb-2">{{ card.id }}</td>
-                            </tr>
-                        {% endif %}
-                        {% if card.type is not empty %}
-                            <tr class="border-b">
-                                <td class="pb-2 pr-2"><strong>Type:</strong></td>
-                                <td class="pb-2 mb-2">{{ card.type }}</td>
-                            </tr>
-                        {% endif %}
-                        {% if card.dimension is not empty %}
-                            <tr class="border-b">
-                                <td class="pb-2 pr-2"><strong>Dimension:</strong></td>
-                                <td class="pb-2 mb-2">{{ card.dimension }}</td>
-                            </tr>
-                        {% endif %}
-                        {% if card.created is not empty %}
-                            <tr class="border-b">
-                                <td class="pb-2 pr-2"><strong>Created:</strong></td>
-                                <td class="pb-2 mb-2">{{ card.created }}</td>
-                            </tr>
-                        {% endif %}
-                    </table>
+                    </div>
 
                 </div>
 
-            </div>
+                <div style="height: 60px;"></div>
 
-            <div style="height: 60px;"></div>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                    Characters Featured in location '{{ card.name }}'
+                </h5>
 
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                Characters Featured in location '{{ card.name }}'
-            </h5>
+                <div style="height: 20px;"></div>
 
-            <div style="height: 20px;"></div>
-
-            <div class="grid place-items-center container mx-auto px-4">
-                <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
-                    {% for character in info %}
-                        <a href="/character/{{ character.id }}">
-                            <div class="map animate-fade-in hover:bg-gray-100 max-w-sm
+                <div class="grid place-items-center container mx-auto px-4">
+                    <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
+                        {% for character in info %}
+                            <a href="/character/{{ character.id }}">
+                                <div class="map animate-fade-in hover:bg-gray-100 max-w-sm
                                 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
-                                <div class="myBox">
-                                    <img src="{{ character.imageUrl }}" alt="{{ character.name }}">
-                                    <p>{{ character.name }}</p>
+                                    <div class="myBox">
+                                        <img src="{{ character.imageUrl }}" alt="{{ character.name }}">
+                                        <p>{{ character.name }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    {% endfor %}
+                            </a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
