@@ -47,7 +47,7 @@
             <div style="height: 20px;"></div>
 
             <div class="grid place-items-center container mx-auto px-4">
-                <div class="grid md:grid-cols-3 gap-8 content-normal mx-auto sm:grid-cols-1">
+                <div class="grid md:grid-cols-3 gap-24 content-normal sm:grid-cols-1">
                     {% for character in info %}
                         <a href="/character/{{ character.id }}">
                             <div class="map animate-fade-in hover-bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
@@ -55,6 +55,7 @@
                                     <img src="{{ character.imageUrl }}" alt="{{ character.name }}">
                                     <p>{{ character.name }}</p>
                                 </div>
+
                             </div>
                         </a>
                     {% endfor %}
