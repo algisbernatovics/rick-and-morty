@@ -48,6 +48,9 @@ function fetchData() {
 
                 await Promise.all(imageLoadPromises);
 
+                // Scroll to the top of the page
+                window.scrollTo({top: 0, behavior: 'smooth'});
+
                 // Setup pagination after scrolling
                 setupPagination();
             }
