@@ -19,7 +19,7 @@ class ErrorsController
 
     public function error(): ResponseInterface
     {
-        $html = $this->renderer->error('Errors/Error.twig', $this->errorCode);
+        $html = $this->renderer->error('Errors/BaseError.twig', $this->errorCode);
         $response = new Response(200, [], $html);
         return $response->withHeader('Content-Type', 'text/html');
     }
