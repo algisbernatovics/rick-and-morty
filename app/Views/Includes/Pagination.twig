@@ -10,7 +10,7 @@
                 </li>
 
                 {# Set the number of pages to display around the current page #}
-                {% set numPagesToShow = 3 %}
+                {% set numPagesToShow = 2 %}
                 {% set startPage = max(1, page - numPagesToShow) %}
                 {% set endPage = min(info.pages, page + numPagesToShow) %}
 
