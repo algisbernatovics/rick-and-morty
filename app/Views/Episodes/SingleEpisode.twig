@@ -39,7 +39,7 @@
             </div>
 
             <div style="height: 60px;"></div>
-
+            {% if info %}
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                 Characters Featured in Episode '{{ card.name }}'
             </h5>
@@ -61,6 +61,7 @@
                     {% endfor %}
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
     <div style="height: 120px;"></div>
