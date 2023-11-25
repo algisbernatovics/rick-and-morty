@@ -4,8 +4,8 @@
         <div class="grid place-items-up place-items-center">
             <div class="h-56 grid grid-cols-1 gap-12 content-normal">
 
-                <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow map animate-fade-in hover:bg-gray-100 mx-auto">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+                <div class="dark:bg-stone-950 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow map animate-fade-in hover:bg-gray-100 mx-auto">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-rose-500">{{ card.name }}</h5>
 
                     <table class="w-full mb-4">
                         {% if card.id is not empty %}
@@ -50,7 +50,7 @@
                 <div class="grid md:grid-cols-3 gap-24 content-normal sm:grid-cols-1">
                     {% for character in info %}
                         <a href="/character/{{ character.id }}">
-                            <div class="map animate-fade-in hover-bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
+                            <div class="dark:bg-stone-950 map animate-fade-in hover-bg-gray-100 max-w-sm shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] p-6 bg-white border border-gray-200 rounded-lg shadow">
                                 <div class="myBox">
                                     <img src="{{ character.imageUrl }}" alt="{{ character.name }}">
                                     <p>{{ character.name }}</p>

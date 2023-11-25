@@ -2,11 +2,11 @@
     <div class="grid md:grid-cols-3 gap-8 content-normal sm:grid-cols-1">
         {% for card in cards %}
             <a href="/character/{{ card.id }}">
-                <div class="shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow map animate-fade-in hover:bg-gray-100 mx-auto">
+                <div class="dark:bg-stone-950 dark:bg-stone-950 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow map animate-fade-in hover:bg-gray-100 mx-auto">
 
                     <img src="{{ card.image }}" alt="{{ card.name }}" class="mx-auto">
                     <div style="height: 30px;"></div>
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ card.name }}</h5>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-rose-500">{{ card.name }}</h5>
                     <div style="height: 30px;"></div>
                     <div class="border border-transparent">
                         <table class="min-w-full">
