@@ -19,6 +19,8 @@ Network's nighttime programming block Adult Swim.
 - download project
 - create empty 'cache' folder into directory 'the-rick-and-morty-main'
 - run `composer install` to get necessary packages
+- run `npm install`
+- run `npx tailwindcss build -o public_html/styles/tailwind.css` -optional
 - run `php -S localhost:7777` from public folder to start server
 - click on site that appears in terminal to open it in browser
 - have fun!
