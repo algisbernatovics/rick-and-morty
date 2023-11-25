@@ -2,6 +2,8 @@
 <img src="prev1.png">
 <img src="prev2.png">
 <img src="prev3.png">
+<img src="prev4.png">
+<img src="prev5.png">
 
 
 This program works with api.
@@ -25,4 +27,3 @@ The program is writed in PHP and includes
 "guzzlehttp/guzzle": "^7.5",
 "nikic/fast-route": "^1.3",
 "twig/twig": "^3.5",
-"ext-json": "*"
