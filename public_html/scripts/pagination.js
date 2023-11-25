@@ -66,7 +66,7 @@ export async function setupPagination() {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-    console.log('DOMContentLoaded event triggered!');
+    console.log('DOMContentLoaded event triggered in pagination.js!');
     await window.scrollTo({top: 0, behavior: 'smooth'});
     await setupPagination();
 });

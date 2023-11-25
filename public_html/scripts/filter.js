@@ -71,7 +71,7 @@ document.getElementById('filterForm').addEventListener('input', function () {
 });
 
 document.addEventListener("DOMContentLoaded", async function () {
-    console.log('DOMContentLoaded event triggered!');
+    console.log('DOMContentLoaded event triggered in filter.js!');
     await window.scrollTo({top: 0, behavior: 'smooth'});
     await setupPagination();
 });
