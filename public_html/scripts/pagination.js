@@ -48,8 +48,8 @@ export async function setupPagination() {
                 contentArea.innerHTML = '';
                 contentArea.appendChild(tempDiv);
 
-                // Pause for 1 second before scrolling
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                // Pause for 0.1 second before scrolling
+                await new Promise(resolve => setTimeout(resolve, 10));
 
                 // Scroll to the top of the page
                 window.scrollTo({top: 0, behavior: 'smooth'});
