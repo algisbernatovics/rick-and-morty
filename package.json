@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "dev": "npx tailwindcss build -o public_html/styles/tailwind.css"
+  },
+
   "dependencies": {
     "autoprefixer": "^10.4.16",
     "lilconfig": "^3.0.0",
