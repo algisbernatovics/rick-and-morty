@@ -16,7 +16,8 @@ class CharactersApiClient
 {
     private TagAwareAdapter $tagCache;
     private Client $client;
-    public function __construct(TagAwareAdapter $tagCache,Client $client)
+
+    public function __construct(TagAwareAdapter $tagCache, Client $client)
     {
         $this->client = $client;
         $this->tagCache = $tagCache;
@@ -31,10 +32,39 @@ class CharactersApiClient
             $response = $this->request($uri);
             $data = $this->decodeJsonResponse($response);
 
+            // 1. Collect all first-episode IDs
+            $episodeIds = [];
+            foreach ($data->results as $characterData) {
+                if (!empty($characterData->episode)) {
+                    $episodeIds[] = Functions::getEpisodeId($characterData->episode[0]);
+                }
+            }
+            $episodeIds = array_unique($episodeIds);
+
+            // 2. Bulk fetch episodes
+            $episodesMap = [];
+            if (!empty($episodeIds)) {
+                $episodesUri = 'https://rickandmortyapi.com/api/episode/' . implode(',', $episodeIds);
+                try {
+                    $epResp = $this->request($episodesUri);
+                    $epData = $this->decodeJsonResponse($epResp);
+                    $epArray = is_array($epData) ? $epData : [$epData];
+
+                    foreach ($epArray as $ep) {
+                        $episodesMap[$ep->id] = $ep->name;
+                    }
+                }
+                catch (Exception $e) {
+                // ignore or log
+                }
+            }
+
             $characters = [];
 
             foreach ($data->results as $characterData) {
-                $episodeName = $this->getEpisodeName($characterData->episode[0]);
+                $firstEpId = !empty($characterData->episode) ?Functions::getEpisodeId($characterData->episode[0]) : null;
+                $episodeName = $episodesMap[$firstEpId] ?? 'Unknown';
+
                 $character = $this->createCharacterFromData($characterData, $episodeName);
                 $characters[] = $character;
             }
@@ -47,15 +77,6 @@ class CharactersApiClient
     {
         $jsonContent = $response->getBody()->getContents();
         return json_decode($jsonContent);
-    }
-
-    private function getEpisodeName(string $episodeUri): string
-    {
-        $episodeUri = Functions::cutUri($episodeUri);
-        $episodeResponse = $this->request($episodeUri);
-        $episodeData = $this->decodeJsonResponse($episodeResponse);
-
-        return $episodeData->name;
     }
 
     public function getSingleCharacter(string $uri): array
@@ -74,7 +95,7 @@ class CharactersApiClient
         });
     }
 
-    private function createCharacterFromData(\stdClass $characterData,string $episodeName): Characters
+    private function createCharacterFromData(\stdClass $characterData, string $episodeName): Characters
     {
         return new Characters(
             $characterData->id,
@@ -90,21 +111,42 @@ class CharactersApiClient
             $episodeName,
             $characterData->url,
             $characterData->created
-        );
+            );
     }
 
     private function getSeenInEpisodes(array $episodeUris): array
     {
-        $episodes = [];
+        $episodeIds = [];
         foreach ($episodeUris as $episodeUri) {
-            $episodeUri = Functions::cutUri($episodeUri);
-            $episodeResponse = $this->request($episodeUri);
-            $episodeData = $this->decodeJsonResponse($episodeResponse);
-            $episodes[] = new SeenInEpisodes(
-                $episodeData->name,
-                $episodeData->id
-            );
+            $episodeIds[] = Functions::getEpisodeId($episodeUri);
         }
+
+        if (empty($episodeIds)) {
+            return [];
+        }
+
+        $episodes = [];
+        // Bulk fetch: https://rickandmortyapi.com/api/episode/[1,2,3]
+        $uri = 'https://rickandmortyapi.com/api/episode/' . implode(',', $episodeIds);
+
+        try {
+            $response = $this->request($uri);
+            $data = $this->decodeJsonResponse($response);
+
+            // API returns a single object if only 1 ID is requested, otherwise an array
+            $episodesData = is_array($data) ? $data : [$data];
+
+            foreach ($episodesData as $episodeData) {
+                $episodes[] = new SeenInEpisodes(
+                    $episodeData->name,
+                    $episodeData->id
+                    );
+            }
+        }
+        catch (Exception $e) {
+        // Fallback or error handling
+        }
+
         return $episodes;
     }
 
@@ -113,11 +155,11 @@ class CharactersApiClient
         try {
             $response = $this->client->get($uri);
             return $response;
-        } catch (Exception $exception) {
+        }
+        catch (Exception $exception) {
             $errorsController = new ErrorsController();
             $errorsController->exception($exception);
             exit;
         }
     }
-
 }

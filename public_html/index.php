@@ -8,7 +8,7 @@ use Nyholm\Psr7Server\ServerRequestCreator;
 use Symfony\Component\Dotenv\Dotenv;
 
 $dotenv = new Dotenv();
-$dotenv->load(__DIR__.'/../.env');
+$dotenv->load(__DIR__ . '/../.env');
 
 // Create a PSR-17 factory for responses
 $responseFactory = new Psr17Factory();
@@ -18,8 +18,8 @@ $serverRequestCreator = new ServerRequestCreator(
     $responseFactory, // ServerRequest factory
     $responseFactory, // Uri factory
     $responseFactory, // UploadedFile factory
-    $responseFactory  // Stream factory
-);
+    $responseFactory // Stream factory
+    );
 
 // Create a ServerRequest using ServerRequestCreator
 $serverRequest = $serverRequestCreator->fromGlobals();

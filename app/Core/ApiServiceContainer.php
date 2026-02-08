@@ -21,7 +21,12 @@ class ApiServiceContainer
         $this->baseUri = $_ENV['API'];
         $this->cache = new FilesystemAdapter($_ENV['CACHE_DIR'], $_ENV['CACHE_TTL'], __DIR__ . $_ENV['CACHE_PATH']);
         $this->tagCache = new TagAwareAdapter($this->cache);
-        $this->client = new Client(['base_uri' => $this->baseUri]);
+        $this->client = new Client([
+            'base_uri' => $this->baseUri,
+            'headers' => [
+                'User-Agent' => 'RickAndMortyExplorer/1.0',
+            ]
+        ]);
     }
 
     public function getCharacterApiClient(): CharactersApiClient
